@@ -1,43 +1,188 @@
-import { usePageMeta } from '@/hooks';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import { Container, Button } from '@/components/ui';
 import { Link } from 'react-router-dom';
-import { IoArrowForward } from 'react-icons/io5';
+import { HiArrowRight } from 'react-icons/hi2';
+import { useRef } from 'react';
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 50 },
+  visible: (i = 0) => ({
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.15 * i },
+  }),
+};
+
+const stagger = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.15, delayChildren: 0.2 },
+  },
+};
+
+const floating = {
+  y: [0, -12, 0],
+  transition: { duration: 5, ease: 'easeInOut', repeat: Infinity },
+};
+
+const avatarData = [
+  { bg: '#4F6F52', initials: 'AS' },
+  { bg: '#A98C5A', initials: 'MK' },
+  { bg: '#3D5640', initials: 'RJ' },
+];
 
 export default function HeroSection() {
+  const sectionRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ['start start', 'end start'],
+  });
+  const bgY = useTransform(scrollYProgress, [0, 1], ['0%', '20%']);
+
   return (
-    <section className="relative flex items-center overflow-hidden bg-gradient-to-br from-primary/10 to-white py-16">
-      <Container className="relative z-10">
-        <div className="grid gap-12 lg:grid-cols-2 items-center">
-          <div className="order-2 lg:order-1">
-            <img
-              src="/72f80c8f-f566-427b-9e07-1ae26cbc16e6.png"
-              alt="Kewalya Yogshala Yoga Studio"
-              className="rounded-2xl shadow-2xl w-full object-cover"
-            />
-          </div>
-          <div className="order-1 lg:order-2">
-            <span className="inline-block px-4 py-2 mb-6 text-sm font-semibold tracking-wider text-primary uppercase bg-primary/10 rounded-full">
-              About Us
+    <section
+      ref={sectionRef}
+      className="relative min-h-screen overflow-hidden"
+    >
+      {/* ===== Full-bleed hero background image ===== */}
+      <div className="absolute inset-0">
+        <img
+          src="/hero.png"
+          alt="Kewalya Yogshala"
+          className="h-full w-full object-cover"
+        />
+       
+      </div>
+
+      {/* Subtle parallax effect on background */}
+      <motion.div
+        style={{ y: bgY }}
+        className="pointer-events-none absolute inset-0"
+      />
+
+      {/* ===== Main container with content overlaid ===== */}
+      <div className="relative z-10 mx-auto flex min-h-screen max-w-[1320px] flex-col items-start justify-center px-6 pt-33 pb-16 lg:pt-25">
+        <motion.div
+          variants={stagger}
+          initial="hidden"
+          animate="visible"
+          className="w-full max-w-[620px]"
+        >
+          {/* Tagline */}
+
+          <motion.span
+
+            custom={0}
+
+            variants={fadeUp}
+
+           className="mb-3 inline-block rounded-full border border-[#A98C5A]/30 bg-white/80 px-3 py-1 font-body text-[10px] font-semibold uppercase tracking-[0.2em] text-[#4F6F52] backdrop-blur-md sm:text-xs"
+          >
+
+
+            YOGA • WELLNESS • HEALING
+          </motion.span>
+
+          {/* Heading */}
+          <motion.h1
+            custom={1}
+            variants={fadeUp}
+           className="mb-10 font-heading font-semibold leading-[1.15] text-[#2E2E2E]"
+          >
+            <span className="text-[25px] md:text-[30px] lg:text-[40px]">
+              Find Your Inner
+              <br />
+              Peace at Kewalya Yogshala
             </span>
-            <h1 className="font-heading text-5xl font-semibold leading-tight text-primary md:text-6xl lg:text-7xl">
-              A Sanctuary for Mind, Body & Soul
-            </h1>
-            <p className="mt-6 text-lg text-dark/70 leading-relaxed md:text-xl">
-              Nestled in the serene beauty of Dehradun, Kewalya Yogshala is a premier yoga studio dedicated to guiding individuals toward physical, mental, and spiritual transformation. Whether you are a beginner or an advanced practitioner, our studio provides the perfect environment for deepening your practice and achieving inner harmony.
-            </p>
-            <div className="mt-8 flex flex-wrap gap-4">
+          </motion.h1>
+
+          {/* Description — smaller */}
+          <motion.p
+            custom={2}
+            variants={fadeUp}
+            className="mb-10 max-w-[480px] text-sm leading-[1.8] text-[#555555] md:text-base"
+          >
+            Nestled in the serene beauty of Dehradun, we offer a sanctuary for
+            those seeking physical vitality, mental clarity, and spiritual
+            transformation through authentic yoga practices.
+          </motion.p>
+
+          {/* CTA Buttons */}
+          <motion.div
+            custom={3}
+            variants={fadeUp}
+            className="mb-10 flex flex-wrap items-center gap-5"
+          >
+            <motion.div
+              whileHover={{ scale: 1.04 }}
+              whileTap={{ scale: 0.97 }}
+              transition={{ type: 'spring', stiffness: 400, damping: 15 }}
+            >
               <Button
                 as={Link}
-                to="/about"
-                size="lg"
-                icon={<IoArrowForward />}
+                to="/contact"
+                variant="primary"
+                icon={<HiArrowRight className="h-4 w-4" />}
+                className="h-[56px] rounded-full px-8 text-base"
               >
-                Know More About Us
+                Book Free Trial
               </Button>
+            </motion.div>
+            <motion.div
+              whileHover={{ scale: 1.04 }}
+              whileTap={{ scale: 0.97 }}
+              transition={{ type: 'spring', stiffness: 400, damping: 15 }}
+            >
+             <Button
+  as={Link}
+  to="/classes"
+  variant="primary"
+  icon={<HiArrowRight className="h-4 w-4" />}
+  className="h-[56px] rounded-full px-8 text-base"
+>
+  Explore Classes
+</Button>
+            </motion.div>
+          </motion.div>
+
+          {/* Student Rating */}
+          <motion.div
+            custom={4}
+            variants={fadeUp}
+            className="flex items-center gap-4"
+          >
+            <div className="flex -space-x-3">
+              {avatarData.map((a, i) => (
+                <div
+                  key={a.initials}
+                  className="relative flex h-10 w-10 items-center justify-center rounded-full border-2 border-white text-[10px] font-bold text-white shadow-soft"
+                  style={{ backgroundColor: a.bg, zIndex: 3 - i }}
+                >
+                  {a.initials}
+                </div>
+              ))}
             </div>
-          </div>
-        </div>
-      </Container>
+            <div>
+              <div className="flex items-center gap-1 text-[#D4AF37]">
+                {[...Array(5)].map((_, i) => (
+                  <svg
+                    key={i}
+                    className="h-4 w-4"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                  </svg>
+                ))}
+              </div>
+              <p className="text-sm font-medium text-[#555555]">
+                500+ Happy Students
+              </p>
+            </div>
+          </motion.div>
+        </motion.div>
+      </div>
     </section>
   );
 }

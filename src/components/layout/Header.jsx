@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { HiOutlinePhone, HiOutlineMenuAlt3, HiX } from 'react-icons/hi';
+import { Link, useLocation } from 'react-router-dom';
+import { HiOutlinePhone } from 'react-icons/hi';
 import { IoArrowForward } from 'react-icons/io5';
 import { motion, AnimatePresence } from 'framer-motion';
 import { cn } from '@/utils';
@@ -8,11 +8,13 @@ import { contactInfo } from '@/utils/constants';
 import { navigationLinks } from '@/router/routes';
 import Logo from '@/components/common/Logo';
 import NavLink from '@/components/common/NavLink';
-import { Button, Container } from '@/components/ui';
+import Button from '@/components/ui/Button';
 
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileOpen, setIsMobileOpen] = useState(false);
+  const location = useLocation();
+  const isHome = location.pathname === '/';
 
   useEffect(() => {
     const onScroll = () => setIsScrolled(window.scrollY > 20);
@@ -22,70 +24,77 @@ export default function Header() {
 
   useEffect(() => {
     document.body.style.overflow = isMobileOpen ? 'hidden' : '';
-    return () => {
-      document.body.style.overflow = '';
-    };
+    return () => { document.body.style.overflow = ''; };
   }, [isMobileOpen]);
 
+  const topPadding = isScrolled ? 'pt-2' : 'pt-5';
+  const pillBg = isScrolled ? 'bg-white/95' : 'bg-white/85';
+  const pillShadow = isScrolled ? 'shadow-xl' : 'shadow-lg';
+
   return (
-    <header
-      className={cn(
-        'fixed inset-x-0 top-0 z-50 transition-all duration-500',
-        isScrolled
-          ? 'bg-background/90 py-3 shadow-soft backdrop-blur-md'
-          : 'bg-transparent py-5',
-      )}
-    >
-      <Container>
-        <div className="flex items-center justify-between gap-4">
-          <Link to="/" aria-label="Kewalya Yogshala home">
-            <Logo />
+    <header className={cn('fixed inset-x-0 top-0 z-50 transition-all duration-500', topPadding)}>
+      <div className="mx-auto max-w-[1320px] px-6">
+        <div
+          className={cn(
+            'flex h-[64px] items-center justify-between rounded-full border border-white/20 px-5 backdrop-blur-xl transition-all duration-500 sm:px-8',
+            pillBg,
+            pillShadow,
+          )}
+        >
+          {/* Logo — 150px, never stretch */}
+          <Link to="/" aria-label="Kewalya Yogshala home" className="w-[150px] shrink-0" onClick={() => isMobileOpen && setIsMobileOpen(false)}>
+            <img src="/logo.png" alt="Kewalya Yogshala" className="h-auto w-full object-contain" />
           </Link>
 
-          <nav className="hidden items-center gap-8 lg:flex" aria-label="Main navigation">
+          {/* Center navigation — 16px, weight 500, gap 36px */}
+          <nav className="hidden items-center justify-center gap-9 lg:flex" aria-label="Main navigation">
             {navigationLinks.map((link) => (
-              <NavLink key={link.path} to={link.path}>
+              <NavLink key={link.path} to={link.path} className="text-base font-medium tracking-wide">
                 {link.label}
               </NavLink>
             ))}
           </nav>
 
+          {/* Right buttons */}
           <div className="hidden items-center gap-3 lg:flex">
-            <Button
-              as="a"
+            <a
               href={contactInfo.phoneHref}
-              variant="ghost"
-              size="sm"
-              icon={<HiOutlinePhone className="text-lg" />}
-              iconPosition="left"
+              className="inline-flex w-[170px] items-center justify-center gap-2 rounded-full border border-border px-4 py-2 text-sm font-medium text-dark whitespace-nowrap transition-colors duration-300 hover:border-primary hover:text-primary"
+              style={{ height: '48px' }}
             >
-              {contactInfo.phone}
-            </Button>
+              <HiOutlinePhone className="text-lg shrink-0" />
+              <span>{contactInfo.phone}</span>
+            </a>
             <Button
               as={Link}
               to="/contact"
-              size="sm"
+              variant="primary"
               icon={<IoArrowForward />}
+              className="w-[160px] rounded-full text-sm"
+              style={{ height: '48px' }}
             >
-              Book Free Trial
+              Book Trial
             </Button>
           </div>
 
+          {/* Hamburger */}
           <button
             type="button"
-            className="flex h-10 w-10 items-center justify-center rounded-full border border-border text-dark lg:hidden"
+            className="flex h-11 w-11 items-center justify-center rounded-full border border-border text-dark transition-colors lg:hidden"
             onClick={() => setIsMobileOpen(true)}
             aria-label="Open menu"
           >
-            <HiOutlineMenuAlt3 className="text-xl" />
+            <div className="relative flex h-4 w-5 flex-col justify-between">
+              <span className="block h-0.5 w-full rounded-full bg-current" />
+              <span className="block h-0.5 w-full rounded-full bg-current" />
+              <span className="block h-0.5 w-full rounded-full bg-current" />
+            </div>
           </button>
         </div>
-      </Container>
+      </div>
 
       <AnimatePresence>
-        {isMobileOpen && (
-          <MobileMenu onClose={() => setIsMobileOpen(false)} />
-        )}
+        {isMobileOpen && <MobileMenu onClose={() => setIsMobileOpen(false)} />}
       </AnimatePresence>
     </header>
   );
@@ -97,53 +106,66 @@ function MobileMenu({ onClose }) {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="fixed inset-0 z-50 bg-dark/40 backdrop-blur-sm lg:hidden"
-      onClick={onClose}
+      transition={{ duration: 0.3 }}
+      className="fixed inset-0 z-50 flex flex-col bg-background lg:hidden"
     >
-      <motion.nav
-        initial={{ x: '100%' }}
-        animate={{ x: 0 }}
-        exit={{ x: '100%' }}
-        transition={{ type: 'tween', duration: 0.3 }}
-        className="absolute right-0 top-0 flex h-full w-[min(100%,320px)] flex-col bg-background p-6 shadow-elevated"
-        onClick={(e) => e.stopPropagation()}
-        aria-label="Mobile navigation"
-      >
-        <div className="mb-8 flex items-center justify-between">
-          <Logo size="sm" />
+      <div className="mx-auto w-full max-w-[1440px] px-4 pt-10 sm:px-6 lg:px-10">
+        <div className="flex items-center justify-between">
+          <Link to="/" onClick={onClose} aria-label="Home" className="w-[140px] sm:w-[180px] lg:w-[200px]">
+            <img src="/logo.png" alt="Kewalya Yogshala" className="h-auto w-full object-contain" />
+          </Link>
           <button
             type="button"
             onClick={onClose}
-            className="flex h-10 w-10 items-center justify-center rounded-full border border-border"
+            className="flex h-11 w-11 items-center justify-center rounded-full border border-border text-dark"
             aria-label="Close menu"
           >
-            <HiX className="text-xl" />
+            <div className="relative flex h-4 w-5 flex-col justify-between">
+              <motion.span animate={{ rotate: 45, y: 7 }} transition={{ duration: 0.3 }} className="block h-0.5 w-full rounded-full bg-current" />
+              <motion.span animate={{ opacity: 0 }} transition={{ duration: 0.2 }} className="block h-0.5 w-full rounded-full bg-current" />
+              <motion.span animate={{ rotate: -45, y: -7 }} transition={{ duration: 0.3 }} className="block h-0.5 w-full rounded-full bg-current" />
+            </div>
           </button>
         </div>
+      </div>
 
-        <div className="flex flex-col gap-5">
-          {navigationLinks.map((link) => (
-            <NavLink key={link.path} to={link.path} onClick={onClose} className="text-base">
+      <div className="flex flex-1 flex-col items-center justify-center gap-3">
+        {navigationLinks.map((link, index) => (
+          <motion.div
+            key={link.path}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.15 + index * 0.07, duration: 0.4 }}
+          >
+            <NavLink to={link.path} onClick={onClose} className="font-heading text-2xl font-medium">
               {link.label}
             </NavLink>
-          ))}
-        </div>
+          </motion.div>
+        ))}
+      </div>
 
-        <div className="mt-auto flex flex-col gap-3 pt-8">
-          <Button
-            as="a"
-            href={contactInfo.phoneHref}
-            variant="ghost"
-            icon={<HiOutlinePhone />}
-            iconPosition="left"
-          >
-            {contactInfo.phone}
-          </Button>
-          <Button as={Link} to="/contact" onClick={onClose} icon={<IoArrowForward />}>
-            Book Free Trial
-          </Button>
+      <div className="pb-8">
+        <div className="mx-auto w-full max-w-[1440px] px-4 sm:px-6 lg:px-10">
+          <div className="flex flex-col gap-3">
+            <a
+              href={contactInfo.phoneHref}
+              className="inline-flex items-center justify-center gap-2 rounded-full border border-border px-7 py-3 text-sm font-medium text-dark transition-colors hover:border-primary hover:text-primary"
+            >
+              <HiOutlinePhone className="text-lg" />
+              {contactInfo.phone}
+            </a>
+            <Link
+              to="/contact"
+              onClick={onClose}
+              className="inline-flex items-center justify-center gap-2 rounded-full bg-primary px-7 py-3 text-sm font-medium text-white shadow-soft transition-colors hover:bg-primary-dark"
+            >
+              Book Trial
+              <IoArrowForward />
+            </Link>
+          </div>
         </div>
-      </motion.nav>
+      </div>
     </motion.div>
   );
 }
+

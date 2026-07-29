@@ -3,8 +3,9 @@ export const navigationLinks = [
   { label: 'About', path: '/about' },
   { label: 'Classes', path: '/classes' },
   { label: 'Therapies', path: '/classes' },
+  { label: 'Teacher Training', path: '/courses' },
   { label: 'Gallery', path: '/gallery' },
-  { label: 'Blog', path: '/blog' },
+  { label: 'Blogs', path: '/blog' },
   { label: 'Contact', path: '/contact' },
 ];
 
