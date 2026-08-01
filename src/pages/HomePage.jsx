@@ -1,5 +1,16 @@
 import usePageMeta from '@/hooks/usePageMeta';
-import { HeroSection, StatisticsAboutPreview, WhyChooseUs, Services } from '@/components/sections';
+import {
+  HeroSection,
+  StatisticsAboutPreview,
+  WhyChooseUs,
+  Services,
+  ProgramsSection,
+  TestimonialsSection,
+  GallerySection,
+  BlogsSection,
+  FAQSection,
+  ContactCTASection,
+} from '@/components/sections';
 
 export default function HomePage() {
   usePageMeta('home');
@@ -9,6 +20,12 @@ export default function HomePage() {
       <StatisticsAboutPreview />
       <WhyChooseUs />
       <Services />
+      <ProgramsSection />
+      <TestimonialsSection />
+      <GallerySection />
+      <BlogsSection />
+      <FAQSection />
+      <ContactCTASection />
     </>
   );
 }
