@@ -1,17 +1,16 @@
 /**
  * FAQSection — Frequently Asked Questions with animated accordion.
  *
- * TODO: Add the following image to `src/assets/images/faq/`:
- *   faq.jpg
- *
- * Once the image is placed in the folder, uncomment the import below
- * and remove the `placeholder` gradient fallback. No JSX changes needed.
+ * TODO: Add the image to `src/assets/images/faq/faq.jpg`.
+ * Once it's added, uncomment the import below and remove the
+ * `placeholder` gradient fallback. No other JSX changes needed.
  */
 
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Container } from '@/components/ui';
 import { FiPlus, FiMinus } from 'react-icons/fi';
+import { IoCheckmarkCircle, IoLogoWhatsapp } from 'react-icons/io5';
 
 /* ===== FAQ image — uncomment when image is added ===== */
 // import faqImage from '@/assets/images/faq/faq.jpg';
@@ -55,37 +54,39 @@ const slideInRight = {
   },
 };
 
-/* ===== FAQ data ===== */
+/* ===== FAQ data =====
+   Class timings here match the batch schedule shown in the hero section —
+   keep these two in sync if either changes. */
 const faqs = [
   {
     question: 'Do I need prior yoga experience?',
     answer:
-      'Not at all! Our classes are designed for all levels, from complete beginners to advanced practitioners. Our experienced instructors will guide you through each posture at your own pace, ensuring a safe and comfortable practice.',
+      "No. Most students who join us have never done yoga before. Radha ma'am starts every new student on the same foundational sequence for the first two weeks, regardless of age or fitness level, before anyone moves into a faster-paced batch.",
   },
   {
     question: 'What should I bring to my first class?',
     answer:
-      'We recommend bringing a water bottle, a small towel, and wearing comfortable, breathable clothing that allows free movement. Yoga mats and props are provided at the studio, but you are welcome to bring your own mat if you prefer.',
+      'Just water and clothes you can move in. Mats, blocks, and straps are provided free of charge. If you already own a mat, bring it — floor space is assigned by mat, so it helps you keep the same spot each class.',
   },
   {
     question: 'Do you offer yoga therapy sessions?',
     answer:
-      'Yes, we offer specialized yoga therapy sessions tailored for individuals dealing with specific health concerns such as back pain, stress, anxiety, joint issues, and recovery from injury. Our certified therapists create personalized plans for your healing journey.',
+      'Yes. Our therapy track is separate from regular batches and is for specific concerns — chronic back pain, post-injury recovery, stress, and joint issues. You start with a one-on-one assessment so the plan is built around your body, not a fixed syllabus.',
   },
   {
     question: 'How can I book a free trial?',
     answer:
-      'Booking a free trial is easy! Simply visit our Contact page, call us directly, or use the "Book Free Trial" button on our homepage. We will schedule your complimentary session at a time that works best for you.',
+      'Call or WhatsApp us on the number below, or use the "Book Free Trial" button on the homepage. We\'ll confirm a batch and time within the day — no advance payment needed for the trial class.',
   },
   {
     question: 'What are the class timings?',
     answer:
-      'We offer multiple sessions throughout the day to accommodate different schedules. Morning classes start at 6:00 AM, with sessions at 7:30 AM and 9:00 AM. Evening classes are held at 4:00 PM, 5:30 PM, and 7:00 PM. Please check our schedule for detailed timings.',
+      'Sunrise batch runs 6:00–7:30 AM, and the evening batch runs 5:00–6:30 PM, both daily except Sundays. Batches are capped at 12 students, so we\'d recommend confirming a spot a day ahead rather than walking in.',
   },
   {
     question: 'Do you provide teacher training certification?',
     answer:
-      'Yes, we offer a comprehensive 200-hour Yoga Teacher Training Certification program accredited by Yoga Alliance. Our course covers asanas, pranayama, meditation, anatomy, teaching methodology, and philosophy to prepare you as a confident, certified yoga instructor.',
+      'Yes — a 200-hour Yoga Alliance-certified teacher training program, run twice a year. It covers asana, pranayama, meditation, anatomy, and teaching practice. Batches are small and fill from our existing students first, so ask in class if you\'re interested.',
   },
 ];
 
@@ -130,9 +131,8 @@ export default function FAQSection() {
             variants={fadeUp}
             className="max-w-[700px] text-base leading-relaxed text-muted md:text-lg"
           >
-            Help visitors quickly find answers to the most common questions
-            about yoga classes, teacher training, therapies, trial sessions,
-            schedules, and memberships.
+            The questions we hear most from students before their first
+            class — if yours isn't here, call or WhatsApp us directly.
           </motion.p>
         </motion.div>
 
@@ -144,13 +144,13 @@ export default function FAQSection() {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.2 }}
-            className="w-full lg:w-[45%]"
+            className="relative w-full lg:w-[45%]"
           >
             <div className="relative overflow-hidden rounded-[28px] shadow-elevated">
               {faqImage ? (
                 <img
                   src={faqImage}
-                  alt="Yoga FAQ illustration"
+                  alt="Students practicing at Kewalya Yogshala"
                   className="h-[500px] w-full object-cover"
                   loading="lazy"
                 />
@@ -161,11 +161,27 @@ export default function FAQSection() {
                       Kewalya Yogshala
                     </span>
                     <p className="mt-3 font-body text-sm text-white/50">
-                      FAQ illustration will appear here
+                      FAQ photo will appear here
                     </p>
                   </div>
                 </div>
               )}
+            </div>
+
+            {/* Same verified mark used across the site, tying this photo
+                back to the studio rather than reading as stock art */}
+            <div className="absolute -bottom-6 left-6 flex items-center gap-3 rounded-2xl border border-border bg-white px-5 py-4 shadow-elevated">
+              <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-primary text-white">
+                <IoCheckmarkCircle className="h-6 w-6" />
+              </div>
+              <div>
+                <p className="font-heading text-sm font-semibold text-dark">
+                  Small Batches
+                </p>
+                <p className="font-body text-xs text-muted">
+                  Max 12 students per class
+                </p>
+              </div>
             </div>
           </motion.div>
 
@@ -237,6 +253,32 @@ export default function FAQSection() {
                 </motion.div>
               ))}
             </motion.div>
+
+            {/* Still-have-a-question fallback — a real channel, not a dead end */}
+            <motion.a
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.4 }}
+              href="https://wa.me/919999999999"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-6 flex items-center justify-between gap-4 rounded-[20px] border border-primary/20 bg-primary/5 p-5 transition-colors hover:bg-primary/10"
+            >
+              <div className="flex items-center gap-3">
+                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary text-white">
+                  <IoLogoWhatsapp className="h-5 w-5" />
+                </div>
+                <div>
+                  <p className="font-heading text-sm font-semibold text-dark">
+                    Still have a question?
+                  </p>
+                  <p className="font-body text-xs text-muted">
+                    Message us on WhatsApp — we usually reply within the hour
+                  </p>
+                </div>
+              </div>
+            </motion.a>
           </motion.div>
         </div>
       </Container>

@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { useEffect, useState, useCallback } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { HiOutlinePhone } from 'react-icons/hi';
 import { IoArrowForward } from 'react-icons/io5';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -10,10 +10,15 @@ import Logo from '@/components/common/Logo';
 import NavLink from '@/components/common/NavLink';
 import Button from '@/components/ui/Button';
 
+/* Height to offset scroll target by, so a section doesn't land hidden
+   underneath the fixed pill header. Matches header height + breathing room. */
+const SCROLL_OFFSET = 110;
+
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileOpen, setIsMobileOpen] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
   const isHome = location.pathname === '/';
 
   useEffect(() => {
@@ -27,13 +32,51 @@ export default function Header() {
     return () => { document.body.style.overflow = ''; };
   }, [isMobileOpen]);
 
+  /* Scrolls to a section id, accounting for the fixed header height */
+  const scrollToId = useCallback((id) => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    const top = el.getBoundingClientRect().top + window.pageYOffset - SCROLL_OFFSET;
+    window.scrollTo({ top, behavior: 'smooth' });
+  }, []);
+
+  /* If the page loads (or is navigated to) with a #hash already in the URL,
+     scroll to that section once the homepage has mounted. */
+  useEffect(() => {
+    if (isHome && location.hash) {
+      const id = location.hash.replace('#', '');
+      const timer = setTimeout(() => scrollToId(id), 150);
+      return () => clearTimeout(timer);
+    }
+  }, [isHome, location.hash, scrollToId]);
+
+  /* Every nav link whose path contains a "#" is treated as a homepage
+     section link (e.g. "/#gallery") rather than a separate route.
+     Links without a "#" (like "/contact") behave as normal page routes. */
+  const handleNavClick = (e, path) => {
+    const hashIndex = path.indexOf('#');
+    if (hashIndex === -1) return; // plain route — let react-router handle it
+
+    e.preventDefault();
+    const id = path.slice(hashIndex + 1);
+    setIsMobileOpen(false);
+
+    if (isHome) {
+      scrollToId(id);
+    } else {
+      navigate('/');
+      // wait for the homepage sections to mount before scrolling
+      setTimeout(() => scrollToId(id), 200);
+    }
+  };
+
   const topPadding = isScrolled ? 'pt-2' : 'pt-5';
   const pillBg = isScrolled ? 'bg-white/95' : 'bg-white/85';
   const pillShadow = isScrolled ? 'shadow-xl' : 'shadow-lg';
 
   return (
     <header className={cn('fixed inset-x-0 top-0 z-50 transition-all duration-500', topPadding)}>
-      <div className="mx-auto max-w-[1320px] px-6">
+      <div className="mx-auto max-w-[1480px] px-6">
         <div
           className={cn(
             'flex h-[64px] items-center justify-between rounded-full border border-white/20 px-5 backdrop-blur-xl transition-all duration-500 sm:px-8',
@@ -46,10 +89,15 @@ export default function Header() {
             <img src="/logo.png" alt="Kewalya Yogshala" className="h-auto w-full object-contain" />
           </Link>
 
-          {/* Center navigation — 16px, weight 500, gap 36px */}
-          <nav className="hidden items-center justify-center gap-9 lg:flex" aria-label="Main navigation">
+          {/* Center navigation — evenly spaced, with breathing room from the logo */}
+          <nav className="ml-10 hidden flex-1 items-center justify-evenly lg:flex" aria-label="Main navigation">
             {navigationLinks.map((link) => (
-              <NavLink key={link.path} to={link.path} className="text-base font-medium tracking-wide">
+              <NavLink
+                key={link.path}
+                to={link.path}
+                onClick={(e) => handleNavClick(e, link.path)}
+                className="text-base font-medium tracking-wide"
+              >
                 {link.label}
               </NavLink>
             ))}
@@ -95,13 +143,15 @@ export default function Header() {
       </div>
 
       <AnimatePresence>
-        {isMobileOpen && <MobileMenu onClose={() => setIsMobileOpen(false)} />}
+        {isMobileOpen && (
+          <MobileMenu onClose={() => setIsMobileOpen(false)} onNavClick={handleNavClick} />
+        )}
       </AnimatePresence>
     </header>
   );
 }
 
-function MobileMenu({ onClose }) {
+function MobileMenu({ onClose, onNavClick }) {
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -138,7 +188,14 @@ function MobileMenu({ onClose }) {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.15 + index * 0.07, duration: 0.4 }}
           >
-            <NavLink to={link.path} onClick={onClose} className="font-heading text-2xl font-medium">
+            <NavLink
+              to={link.path}
+              onClick={(e) => {
+                onNavClick(e, link.path);
+                onClose();
+              }}
+              className="font-heading text-2xl font-medium"
+            >
               {link.label}
             </NavLink>
           </motion.div>
@@ -169,4 +226,3 @@ function MobileMenu({ onClose }) {
     </motion.div>
   );
 }
-

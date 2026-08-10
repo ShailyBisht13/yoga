@@ -1,8 +1,21 @@
 import { motion } from 'framer-motion';
 import { Container, Button } from '@/components/ui';
 import { Link } from 'react-router-dom';
-import { IoArrowForward } from 'react-icons/io5';
+import { IoArrowForward, IoCheckmarkCircle } from 'react-icons/io5';
 import { fadeInUp, staggerContainer, slideInLeft } from '@/animations';
+
+/* Concrete numbers instead of another paragraph of wellness language —
+   these are the specifics a visitor actually checks before signing up. */
+const stats = [
+  { value: '15+', label: 'Years Teaching' },
+  { value: '6', label: 'Certified Teachers' },
+  { value: '500+', label: 'Students Guided' },
+];
+
+const credentials = [
+  'Yoga Alliance Certified Teachers',
+  'Small Batches, Max 12 Students',
+];
 
 export default function AboutSection() {
   return (
@@ -15,13 +28,29 @@ export default function AboutSection() {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.3 }}
-            className="order-2 lg:order-1"
+            className="relative order-2 lg:order-1"
           >
             <img
               src="/72f80c8f-f566-427b-9e07-1ae26cbc16e6.png"
               alt="Kewalya Yogshala Yoga Studio"
               className="rounded-2xl shadow-2xl w-full object-cover"
             />
+
+            {/* Founding plaque — the same circular "verified" mark used
+                elsewhere on the site, here standing in for a founding seal */}
+            <div className="absolute -bottom-6 -left-6 flex items-center gap-3 rounded-2xl border border-border bg-white px-5 py-4 shadow-elevated">
+              <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-primary text-white">
+                <IoCheckmarkCircle className="h-6 w-6" />
+              </div>
+              <div>
+                <p className="font-heading text-sm font-semibold text-dark">
+                  Est. 2015
+                </p>
+                <p className="font-body text-xs text-muted">
+                  Founded by Devendra &amp; Radha Uniyal
+                </p>
+              </div>
+            </div>
           </motion.div>
 
           {/* Text content */}
@@ -48,13 +77,52 @@ export default function AboutSection() {
               variants={fadeInUp}
               className="mt-6 text-lg text-dark/70 leading-relaxed md:text-xl"
             >
-              Nestled in the serene beauty of Dehradun, Kewalya Yogshala is a
-              premier yoga studio dedicated to guiding individuals toward
-              physical, mental, and spiritual transformation. Whether you are a
-              beginner or an advanced practitioner, our studio provides the
-              perfect environment for deepening your practice and achieving
-              inner harmony.
+              Kewalya Yogshala was started in 2015 by Devendra and Radha
+              Uniyal out of a single rented hall in Dehradun, with eleven
+              students. Today it's grown into a full studio — but the
+              batches are still kept small on purpose, because the thing
+              that changed our own practice was a teacher who noticed when
+              our alignment was off.
             </motion.p>
+
+            {/* Credentials */}
+            <motion.ul
+              variants={fadeInUp}
+              className="mt-6 flex flex-col gap-2"
+            >
+              {credentials.map((item) => (
+                <li
+                  key={item}
+                  className="flex items-center gap-2 text-sm text-dark/70"
+                >
+                  <IoCheckmarkCircle className="h-4 w-4 shrink-0 text-primary" />
+                  {item}
+                </li>
+              ))}
+            </motion.ul>
+
+            {/* Stat row */}
+            <motion.div
+              variants={fadeInUp}
+              className="mt-8 flex flex-wrap gap-8 border-y border-border py-6"
+            >
+              {stats.map((stat, i) => (
+                <div
+                  key={stat.label}
+                  className={`flex flex-col ${
+                    i !== stats.length - 1 ? 'pr-8 sm:border-r sm:border-border' : ''
+                  }`}
+                >
+                  <span className="font-heading text-3xl font-semibold text-primary">
+                    {stat.value}
+                  </span>
+                  <span className="mt-1 font-body text-xs uppercase tracking-wide text-muted">
+                    {stat.label}
+                  </span>
+                </div>
+              ))}
+            </motion.div>
+
             <motion.div
               variants={fadeInUp}
               className="mt-8 flex flex-wrap gap-4"

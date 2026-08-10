@@ -6,11 +6,11 @@ import { IoTimeOutline } from 'react-icons/io5';
 import { FiArrowUpRight } from 'react-icons/fi';
 
 // Program images — imports left ready for when assets are added
-import hathaImg from '@/assets/images/programs/hatha.jpg';
+import hathaImg from '@/assets/images/programs/hatha.avif';
 import meditationImg from '@/assets/images/programs/meditation.jpg';
-import pranayamaImg from '@/assets/images/programs/pranayama.jpg';
-import therapyImg from '@/assets/images/programs/therapy.jpg';
-import kidsImg from '@/assets/images/programs/kids.jpg';
+import pranayamaImg from '@/assets/images/programs/pranayama.webp';
+import therapyImg from '@/assets/images/programs/therapy.webp';
+import kidsImg from '@/assets/images/programs/kids.webp';
 import teacherTrainingImg from '@/assets/images/programs/teacher-training.jpg';
 
 /* ===== Animation variants ===== */

@@ -62,15 +62,21 @@ const floating = {
   transition: { duration: 5, ease: 'easeInOut', repeat: Infinity },
 };
 
-/* ===== Contact information — easily updatable ===== */
+/* ===== Contact information — swap these for the studio's real details =====
+   Studio hours (front-desk / general enquiries) are intentionally separate
+   from the batch timings shown in the Hero and FAQ sections — don't merge
+   them, since "open 6 AM–8 PM" and "class runs 6:00–7:30 AM" answer
+   different questions. */
 const contactInfo = {
   phone: '+91 98765 43210',
+  whatsapp: '919876543210',
   email: 'info@kewalyayogshala.com',
-  address: 'Dehradun, Uttarakhand, India',
-  timings: 'Mon – Sat: 6:00 AM – 8:00 PM',
+  address: 'Kewalya Yogshala, Rajpur Road, Dehradun, Uttarakhand',
+  mapsQuery: 'Kewalya+Yogshala+Rajpur+Road+Dehradun',
+  studioHours: 'Mon – Sat, 6:00 AM – 8:00 PM',
 };
 
-/* ===== Contact items config ===== */
+/* ===== Contact items config — each links somewhere real, nothing is a dead "#" ===== */
 const contactItems = [
   {
     icon: <FiPhone className="h-5 w-5" />,
@@ -88,13 +94,8 @@ const contactItems = [
     icon: <FiMapPin className="h-5 w-5" />,
     title: 'Address',
     value: contactInfo.address,
-    href: '#',
-  },
-  {
-    icon: <FiClock className="h-5 w-5" />,
-    title: 'Working Hours',
-    value: contactInfo.timings,
-    href: '#',
+    href: `https://www.google.com/maps/search/?api=1&query=${contactInfo.mapsQuery}`,
+    external: true,
   },
 ];
 
@@ -161,9 +162,9 @@ export default function ContactCTASection() {
                 variants={fadeUp}
                 className="font-heading text-4xl font-semibold leading-tight text-white md:text-5xl"
               >
-                Start Your Yoga Journey
+                Your First Class
                 <br />
-                <span className="text-secondary-light">With Kewalya Yogshala</span>
+                <span className="text-secondary-light">Is On Us</span>
               </motion.h2>
 
               {/* Description */}
@@ -171,10 +172,11 @@ export default function ContactCTASection() {
                 variants={fadeUp}
                 className="max-w-lg text-base leading-relaxed text-white/80 md:text-lg"
               >
-                Take the first step toward a healthier, more balanced life.
-                Book your free trial session today and experience the
-                transformative power of authentic yoga in the serene beauty
-                of Dehradun. Your wellness journey begins here.
+                One free trial class, no card details, no pressure to
+                continue. Pick the Sunrise or Evening batch, tell us if you're
+                new to yoga or coming back after an injury, and we'll place
+                you with the right instructor — batches are capped at 12, so
+                we'll confirm your spot the same day.
               </motion.p>
 
               {/* Buttons */}
@@ -204,13 +206,15 @@ export default function ContactCTASection() {
                   transition={{ type: 'spring', stiffness: 400, damping: 15 }}
                 >
                   <Button
-                    as={Link}
-                    to="/contact"
+                    as="a"
+                    href={`https://wa.me/${contactInfo.whatsapp}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     variant="outline"
                     size="lg"
                     className="h-[56px] rounded-full border-2 border-white/40 px-8 text-base text-white hover:bg-white hover:text-primary"
                   >
-                    Contact Us
+                    WhatsApp Us
                   </Button>
                 </motion.div>
               </motion.div>
@@ -242,17 +246,21 @@ export default function ContactCTASection() {
                     Get in Touch
                   </h3>
                   <p className="mt-1 font-body text-sm text-muted">
-                    We&rsquo;re here to help you on your wellness journey
+                    Call, email, or drop by — we reply to WhatsApp within the
+                    hour
                   </p>
                 </motion.div>
 
-                {/* Contact items */}
+                {/* Contact items — phone, email, address (all real links) */}
                 {contactItems.map((item) => (
                   <motion.a
                     key={item.title}
                     href={item.href}
                     variants={fadeUp}
                     className={contactItemClass}
+                    {...(item.external
+                      ? { target: '_blank', rel: 'noopener noreferrer' }
+                      : {})}
                   >
                     <span className={iconCircleClass}>{item.icon}</span>
                     <div className="flex flex-col">
@@ -265,6 +273,22 @@ export default function ContactCTASection() {
                     </div>
                   </motion.a>
                 ))}
+
+                {/* Studio hours — informational only, not a link, since it
+                    isn't an action a visitor takes */}
+                <motion.div variants={fadeUp} className={contactItemClass}>
+                  <span className={iconCircleClass}>
+                    <FiClock className="h-5 w-5" />
+                  </span>
+                  <div className="flex flex-col">
+                    <span className="font-body text-xs font-medium uppercase tracking-wider text-muted">
+                      Studio Hours
+                    </span>
+                    <span className="mt-0.5 font-heading text-base font-medium text-dark">
+                      {contactInfo.studioHours}
+                    </span>
+                  </div>
+                </motion.div>
               </motion.div>
             </motion.div>
           </motion.div>

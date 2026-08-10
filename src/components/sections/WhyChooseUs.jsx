@@ -10,7 +10,6 @@ import {
   FaHandsHelping,
 } from 'react-icons/fa';
 import { GiMeditation } from 'react-icons/gi';
-const whyChooseImage = '/hero.png';
 
 /* ───── Animation Variants ───── */
 const fadeUp = {
@@ -37,11 +36,6 @@ const staggerItem = {
     y: 0,
     transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] },
   },
-};
-
-const floating = {
-  y: [0, -14, 0],
-  transition: { duration: 5, ease: 'easeInOut', repeat: Infinity },
 };
 
 /* ───── Feature Data ───── */
@@ -140,90 +134,59 @@ export default function WhyChooseUs() {
           </motion.p>
         </motion.div>
 
-        {/* ─── Content: Image + Cards ─── */}
-        <div className="flex flex-col gap-12 lg:flex-row lg:items-start lg:gap-16">
-          {/* ─── Left: Image Card (45%) ─── */}
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: '-60px' }}
-            className="w-full lg:w-[45%] lg:sticky lg:top-32"
-          >
-            <motion.div
-              custom={0}
-              variants={fadeUp}
-              className="rounded-[32px] bg-white p-4 shadow-[0_8px_40px_rgba(46,46,46,0.08)]"
-            >
-              <motion.div
-                animate={floating}
-                className="overflow-hidden rounded-[24px]"
-              >
-                <img
-                  src={whyChooseImage}
-                  alt="Kewalya Yogshala yoga practice session"
-                  loading="lazy"
-                  className="h-full w-full object-cover"
-                  style={{ minHeight: '420px', maxHeight: '560px' }}
-                />
-              </motion.div>
-            </motion.div>
-          </motion.div>
+        {/* ─── Feature Cards (3 across, 2 rows) ─── */}
+        <motion.div
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: '-60px' }}
+        >
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {features.map((feature, index) => {
+              const IconComponent = feature.icon;
+              return (
+                <motion.div
+                  key={index}
+                  variants={staggerItem}
+                  whileHover={{ y: -6, transition: { duration: 0.3 } }}
+                  className="group relative flex flex-col rounded-[24px] border border-transparent bg-white p-7 shadow-[0_4px_24px_rgba(46,46,46,0.06)] transition-all duration-300 hover:border-[#4F6F52]/30 hover:shadow-[0_12px_40px_rgba(46,46,46,0.10)]"
+                >
+                  {/* Circular Icon */}
+                  <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-full bg-[#DCC8A1]/30 text-[#4F6F52] transition-all duration-300 group-hover:rotate-6 group-hover:bg-[#DCC8A1]/50">
+                    <IconComponent className="text-xl" />
+                  </div>
 
-          {/* ─── Right: Feature Cards (55%) ─── */}
-          <motion.div
-            variants={staggerContainer}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: '-60px' }}
-            className="w-full lg:w-[55%]"
-          >
-            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
-              {features.map((feature, index) => {
-                const IconComponent = feature.icon;
-                return (
-                  <motion.div
-                    key={index}
-                    variants={staggerItem}
-                    whileHover={{ y: -6, transition: { duration: 0.3 } }}
-                    className="group relative flex flex-col rounded-[24px] border border-transparent bg-white p-7 shadow-[0_4px_24px_rgba(46,46,46,0.06)] transition-all duration-300 hover:border-[#4F6F52]/30 hover:shadow-[0_12px_40px_rgba(46,46,46,0.10)]"
-                  >
-                    {/* Circular Icon */}
-                    <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-full bg-[#DCC8A1]/30 text-[#4F6F52] transition-all duration-300 group-hover:rotate-6 group-hover:bg-[#DCC8A1]/50">
-                      <IconComponent className="text-xl" />
-                    </div>
+                  {/* Title */}
+                  <h3 className="font-heading text-xl font-semibold text-[#2E2E2E]">
+                    {feature.title}
+                  </h3>
 
-                    {/* Title */}
-                    <h3 className="font-heading text-xl font-semibold text-[#2E2E2E]">
-                      {feature.title}
-                    </h3>
+                  {/* Description */}
+                  <p className="mt-2 flex-1 text-sm leading-relaxed text-[#6B6B6B]">
+                    {feature.description}
+                  </p>
 
-                    {/* Description */}
-                    <p className="mt-2 flex-1 text-sm leading-relaxed text-[#6B6B6B]">
-                      {feature.description}
-                    </p>
-
-                    {/* Small Arrow - bottom right */}
-                    <div className="mt-4 flex items-center justify-end">
-                      <span className="flex h-7 w-7 items-center justify-center rounded-full bg-[#DCC8A1]/20 text-[10px] text-[#4F6F52] transition-all duration-300 group-hover:bg-[#4F6F52] group-hover:text-white">
-                        <svg
-                          className="h-3 w-3"
-                          fill="none"
-                          viewBox="0 0 12 12"
-                          stroke="currentColor"
-                          strokeWidth={2}
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        >
-                          <path d="M2.5 9.5l7-7M4.5 2.5h5v5" />
-                        </svg>
-                      </span>
-                    </div>
-                  </motion.div>
-                );
-              })}
-            </div>
-          </motion.div>
-        </div>
+                  {/* Small Arrow - bottom right */}
+                  <div className="mt-4 flex items-center justify-end">
+                    <span className="flex h-7 w-7 items-center justify-center rounded-full bg-[#DCC8A1]/20 text-[10px] text-[#4F6F52] transition-all duration-300 group-hover:bg-[#4F6F52] group-hover:text-white">
+                      <svg
+                        className="h-3 w-3"
+                        fill="none"
+                        viewBox="0 0 12 12"
+                        stroke="currentColor"
+                        strokeWidth={2}
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      >
+                        <path d="M2.5 9.5l7-7M4.5 2.5h5v5" />
+                      </svg>
+                    </span>
+                  </div>
+                </motion.div>
+              );
+            })}
+          </div>
+        </motion.div>
 
         {/* ─── Bottom CTA ─── */}
         <motion.div

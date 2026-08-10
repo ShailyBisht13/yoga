@@ -2,6 +2,7 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import { Container, Button } from '@/components/ui';
 import { Link } from 'react-router-dom';
 import { HiArrowRight } from 'react-icons/hi2';
+import { IoTimeOutline } from 'react-icons/io5';
 import { useRef } from 'react';
 
 const fadeUp = {
@@ -21,15 +22,17 @@ const stagger = {
   },
 };
 
-const floating = {
-  y: [0, -12, 0],
-  transition: { duration: 5, ease: 'easeInOut', repeat: Infinity },
-};
-
 const avatarData = [
   { bg: '#4F6F52', initials: 'AS' },
-  { bg: '#A98C5A', initials: 'MK' },
-  { bg: '#3D5640', initials: 'RJ' },
+  { bg: '#A98C5A', initials: 'RV' },
+  { bg: '#3D5640', initials: 'PS' },
+];
+
+/* Real batch timings — ties to the "batch" detail shown in student reviews,
+   so a visitor sees the same schedule referenced twice, not two disconnected claims. */
+const batches = [
+  { label: 'Sunrise Batch', time: '6:00 – 7:30 AM' },
+  { label: 'Evening Batch', time: '5:00 – 6:30 PM' },
 ];
 
 export default function HeroSection() {
@@ -53,6 +56,8 @@ export default function HeroSection() {
           fetchpriority="high"
           className="h-full w-full object-cover"
         />
+        {/* Left-side gradient so text stays legible over any photo */}
+        <div className="absolute inset-0 bg-gradient-to-r from-white/90 via-white/50 to-transparent" />
       </div>
 
       {/* Subtle parallax effect on background */}
@@ -75,14 +80,14 @@ export default function HeroSection() {
             variants={fadeUp}
             className="mb-3 inline-block rounded-full border border-[#A98C5A]/30 bg-white/80 px-3 py-1 font-body text-[10px] font-semibold uppercase tracking-[0.2em] text-[#4F6F52] backdrop-blur-md sm:text-xs"
           >
-            YOGA • WELLNESS • HEALING
+            EST. 2015 · DEHRADUN'S TRUSTED YOGA SHALA
           </motion.span>
 
           {/* Heading */}
           <motion.h1
             custom={1}
             variants={fadeUp}
-           className="mb-10 font-heading font-semibold leading-[1.15] text-[#2E2E2E]"
+            className="mb-6 font-heading font-semibold leading-[1.15] text-[#2E2E2E]"
           >
             <span className="text-[25px] md:text-[30px] lg:text-[40px]">
               Find Your Inner
@@ -91,20 +96,44 @@ export default function HeroSection() {
             </span>
           </motion.h1>
 
-          {/* Description — smaller */}
+          {/* Description */}
           <motion.p
             custom={2}
             variants={fadeUp}
-            className="mb-10 max-w-[480px] text-sm leading-[1.8] text-[#555555] md:text-base"
+            className="mb-8 max-w-[480px] text-sm leading-[1.8] text-[#555555] md:text-base"
           >
-            Nestled in the serene beauty of Dehradun, we offer a sanctuary for
-            those seeking physical vitality, mental clarity, and spiritual
-            transformation through authentic yoga practices.
+            Nestled in the serene beauty of Dehradun, we've guided over 500
+            students through authentic Hatha yoga, pranayama, and yoga
+            therapy — taught in small batches, led by teachers who know your
+            name by the second class.
           </motion.p>
+
+          {/* Batch timings strip — concrete, checkable information beats
+              another line of wellness copy */}
+          <motion.div
+            custom={3}
+            variants={fadeUp}
+            className="mb-8 flex flex-wrap gap-3"
+          >
+            {batches.map((b) => (
+              <div
+                key={b.label}
+                className="flex items-center gap-2 rounded-full border border-[#A98C5A]/25 bg-white/85 px-4 py-2 backdrop-blur-md"
+              >
+                <IoTimeOutline className="h-4 w-4 text-[#4F6F52]" />
+                <span className="font-body text-xs font-medium text-[#2E2E2E]">
+                  {b.label}
+                </span>
+                <span className="font-body text-xs text-[#777]">
+                  {b.time}
+                </span>
+              </div>
+            ))}
+          </motion.div>
 
           {/* CTA Buttons */}
           <motion.div
-            custom={3}
+            custom={4}
             variants={fadeUp}
             className="mb-10 flex flex-wrap items-center gap-5"
           >
@@ -120,14 +149,14 @@ export default function HeroSection() {
                 icon={<HiArrowRight className="h-4 w-4" />}
                 className="h-[56px] rounded-full px-8 text-base"
               >
-                Book Free Trial
+                Book Free Trial Class
               </Button>
             </motion.div>
-             <motion.div
-               whileHover={{ scale: 1.04 }}
-               whileTap={{ scale: 0.97 }}
-               transition={{ type: 'spring', stiffness: 400, damping: 15 }}
-             >
+            <motion.div
+              whileHover={{ scale: 1.04 }}
+              whileTap={{ scale: 0.97 }}
+              transition={{ type: 'spring', stiffness: 400, damping: 15 }}
+            >
               <Button
                 as={Link}
                 to="/classes"
@@ -137,12 +166,12 @@ export default function HeroSection() {
               >
                 Explore Classes
               </Button>
-             </motion.div>
+            </motion.div>
           </motion.div>
 
           {/* Student Rating */}
           <motion.div
-            custom={4}
+            custom={5}
             variants={fadeUp}
             className="flex items-center gap-4"
           >
@@ -171,7 +200,7 @@ export default function HeroSection() {
                 ))}
               </div>
               <p className="text-sm font-medium text-[#555555]">
-                500+ Happy Students
+                4.9 from 500+ students
               </p>
             </div>
           </motion.div>
@@ -180,4 +209,3 @@ export default function HeroSection() {
     </section>
   );
 }
-
