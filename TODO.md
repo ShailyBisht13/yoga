@@ -1,23 +1,34 @@
-# Why Choose Kewalya Yogshala - Implementation Steps
+# UI & Layout Fixes - Implementation Steps
 
-## Step 1: Write the complete WhyChooseUs.jsx component
-- [x] Section background #FAF7F2, padding py-[120px]
-- [x] Container max-w-[1320px] mx-auto px-6
-- [x] Premium pill badge "WHY CHOOSE KEWALYA YOGSHALA"
-- [x] Heading "Experience Authentic Yoga With Expert Guidance"
-- [x] Description paragraph, max-w-[700px] centered
-- [x] Subtle decorative background (blurred circles)
-- [x] Desktop: Image left (45%) + Cards right (55%)
-- [x] Image wrapped in premium card (16px padding, white bg, shadow, rounded-[32px])
-- [x] 6 feature cards in 2×3 grid with equal height
-- [x] Each card: circular icon, title, description, small arrow, hover effects
-- [x] Import hero.png temporarily
-- [x] Framer Motion: fade-up stagger, floating image, hover scale
-- [x] Bottom CTA: heading, description, button with arrow
-- [x] Responsive: tablet stack, mobile single column
+## Issue 1: CTA Section Button (ContactCTASection.jsx)
+- [x] Remove white/transparent overrides on "Book Free Trial" primary button
+- [x] Ensure text "Book Free Trial", bg #4F6F52, white text, rounded-full, h-[56px], font-semibold, right arrow
+- [x] Hover = slightly darker green (via primary variant `hover:bg-primary-dark`)
 
-## Step 2: Run the project
-- [ ] Run `npm run dev`
-- [ ] Fix any compile errors
-- [ ] Fix responsive issues
-- [ ] Fix overflow/alignment issues
+## Issue 2: Footer / Navbar Overlap (MainLayout, Footer)
+- [x] Navbar fixed only at top (unchanged, `fixed top-0`)
+- [x] Proper z-index stacking (main `relative z-10`, footer `relative z-10`)
+- [x] Footer in normal document flow via flex column layout
+- [x] Removed negative margins (none present causing overlap)
+- [x] Footer occupies its own space at bottom
+
+## Issue 3: Floating Action Buttons (FloatingActions.jsx)
+- [x] Equal circular size (h-12 w-12 for all three)
+- [x] Vertical stack, gap-4 (16px)
+- [x] Proper shadow (shadow-elevated)
+- [x] High z-index (z-[100])
+- [x] Responsive (fixed bottom-right)
+
+## Issue 4: Button Alignment (Button.jsx)
+- [x] Same height (h-10/h-12/h-14 fixed sizes)
+- [x] Same border radius (rounded-full)
+- [x] Same vertical alignment (items-center)
+- [x] Same font size per size variant
+- [x] Icons centered (inline-flex items-center justify-center gap-2)
+
+## Issue 5: Final Verification
+- [x] Run npm run build - SUCCESS (all chunks generated)
+- [x] Fix every compile error - none
+- [x] Fix every Tailwind warning - none
+- [x] Fix every import error - none
+- [x] Ensure no layout shifts, responsive preserved

@@ -193,7 +193,7 @@ export default function ContactCTASection() {
                     variant="primary"
                     size="lg"
                     icon={<HiArrowRight className="h-4 w-4" />}
-                    className="h-[56px] rounded-full bg-white px-8 text-base text-primary hover:bg-secondary-light hover:text-primary-dark"
+                    className="h-[56px] rounded-full px-8 text-base font-semibold"
                   >
                     Book Free Trial
                   </Button>

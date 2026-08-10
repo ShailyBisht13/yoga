@@ -161,6 +161,7 @@ export default function WhyChooseUs() {
                 <img
                   src={whyChooseImage}
                   alt="Kewalya Yogshala yoga practice session"
+                  loading="lazy"
                   className="h-full w-full object-cover"
                   style={{ minHeight: '420px', maxHeight: '560px' }}
                 />

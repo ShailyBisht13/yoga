@@ -49,10 +49,10 @@ export default function HeroSection() {
       <div className="absolute inset-0">
         <img
           src="/hero.png"
-          alt="Kewalya Yogshala"
+          alt="Kewalya Yogshala — Yoga and wellness sanctuary in Dehradun"
+          fetchpriority="high"
           className="h-full w-full object-cover"
         />
-       
       </div>
 
       {/* Subtle parallax effect on background */}
@@ -70,17 +70,11 @@ export default function HeroSection() {
           className="w-full max-w-[620px]"
         >
           {/* Tagline */}
-
           <motion.span
-
             custom={0}
-
             variants={fadeUp}
-
-           className="mb-3 inline-block rounded-full border border-[#A98C5A]/30 bg-white/80 px-3 py-1 font-body text-[10px] font-semibold uppercase tracking-[0.2em] text-[#4F6F52] backdrop-blur-md sm:text-xs"
+            className="mb-3 inline-block rounded-full border border-[#A98C5A]/30 bg-white/80 px-3 py-1 font-body text-[10px] font-semibold uppercase tracking-[0.2em] text-[#4F6F52] backdrop-blur-md sm:text-xs"
           >
-
-
             YOGA • WELLNESS • HEALING
           </motion.span>
 
@@ -129,21 +123,21 @@ export default function HeroSection() {
                 Book Free Trial
               </Button>
             </motion.div>
-            <motion.div
-              whileHover={{ scale: 1.04 }}
-              whileTap={{ scale: 0.97 }}
-              transition={{ type: 'spring', stiffness: 400, damping: 15 }}
-            >
-             <Button
-  as={Link}
-  to="/classes"
-  variant="primary"
-  icon={<HiArrowRight className="h-4 w-4" />}
-  className="h-[56px] rounded-full px-8 text-base"
->
-  Explore Classes
-</Button>
-            </motion.div>
+             <motion.div
+               whileHover={{ scale: 1.04 }}
+               whileTap={{ scale: 0.97 }}
+               transition={{ type: 'spring', stiffness: 400, damping: 15 }}
+             >
+              <Button
+                as={Link}
+                to="/classes"
+                variant="outline"
+                icon={<HiArrowRight className="h-4 w-4" />}
+                className="h-[56px] rounded-full px-8 text-base"
+              >
+                Explore Classes
+              </Button>
+             </motion.div>
           </motion.div>
 
           {/* Student Rating */}

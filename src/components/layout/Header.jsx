@@ -83,6 +83,7 @@ export default function Header() {
             className="flex h-11 w-11 items-center justify-center rounded-full border border-border text-dark transition-colors lg:hidden"
             onClick={() => setIsMobileOpen(true)}
             aria-label="Open menu"
+            aria-expanded={isMobileOpen}
           >
             <div className="relative flex h-4 w-5 flex-col justify-between">
               <span className="block h-0.5 w-full rounded-full bg-current" />

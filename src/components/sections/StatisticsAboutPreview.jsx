@@ -154,7 +154,8 @@ export default function StatisticsAboutPreview() {
             >
               <motion.img
                 src={heroImage}
-                alt="Kewalya Yogshala"
+                alt="Kewalya Yogshala — Yoga practice in serene environment"
+                loading="lazy"
                 className="h-[400px] w-full object-cover md:h-[620px]"
                 animate={{ y: [0, -10, 0] }}
                 transition={{ duration: 5, ease: 'easeInOut', repeat: Infinity }}
