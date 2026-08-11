@@ -23,9 +23,9 @@ const stagger = {
 };
 
 const avatarData = [
-  { bg: '#4F6F52', initials: 'AS' },
-  { bg: '#A98C5A', initials: 'RV' },
-  { bg: '#3D5640', initials: 'PS' },
+  { bg: '#9A3617', initials: 'AS' },
+  { bg: '#F69116', initials: 'RV' },
+  { bg: '#742711', initials: 'PS' },
 ];
 
 /* Real batch timings — ties to the "batch" detail shown in student reviews,
@@ -51,10 +51,10 @@ export default function HeroSection() {
       {/* ===== Full-bleed hero background image ===== */}
       <div className="absolute inset-0">
         <img
-          src="/hero.png"
+          src="/hero1.png"
           alt="Kewalya Yogshala — Yoga and wellness sanctuary in Dehradun"
           fetchpriority="high"
-          className="h-full w-full object-cover"
+          className="h-full w-full object-cover object-[74%_38%]"
         />
         {/* Left-side gradient so text stays legible over any photo */}
         <div className="absolute inset-0 bg-gradient-to-r from-white/90 via-white/50 to-transparent" />
@@ -78,7 +78,7 @@ export default function HeroSection() {
           <motion.span
             custom={0}
             variants={fadeUp}
-            className="mb-3 inline-block rounded-full border border-[#A98C5A]/30 bg-white/80 px-3 py-1 font-body text-[10px] font-semibold uppercase tracking-[0.2em] text-[#4F6F52] backdrop-blur-md sm:text-xs"
+            className="mb-3 inline-block rounded-full border border-[#f69116]/30 bg-white/80 px-3 py-1 font-body text-[10px] font-semibold uppercase tracking-[0.2em] text-[#9a3617] backdrop-blur-md sm:text-xs"
           >
             EST. 2015 · DEHRADUN'S TRUSTED YOGA SHALA
           </motion.span>
@@ -118,9 +118,9 @@ export default function HeroSection() {
             {batches.map((b) => (
               <div
                 key={b.label}
-                className="flex items-center gap-2 rounded-full border border-[#A98C5A]/25 bg-white/85 px-4 py-2 backdrop-blur-md"
+                className="flex items-center gap-2 rounded-full border border-[#f69116]/25 bg-white/85 px-4 py-2 backdrop-blur-md"
               >
-                <IoTimeOutline className="h-4 w-4 text-[#4F6F52]" />
+                <IoTimeOutline className="h-4 w-4 text-[#9a3617]" />
                 <span className="font-body text-xs font-medium text-[#2E2E2E]">
                   {b.label}
                 </span>
@@ -187,7 +187,7 @@ export default function HeroSection() {
               ))}
             </div>
             <div>
-              <div className="flex items-center gap-1 text-[#D4AF37]">
+              <div className="flex items-center gap-1 text-[#F69116]">
                 {[...Array(5)].map((_, i) => (
                   <svg
                     key={i}

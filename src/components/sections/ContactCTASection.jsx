@@ -2,7 +2,7 @@
  * ContactCTASection — Premium call-to-action with floating contact card.
  *
  * Features:
- *   - Linear gradient background (#4F6F52 → #3E5B41)
+ *   - Linear gradient background (#9A3617 → #742711)
  *   - Left (55%): Badge, heading, description, CTA buttons
  *   - Right (45%): Floating white info card with contact details
  *   - Subtle blurred circles + leaf pattern for luxury feel
@@ -112,7 +112,7 @@ export default function ContactCTASection() {
       id="contact-cta"
       className="relative overflow-hidden py-[100px]"
       style={{
-        background: 'linear-gradient(135deg, #4F6F52 0%, #3E5B41 100%)',
+        background: 'linear-gradient(135deg, #9a3617 0%, #742711 100%)',
       }}
     >
       {/* ===== Decorative blurred circles ===== */}

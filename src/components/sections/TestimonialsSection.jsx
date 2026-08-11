@@ -23,12 +23,12 @@ const staggerContainer = {
 
 /* ===== Avatar colors ===== */
 const avatarColors = [
-  { bg: '#4F6F52', text: '#ffffff' },
-  { bg: '#A98C5A', text: '#ffffff' },
-  { bg: '#3D5640', text: '#ffffff' },
-  { bg: '#8A6D3B', text: '#ffffff' },
-  { bg: '#5C7A5F', text: '#ffffff' },
-  { bg: '#6B4F2A', text: '#ffffff' },
+  { bg: '#9A3617', text: '#ffffff' },
+  { bg: '#F69116', text: '#ffffff' },
+  { bg: '#742711', text: '#ffffff' },
+  { bg: '#EB5E1A', text: '#ffffff' },
+  { bg: '#B8542F', text: '#ffffff' },
+  { bg: '#C1571F', text: '#ffffff' },
 ];
 
 /* ===== Testimonial data =====
@@ -86,7 +86,7 @@ const trustStats = {
 
 export default function TestimonialsSection() {
   return (
-    <section id="testimonials" className="bg-cream py-[120px]">
+    <section id="testimonials" className="bg-background py-[120px]">
       <Container className="max-w-[1320px]">
         {/* ===== Section Heading ===== */}
         <motion.div
@@ -172,7 +172,7 @@ export default function TestimonialsSection() {
               className="group relative flex min-h-[300px] flex-col rounded-[24px] border border-border bg-white p-7 shadow-soft transition-shadow duration-300 hover:shadow-elevated"
             >
               {/* Verified seal */}
-              <div className="absolute -right-2.5 -top-2.5 flex h-11 w-11 items-center justify-center rounded-full bg-primary text-white shadow-soft ring-4 ring-cream">
+              <div className="absolute -right-2.5 -top-2.5 flex h-11 w-11 items-center justify-center rounded-full bg-primary text-white shadow-soft ring-4 ring-background">
                 <IoCheckmarkCircle className="h-6 w-6" />
               </div>
 

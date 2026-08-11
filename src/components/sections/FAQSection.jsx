@@ -100,7 +100,7 @@ export default function FAQSection() {
   return (
     <section
       id="faq"
-      className="bg-[#FAF7F2] py-[120px]"
+      className="bg-background py-[120px]"
     >
       <Container className="max-w-[1320px]">
         {/* ===== Section Heading ===== */}

@@ -1,7 +1,7 @@
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState, useCallback, useRef } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { HiOutlinePhone } from 'react-icons/hi';
-import { IoArrowForward } from 'react-icons/io5';
+import { IoArrowForward, IoChevronDown } from 'react-icons/io5';
 import { motion, AnimatePresence } from 'framer-motion';
 import { cn } from '@/utils';
 import { contactInfo } from '@/utils/constants';
@@ -17,6 +17,7 @@ const SCROLL_OFFSET = 110;
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileOpen, setIsMobileOpen] = useState(false);
+  const [openDropdown, setOpenDropdown] = useState(null);
   const location = useLocation();
   const navigate = useNavigate();
   const isHome = location.pathname === '/';
@@ -91,16 +92,62 @@ export default function Header() {
 
           {/* Center navigation — evenly spaced, with breathing room from the logo */}
           <nav className="ml-10 hidden flex-1 items-center justify-evenly lg:flex" aria-label="Main navigation">
-            {navigationLinks.map((link) => (
-              <NavLink
-                key={link.path}
-                to={link.path}
-                onClick={(e) => handleNavClick(e, link.path)}
-                className="text-base font-medium tracking-wide"
-              >
-                {link.label}
-              </NavLink>
-            ))}
+            {navigationLinks.map((link) =>
+              link.children ? (
+                <div
+                  key={link.path}
+                  className="relative"
+                  onMouseEnter={() => setOpenDropdown(link.path)}
+                  onMouseLeave={() => setOpenDropdown(null)}
+                >
+                  <button
+                    type="button"
+                    className="flex items-center gap-1 py-1 text-base font-medium tracking-wide text-dark/80 transition-colors duration-300 hover:text-primary"
+                    aria-expanded={openDropdown === link.path}
+                  >
+                    {link.label}
+                    <IoChevronDown
+                      className={cn(
+                        'h-3.5 w-3.5 transition-transform duration-300',
+                        openDropdown === link.path && 'rotate-180',
+                      )}
+                    />
+                  </button>
+
+                  <AnimatePresence>
+                    {openDropdown === link.path && (
+                      <motion.div
+                        initial={{ opacity: 0, y: 8 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: 8 }}
+                        transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
+                        className="absolute left-1/2 top-full z-50 mt-3 w-[220px] -translate-x-1/2 overflow-hidden rounded-2xl border border-border bg-white p-2 shadow-elevated"
+                      >
+                        {link.children.map((child) => (
+                          <Link
+                            key={child.path}
+                            to={child.path}
+                            onClick={() => setOpenDropdown(null)}
+                            className="block rounded-xl px-4 py-2.5 text-sm font-medium text-dark/80 transition-colors duration-200 hover:bg-primary/5 hover:text-primary"
+                          >
+                            {child.label}
+                          </Link>
+                        ))}
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+              ) : (
+                <NavLink
+                  key={link.path}
+                  to={link.path}
+                  onClick={(e) => handleNavClick(e, link.path)}
+                  className="text-base font-medium tracking-wide"
+                >
+                  {link.label}
+                </NavLink>
+              ),
+            )}
           </nav>
 
           {/* Right buttons */}
@@ -152,6 +199,8 @@ export default function Header() {
 }
 
 function MobileMenu({ onClose, onNavClick }) {
+  const [openSection, setOpenSection] = useState(null);
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -180,26 +229,74 @@ function MobileMenu({ onClose, onNavClick }) {
         </div>
       </div>
 
-      <div className="flex flex-1 flex-col items-center justify-center gap-3">
-        {navigationLinks.map((link, index) => (
-          <motion.div
-            key={link.path}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.15 + index * 0.07, duration: 0.4 }}
-          >
-            <NavLink
-              to={link.path}
-              onClick={(e) => {
-                onNavClick(e, link.path);
-                onClose();
-              }}
-              className="font-heading text-2xl font-medium"
+      <div className="flex flex-1 flex-col items-center justify-center gap-3 overflow-y-auto py-6">
+        {navigationLinks.map((link, index) =>
+          link.children ? (
+            <motion.div
+              key={link.path}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.15 + index * 0.07, duration: 0.4 }}
+              className="flex flex-col items-center"
             >
-              {link.label}
-            </NavLink>
-          </motion.div>
-        ))}
+              <button
+                type="button"
+                onClick={() => setOpenSection(openSection === link.path ? null : link.path)}
+                className="flex items-center gap-2 font-heading text-2xl font-medium text-dark/80"
+                aria-expanded={openSection === link.path}
+              >
+                {link.label}
+                <IoChevronDown
+                  className={cn(
+                    'h-4 w-4 transition-transform duration-300',
+                    openSection === link.path && 'rotate-180',
+                  )}
+                />
+              </button>
+
+              <AnimatePresence initial={false}>
+                {openSection === link.path && (
+                  <motion.div
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: 'auto', opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+                    className="flex flex-col items-center gap-2 overflow-hidden"
+                  >
+                    {link.children.map((child) => (
+                      <Link
+                        key={child.path}
+                        to={child.path}
+                        onClick={onClose}
+                        className="pt-3 font-body text-base font-medium text-dark/60 transition-colors hover:text-primary"
+                      >
+                        {child.label}
+                      </Link>
+                    ))}
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </motion.div>
+          ) : (
+            <motion.div
+              key={link.path}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.15 + index * 0.07, duration: 0.4 }}
+            >
+              <NavLink
+                to={link.path}
+                onClick={(e) => {
+                  onNavClick(e, link.path);
+                  onClose();
+                }}
+                className="font-heading text-2xl font-medium"
+              >
+                {link.label}
+              </NavLink>
+            </motion.div>
+          ),
+        )}
       </div>
 
       <div className="pb-8">

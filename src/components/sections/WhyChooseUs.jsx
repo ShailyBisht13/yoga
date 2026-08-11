@@ -81,17 +81,17 @@ const features = [
 /* ───── Component ───── */
 export default function WhyChooseUs() {
   return (
-    <section className="relative overflow-hidden bg-[#FAF7F2] py-[120px]">
+    <section className="relative overflow-hidden bg-background py-[120px]">
       {/* ─── Subtle Decorative Background ─── */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
         {/* Large blurred circle top-left */}
-        <div className="absolute -top-40 -left-40 h-[500px] w-[500px] rounded-full bg-[#DCC8A1]/20 blur-[120px]" />
+        <div className="absolute -top-40 -left-40 h-[500px] w-[500px] rounded-full bg-[#f9b35c]/20 blur-[120px]" />
         {/* Small blurred circle bottom-right */}
-        <div className="absolute -bottom-32 -right-32 h-[400px] w-[400px] rounded-full bg-[#4F6F52]/10 blur-[100px]" />
+        <div className="absolute -bottom-32 -right-32 h-[400px] w-[400px] rounded-full bg-[#9a3617]/10 blur-[100px]" />
         {/* Leaf-like decorative dots */}
-        <div className="absolute top-[20%] right-[8%] h-3 w-3 rounded-full bg-[#DCC8A1]/30 blur-[2px]" />
-        <div className="absolute top-[35%] right-[5%] h-2 w-2 rounded-full bg-[#DCC8A1]/20 blur-[1px]" />
-        <div className="absolute bottom-[25%] left-[6%] h-4 w-4 rounded-full bg-[#4F6F52]/15 blur-[2px]" />
+        <div className="absolute top-[20%] right-[8%] h-3 w-3 rounded-full bg-[#f9b35c]/30 blur-[2px]" />
+        <div className="absolute top-[35%] right-[5%] h-2 w-2 rounded-full bg-[#f9b35c]/20 blur-[1px]" />
+        <div className="absolute bottom-[25%] left-[6%] h-4 w-4 rounded-full bg-[#9a3617]/15 blur-[2px]" />
       </div>
 
       {/* ─── Header ─── */}
@@ -106,7 +106,7 @@ export default function WhyChooseUs() {
           <motion.span
             custom={0}
             variants={fadeUp}
-            className="mb-5 inline-block rounded-full border border-[#A98C5A]/30 bg-white/80 px-5 py-1.5 font-body text-[10px] font-semibold uppercase tracking-[0.22em] text-[#4F6F52] shadow-sm backdrop-blur-md sm:text-xs"
+            className="mb-5 inline-block rounded-full border border-[#f69116]/30 bg-white/80 px-5 py-1.5 font-body text-[10px] font-semibold uppercase tracking-[0.22em] text-[#9a3617] shadow-sm backdrop-blur-md sm:text-xs"
           >
             WHY CHOOSE KEWALYA YOGSHALA
           </motion.span>
@@ -149,10 +149,10 @@ export default function WhyChooseUs() {
                   key={index}
                   variants={staggerItem}
                   whileHover={{ y: -6, transition: { duration: 0.3 } }}
-                  className="group relative flex flex-col rounded-[24px] border border-transparent bg-white p-7 shadow-[0_4px_24px_rgba(46,46,46,0.06)] transition-all duration-300 hover:border-[#4F6F52]/30 hover:shadow-[0_12px_40px_rgba(46,46,46,0.10)]"
+                  className="group relative flex flex-col rounded-[24px] border border-transparent bg-white p-7 shadow-[0_4px_24px_rgba(46,46,46,0.06)] transition-all duration-300 hover:border-[#9a3617]/30 hover:shadow-[0_12px_40px_rgba(46,46,46,0.10)]"
                 >
                   {/* Circular Icon */}
-                  <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-full bg-[#DCC8A1]/30 text-[#4F6F52] transition-all duration-300 group-hover:rotate-6 group-hover:bg-[#DCC8A1]/50">
+                  <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-full bg-[#f9b35c]/30 text-[#9a3617] transition-all duration-300 group-hover:rotate-6 group-hover:bg-[#f9b35c]/50">
                     <IconComponent className="text-xl" />
                   </div>
 
@@ -168,7 +168,7 @@ export default function WhyChooseUs() {
 
                   {/* Small Arrow - bottom right */}
                   <div className="mt-4 flex items-center justify-end">
-                    <span className="flex h-7 w-7 items-center justify-center rounded-full bg-[#DCC8A1]/20 text-[10px] text-[#4F6F52] transition-all duration-300 group-hover:bg-[#4F6F52] group-hover:text-white">
+                    <span className="flex h-7 w-7 items-center justify-center rounded-full bg-[#f9b35c]/20 text-[10px] text-[#9a3617] transition-all duration-300 group-hover:bg-[#9a3617] group-hover:text-white">
                       <svg
                         className="h-3 w-3"
                         fill="none"
@@ -198,7 +198,7 @@ export default function WhyChooseUs() {
           <motion.span
             custom={0}
             variants={fadeUp}
-            className="mb-4 inline-block rounded-full border border-[#A98C5A]/30 bg-white/80 px-4 py-1 font-body text-[10px] font-semibold uppercase tracking-[0.2em] text-[#4F6F52] shadow-sm backdrop-blur-md sm:text-xs"
+            className="mb-4 inline-block rounded-full border border-[#f69116]/30 bg-white/80 px-4 py-1 font-body text-[10px] font-semibold uppercase tracking-[0.2em] text-[#9a3617] shadow-sm backdrop-blur-md sm:text-xs"
           >
             BEGIN YOUR JOURNEY
           </motion.span>
