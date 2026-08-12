@@ -1,4 +1,4 @@
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { Container, Button } from '@/components/ui';
 import { Link } from 'react-router-dom';
 import { HiArrowRight } from 'react-icons/hi2';
@@ -22,193 +22,153 @@ const stagger = {
   },
 };
 
-const avatarData = [
-  { bg: '#9A3617', initials: 'AS' },
-  { bg: '#F69116', initials: 'RV' },
-  { bg: '#742711', initials: 'PS' },
-];
-
-/* Real batch timings — ties to the "batch" detail shown in student reviews,
-   so a visitor sees the same schedule referenced twice, not two disconnected claims. */
 const batches = [
   { label: 'Sunrise Batch', time: '6:00 – 7:30 AM' },
   { label: 'Evening Batch', time: '5:00 – 6:30 PM' },
 ];
 
+/* Delicate high-contrast serif for the hero headline — matches the new
+   reference screenshot's font (with italic for the accent line).
+   Move this <link> to index.html if you'd rather not inject it at runtime. */
+const HeadingFont = () => (
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Poppins:wght@300;400;500;600&display=swap"
+  />
+);
+
 export default function HeroSection() {
   const sectionRef = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ['start start', 'end start'],
-  });
-  const bgY = useTransform(scrollYProgress, [0, 1], ['0%', '20%']);
 
   return (
-    <section
-      ref={sectionRef}
-      className="relative min-h-screen overflow-hidden"
-    >
-      {/* ===== Full-bleed hero background image ===== */}
-      <div className="absolute inset-0">
-        <img
-          src="/hero1.png"
-          alt="Kewalya Yogshala — Yoga and wellness sanctuary in Dehradun"
-          fetchPriority="high"
-          className="h-full w-full object-cover object-[74%_38%]"
-        />
-        {/* Left-side gradient so text stays legible over any photo — lightened so more of the photo shows through */}
-        <div className="absolute inset-0 bg-gradient-to-r from-white/70 via-white/30 to-transparent" />
-        {/* On phones the text column spans the full width, not just the left
-            side, so add a vertical fade too — hidden from sm up where the
-            horizontal gradient alone is enough. */}
-        <div className="absolute inset-0 bg-gradient-to-b from-white/55 via-white/25 to-transparent sm:hidden" />
-      </div>
+    <section className="relative bg-[#F3F1EC] pb-6 sm:pb-10">
+      <HeadingFont />
 
-      {/* Subtle parallax effect on background */}
-      <motion.div
-        style={{ y: bgY }}
-        className="pointer-events-none absolute inset-0"
-      />
+      {/* ===== Full-width, bottom-cropped hero card — flush with the navbar
+          above it (no top gap/rounding), full browser width, rounded only
+          at the bottom so the image reads as "cut off" there. No dark
+          overlay: the photo's own light wall gives the dark text its
+          contrast, so the copy sits directly on the image. ===== */}
+      <div
+        ref={sectionRef}
+        className="relative h-[calc(100vh-1rem)] w-full overflow-hidden rounded-b-[28px]"
+      >
+        <div className="absolute inset-0">
+          <img
+            src="/hero.png"
+            alt="Vimoksha Yogshala — student meditating in a sunlit courtyard studio"
+            fetchPriority="high"
+            className="h-full w-full object-cover object-[70%_center]"
+          />
+        </div>
 
-      {/* ===== Main container with content overlaid ===== */}
-      <div className="relative z-10 mx-auto flex min-h-screen max-w-[1320px] flex-col items-start justify-center px-6 pt-[110px] pb-16 sm:pt-[125px] lg:pt-[100px]">
-        <motion.div
-          variants={stagger}
-          initial="hidden"
-          animate="visible"
-          className="w-full max-w-[620px]"
-        >
-          {/* Tagline */}
-          <motion.span
-            custom={0}
-            variants={fadeUp}
-            className="mb-3 inline-block rounded-full border border-[#f69116]/30 bg-white/80 px-3 py-1 font-body text-[10px] font-semibold uppercase tracking-[0.2em] text-[#9a3617] backdrop-blur-md sm:text-xs"
-          >
-            EST. 2015 · DEHRADUN'S TRUSTED YOGA SHALA
-          </motion.span>
-
-          {/* Heading */}
-          <motion.h1
-            custom={1}
-            variants={fadeUp}
-            className="mb-6 font-heading font-semibold leading-[1.15] text-[#2E2E2E]"
-          >
-            <span className="text-[26px] sm:text-[30px] md:text-[34px] lg:text-[40px]">
-              Find Your Inner
-              <br />
-              Peace at Kewalya Yogshala
-            </span>
-          </motion.h1>
-
-          {/* Description */}
-          <motion.p
-            custom={2}
-            variants={fadeUp}
-            className="mb-8 max-w-[480px] text-sm leading-[1.8] text-[#555555] md:text-base"
-          >
-            Nestled in the serene beauty of Dehradun, we've guided over 500
-            students through authentic Hatha yoga, pranayama, and yoga
-            therapy — taught in small batches, led by teachers who know your
-            name by the second class.
-          </motion.p>
-
-          {/* Batch timings strip — concrete, checkable information beats
-              another line of wellness copy */}
+        {/* ===== Content overlaid on the card ===== */}
+        <div className="relative z-10 flex h-full max-w-[1320px] flex-col items-start justify-center px-6 pt-28 pb-10 sm:px-10 sm:pt-32 md:px-14 md:pt-36">
           <motion.div
-            custom={3}
-            variants={fadeUp}
-            className="mb-8 flex flex-wrap gap-3"
+            variants={stagger}
+            initial="hidden"
+            animate="visible"
+            className="w-full max-w-[620px]"
           >
-            {batches.map((b) => (
-              <div
-                key={b.label}
-                className="flex items-center gap-2 rounded-full border border-[#f69116]/25 bg-white/85 px-4 py-2 backdrop-blur-md"
-              >
-                <IoTimeOutline className="h-4 w-4 text-[#9a3617]" />
-                <span className="font-body text-xs font-medium text-[#2E2E2E]">
-                  {b.label}
-                </span>
-                <span className="font-body text-xs text-[#777]">
-                  {b.time}
-                </span>
-              </div>
-            ))}
-          </motion.div>
-
-          {/* CTA Buttons */}
-          <motion.div
-            custom={4}
-            variants={fadeUp}
-            className="mb-10 flex flex-wrap items-center gap-5"
-          >
-            <motion.div
-              whileHover={{ scale: 1.04 }}
-              whileTap={{ scale: 0.97 }}
-              transition={{ type: 'spring', stiffness: 400, damping: 15 }}
+            {/* Tagline */}
+            <motion.span
+              custom={0}
+              variants={fadeUp}
+              className="mb-3 inline-block rounded-full border border-black/10 bg-white/70 px-3 py-1 font-body text-[10px] font-semibold uppercase tracking-[0.2em] text-[#742711] backdrop-blur-md sm:text-xs"
             >
-              <Button
-                as={Link}
-                to="/contact"
-                variant="primary"
-                icon={<HiArrowRight className="h-4 w-4" />}
-                className="h-[56px] rounded-full px-8 text-base"
-              >
-                Book Free Trial Class
-              </Button>
-            </motion.div>
-            <motion.div
-              whileHover={{ scale: 1.04 }}
-              whileTap={{ scale: 0.97 }}
-              transition={{ type: 'spring', stiffness: 400, damping: 15 }}
-            >
-              <Button
-                as={Link}
-                to="/classes"
-                variant="outline"
-                icon={<HiArrowRight className="h-4 w-4" />}
-                className="h-[56px] rounded-full px-8 text-base"
-              >
-                Explore Classes
-              </Button>
-            </motion.div>
-          </motion.div>
+              EST. 2015 · DEHRADUN'S TRUSTED YOGA SHALA
+            </motion.span>
 
-          {/* Student Rating */}
-          <motion.div
-            custom={5}
-            variants={fadeUp}
-            className="flex items-center gap-4"
-          >
-            <div className="flex -space-x-3">
-              {avatarData.map((a, i) => (
+            {/* Heading */}
+            <motion.h1
+              custom={1}
+              variants={fadeUp}
+              style={{ fontFamily: "'Cormorant Garamond', serif" }}
+              className="mb-6 font-medium leading-[1.15] tracking-tight text-neutral-900"
+            >
+              <span className="text-[32px] sm:text-[36px] md:text-[42px] lg:text-[48px]">
+                Find Your Inner
+                <br />
+                Peace at <span style={{ color: '#9a3617' }}>Vimoksha Yogshala</span>
+              </span>
+            </motion.h1>
+
+            {/* Description */}
+            <motion.p
+              custom={2}
+              variants={fadeUp}
+              style={{ fontFamily: "'Poppins', sans-serif" }}
+              className="mb-8 max-w-[480px] text-sm font-light leading-[1.8] text-neutral-600 md:text-base"
+            >
+              Nestled in the serene beauty of Dehradun, we've guided over 500
+              students through authentic Hatha yoga, pranayama, and yoga
+              therapy — taught in small batches, led by teachers who know your
+              name by the second class.
+            </motion.p>
+
+            {/* Batch timings strip — concrete, checkable information beats
+                another line of wellness copy */}
+            <motion.div
+              custom={3}
+              variants={fadeUp}
+              className="mb-8 flex flex-wrap gap-3"
+            >
+              {batches.map((b) => (
                 <div
-                  key={a.initials}
-                  className="relative flex h-10 w-10 items-center justify-center rounded-full border-2 border-white text-[10px] font-bold text-white shadow-soft"
-                  style={{ backgroundColor: a.bg, zIndex: 3 - i }}
+                  key={b.label}
+                  className="flex items-center gap-2 rounded-full border border-black/10 bg-white/70 px-4 py-2 backdrop-blur-md"
                 >
-                  {a.initials}
+                  <IoTimeOutline className="h-4 w-4 text-[#F69116]" />
+                  <span className="font-body text-xs font-medium text-neutral-900">
+                    {b.label}
+                  </span>
+                  <span className="font-body text-xs text-neutral-500">
+                    {b.time}
+                  </span>
                 </div>
               ))}
-            </div>
-            <div>
-              <div className="flex items-center gap-1 text-[#F69116]">
-                {[...Array(5)].map((_, i) => (
-                  <svg
-                    key={i}
-                    className="h-4 w-4"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                  >
-                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                  </svg>
-                ))}
-              </div>
-              <p className="text-sm font-medium text-[#555555]">
-                4.9 from 500+ students
-              </p>
-            </div>
+            </motion.div>
+
+            {/* CTA Buttons */}
+            <motion.div
+              custom={4}
+              variants={fadeUp}
+              className="mb-10 flex flex-wrap items-center gap-5"
+            >
+              <motion.div
+                whileHover={{ scale: 1.04 }}
+                whileTap={{ scale: 0.97 }}
+                transition={{ type: 'spring', stiffness: 400, damping: 15 }}
+              >
+                <Button
+                  as={Link}
+                  to="/contact"
+                  variant="primary"
+                  icon={<HiArrowRight className="h-4 w-4" />}
+                  className="h-[56px] rounded-full px-8 text-base"
+                >
+                  Book Free Trial Class
+                </Button>
+              </motion.div>
+              <motion.div
+                whileHover={{ scale: 1.04 }}
+                whileTap={{ scale: 0.97 }}
+                transition={{ type: 'spring', stiffness: 400, damping: 15 }}
+              >
+                <Button
+                  as={Link}
+                  to="/classes"
+                  variant="outline"
+                  icon={<HiArrowRight className="h-4 w-4" />}
+                  className="h-[56px] rounded-full border-black/20 px-8 text-base text-neutral-900 hover:bg-black/5"
+                >
+                  Explore Classes
+                </Button>
+              </motion.div>
+            </motion.div>
+
           </motion.div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );
