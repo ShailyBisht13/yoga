@@ -40,7 +40,7 @@ const stagger = {
 export default function StatisticsAboutPreview() {
   return (
     <section className="overflow-hidden bg-background">
-      <div className="mx-auto max-w-[1320px] px-6 pt-[100px] pb-[100px]">
+      <div className="mx-auto max-w-[1320px] px-6 pt-[60px] pb-[60px] sm:pt-[80px] sm:pb-[80px] md:pt-[100px] md:pb-[100px]">
         {/* ===== TOP: Statistics Card ===== */}
         <motion.div
           initial="hidden"
@@ -48,7 +48,7 @@ export default function StatisticsAboutPreview() {
           viewport={{ once: true, amount: 0.2 }}
           whileHover={{ y: -6, boxShadow: '0 24px 60px rgba(46, 46, 46, 0.12)' }}
           transition={{ duration: 0.4, ease: 'easeOut' }}
-          className="mb-[100px] rounded-[28px] border border-[#ebe0d2]/40 bg-white p-8 shadow-soft md:p-10"
+          className="mb-[60px] rounded-[28px] border border-[#ebe0d2]/40 bg-white p-8 shadow-soft sm:mb-[80px] md:mb-[100px] md:p-10"
         >
           <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
             {statItems.map((item, index) => (
@@ -95,12 +95,12 @@ export default function StatisticsAboutPreview() {
             {/* Heading */}
             <motion.h2
               variants={fadeUp}
-              className="font-heading text-[2.5rem] font-semibold leading-[1.12] text-[#2E2E2E] md:text-[3.2rem]"
+              className="font-heading text-[28px] font-semibold leading-[1.2] text-[#2E2E2E] sm:text-[34px] sm:leading-[1.15] md:text-[3.2rem] md:leading-[1.12]"
             >
               Transform Your Mind,
-              <br />
+              <br className="hidden sm:block" />
               Body & Soul Through
-              <br />
+              <br className="hidden sm:block" />
               Authentic Yoga
             </motion.h2>
 
@@ -156,7 +156,7 @@ export default function StatisticsAboutPreview() {
                 src={heroImage}
                 alt="Kewalya Yogshala — Yoga practice in serene environment"
                 loading="lazy"
-                className="h-[400px] w-full object-cover md:h-[620px]"
+                className="h-[280px] w-full object-cover sm:h-[400px] md:h-[620px]"
                 animate={{ y: [0, -10, 0] }}
                 transition={{ duration: 5, ease: 'easeInOut', repeat: Infinity }}
               />

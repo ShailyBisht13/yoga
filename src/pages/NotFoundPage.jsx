@@ -10,7 +10,7 @@ export default function NotFoundPage() {
     <Section className="flex min-h-[70vh] items-center">
       <Container className="text-center">
         <p className="text-sm font-medium uppercase tracking-[0.25em] text-primary">404</p>
-        <h1 className="mt-4 font-heading text-5xl text-dark md:text-6xl">Page Not Found</h1>
+        <h1 className="mt-4 font-heading text-4xl text-dark sm:text-5xl md:text-6xl">Page Not Found</h1>
         <p className="mx-auto mt-4 max-w-md text-muted">
           The page you are looking for may have been moved or no longer exists.
         </p>

@@ -100,7 +100,7 @@ export default function IntermediateClassesPage() {
   return (
     <div data-page="intermediate-classes">
       {/* ===== Intro ===== */}
-      <section className="bg-background pt-[160px] pb-[100px]">
+      <section className="bg-background pt-[120px] pb-[60px] sm:pt-[140px] sm:pb-[80px] md:pt-[160px] md:pb-[100px]">
         <Container className="max-w-[900px]">
           <motion.div
             variants={staggerContainer}
@@ -117,7 +117,7 @@ export default function IntermediateClassesPage() {
 
             <motion.h1
               variants={fadeUp}
-              className="font-heading text-4xl font-semibold leading-tight text-dark md:text-5xl"
+              className="font-heading text-3xl font-semibold leading-tight text-dark sm:text-4xl md:text-5xl"
             >
               Build on the <span className="text-primary">Basics</span>
             </motion.h1>
@@ -135,7 +135,7 @@ export default function IntermediateClassesPage() {
       </section>
 
       {/* ===== Why This Level ===== */}
-      <section className="bg-white py-[100px]">
+      <section className="bg-white py-[60px] md:py-[100px]">
         <Container className="max-w-[1320px]">
           <motion.div
             variants={staggerContainer}
@@ -146,7 +146,7 @@ export default function IntermediateClassesPage() {
           >
             <motion.h2
               variants={fadeUp}
-              className="font-heading text-3xl font-semibold text-dark md:text-4xl"
+              className="font-heading text-2xl font-semibold text-dark sm:text-3xl md:text-4xl"
             >
               What Changes at This Level
             </motion.h2>
@@ -182,7 +182,7 @@ export default function IntermediateClassesPage() {
       </section>
 
       {/* ===== Gallery ===== */}
-      <section className="bg-background py-[100px]">
+      <section className="bg-background py-[60px] md:py-[100px]">
         <Container className="max-w-[1320px]">
           <motion.div
             variants={staggerContainer}
@@ -207,7 +207,7 @@ export default function IntermediateClassesPage() {
       </section>
 
       {/* ===== Styles Taught ===== */}
-      <section className="bg-white py-[100px]">
+      <section className="bg-white py-[60px] md:py-[100px]">
         <Container className="max-w-[1100px]">
           <motion.div
             variants={staggerContainer}
@@ -218,7 +218,7 @@ export default function IntermediateClassesPage() {
           >
             <motion.h2
               variants={fadeUp}
-              className="font-heading text-3xl font-semibold text-dark md:text-4xl"
+              className="font-heading text-2xl font-semibold text-dark sm:text-3xl md:text-4xl"
             >
               Styles Taught at This Level
             </motion.h2>
@@ -254,7 +254,7 @@ export default function IntermediateClassesPage() {
       </section>
 
       {/* ===== Class Includes + Batch Timings ===== */}
-      <section className="bg-background py-[100px]">
+      <section className="bg-background py-[60px] md:py-[100px]">
         <Container className="max-w-[1100px]">
           <motion.div
             variants={staggerContainer}
@@ -292,7 +292,7 @@ export default function IntermediateClassesPage() {
       </section>
 
       {/* ===== Contact ===== */}
-      <section className="bg-white py-[100px]">
+      <section className="bg-white py-[60px] md:py-[100px]">
         <Container className="max-w-[900px]">
           <motion.div
             variants={staggerContainer}
@@ -305,7 +305,7 @@ export default function IntermediateClassesPage() {
               <span className="inline-block rounded-full border border-secondary/30 bg-secondary/5 px-4 py-1.5 font-body text-xs font-semibold uppercase tracking-[0.25em] text-secondary">
                 Get In Touch
               </span>
-              <h2 className="font-heading text-3xl font-semibold text-dark md:text-4xl">
+              <h2 className="font-heading text-2xl font-semibold text-dark sm:text-3xl md:text-4xl">
                 Ready to Push Your Practice?
               </h2>
               <p className="max-w-xl text-base leading-relaxed text-muted">

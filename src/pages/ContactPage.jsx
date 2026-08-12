@@ -91,7 +91,7 @@ export default function ContactPage() {
   return (
     <div data-page="contact">
       {/* ===== Intro / Welcome ===== */}
-      <section className="bg-background pt-[160px] pb-[80px]">
+      <section className="bg-background pt-[120px] pb-[50px] sm:pt-[140px] sm:pb-[65px] md:pt-[160px] md:pb-[80px]">
         <Container className="max-w-[900px]">
           <motion.div
             variants={staggerContainer}
@@ -108,7 +108,7 @@ export default function ContactPage() {
 
             <motion.h1
               variants={fadeUp}
-              className="font-heading text-4xl font-semibold leading-tight text-dark md:text-5xl"
+              className="font-heading text-3xl font-semibold leading-tight text-dark sm:text-4xl md:text-5xl"
             >
               Let's Start Your <span className="text-primary">Practice</span>
             </motion.h1>
@@ -125,7 +125,7 @@ export default function ContactPage() {
       </section>
 
       {/* ===== Contact cards ===== */}
-      <section className="bg-white pb-[60px]">
+      <section className="bg-white pb-[40px] md:pb-[60px]">
         <Container className="max-w-[1320px]">
           <motion.div
             variants={staggerContainer}
@@ -175,7 +175,7 @@ export default function ContactPage() {
       </section>
 
       {/* ===== Map + Form ===== */}
-      <section className="bg-background py-[100px]">
+      <section className="bg-background py-[60px] md:py-[100px]">
         <Container className="max-w-[1320px]">
           <motion.div
             variants={staggerContainer}
@@ -187,12 +187,12 @@ export default function ContactPage() {
             {/* Map */}
             <motion.div
               variants={fadeUp}
-              className="overflow-hidden rounded-[28px] border border-border shadow-soft min-h-[420px]"
+              className="overflow-hidden rounded-[28px] border border-border shadow-soft min-h-[280px] sm:min-h-[420px]"
             >
               <iframe
                 title="Vimoksha Yogshala — Dehradun studio location"
                 src={MAP_EMBED_SRC}
-                className="h-full w-full min-h-[420px]"
+                className="h-full w-full min-h-[280px] sm:min-h-[420px]"
                 style={{ border: 0 }}
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
@@ -205,7 +205,7 @@ export default function ContactPage() {
               variants={fadeUp}
               className="rounded-[28px] border border-border bg-white p-8 shadow-soft md:p-10"
             >
-              <h2 className="font-heading text-2xl font-semibold text-dark md:text-3xl">
+              <h2 className="font-heading text-xl font-semibold text-dark sm:text-2xl md:text-3xl">
                 Send a Message
               </h2>
               <p className="mt-2 text-sm leading-relaxed text-muted">

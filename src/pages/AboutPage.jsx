@@ -94,7 +94,7 @@ export default function AboutPage() {
   return (
     <div data-page="about">
       {/* ===== Intro / Welcome ===== */}
-      <section className="bg-background pt-[160px] pb-[100px]">
+      <section className="bg-background pt-[120px] pb-[60px] sm:pt-[140px] sm:pb-[80px] md:pt-[160px] md:pb-[100px]">
         <Container className="max-w-[900px]">
           <motion.div
             variants={staggerContainer}
@@ -111,7 +111,7 @@ export default function AboutPage() {
 
             <motion.h1
               variants={fadeUp}
-              className="font-heading text-4xl font-semibold leading-tight text-dark md:text-5xl"
+              className="font-heading text-3xl font-semibold leading-tight text-dark sm:text-4xl md:text-5xl"
             >
               Welcome to <span className="text-primary">Vimoksha Yogshala</span>
             </motion.h1>
@@ -131,7 +131,7 @@ export default function AboutPage() {
       </section>
 
       {/* ===== What We Offer ===== */}
-      <section className="bg-white py-[100px]">
+      <section className="bg-white py-[60px] md:py-[100px]">
         <Container className="max-w-[1320px]">
           <motion.div
             variants={staggerContainer}
@@ -142,7 +142,7 @@ export default function AboutPage() {
           >
             <motion.h2
               variants={fadeUp}
-              className="font-heading text-3xl font-semibold text-dark md:text-4xl"
+              className="font-heading text-2xl font-semibold text-dark sm:text-3xl md:text-4xl"
             >
               What We Offer
             </motion.h2>
@@ -182,7 +182,7 @@ export default function AboutPage() {
       </section>
 
       {/* ===== Our Story ===== */}
-      <section className="bg-background py-[100px]">
+      <section className="bg-background py-[60px] md:py-[100px]">
         <Container className="max-w-[900px]">
           <motion.div
             variants={staggerContainer}
@@ -200,7 +200,7 @@ export default function AboutPage() {
 
             <motion.h2
               variants={fadeUp}
-              className="text-center font-heading text-3xl font-semibold text-dark md:text-4xl"
+              className="text-center font-heading text-2xl font-semibold text-dark sm:text-3xl md:text-4xl"
             >
               Where Tradition Meets Modern Wellness
             </motion.h2>
@@ -277,7 +277,7 @@ export default function AboutPage() {
       </section>
 
       {/* ===== Founder Profile ===== */}
-      <section className="bg-background py-[100px]">
+      <section className="bg-background py-[60px] md:py-[100px]">
         <Container className="max-w-[900px]">
           <motion.div
             initial="hidden"
@@ -297,7 +297,7 @@ export default function AboutPage() {
               </div>
 
               <div className="flex flex-1 flex-col gap-2 text-center sm:text-left">
-                <h3 className="font-heading text-2xl font-semibold text-dark md:text-3xl">
+                <h3 className="font-heading text-xl font-semibold text-dark sm:text-2xl md:text-3xl">
                   Yogacharya Gyan Prakash
                 </h3>
                 <p className="font-body text-sm text-muted">
@@ -373,7 +373,7 @@ export default function AboutPage() {
       </section>
 
       {/* ===== Closing CTA ===== */}
-      <section className="bg-white py-[100px]">
+      <section className="bg-white py-[60px] md:py-[100px]">
         <Container className="max-w-[700px]">
           <motion.div
             variants={staggerContainer}

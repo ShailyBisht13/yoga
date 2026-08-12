@@ -53,11 +53,15 @@ export default function HeroSection() {
         <img
           src="/hero1.png"
           alt="Kewalya Yogshala — Yoga and wellness sanctuary in Dehradun"
-          fetchpriority="high"
+          fetchPriority="high"
           className="h-full w-full object-cover object-[74%_38%]"
         />
         {/* Left-side gradient so text stays legible over any photo — lightened so more of the photo shows through */}
         <div className="absolute inset-0 bg-gradient-to-r from-white/70 via-white/30 to-transparent" />
+        {/* On phones the text column spans the full width, not just the left
+            side, so add a vertical fade too — hidden from sm up where the
+            horizontal gradient alone is enough. */}
+        <div className="absolute inset-0 bg-gradient-to-b from-white/55 via-white/25 to-transparent sm:hidden" />
       </div>
 
       {/* Subtle parallax effect on background */}
@@ -67,7 +71,7 @@ export default function HeroSection() {
       />
 
       {/* ===== Main container with content overlaid ===== */}
-      <div className="relative z-10 mx-auto flex min-h-screen max-w-[1320px] flex-col items-start justify-center px-6 pt-33 pb-16 lg:pt-25">
+      <div className="relative z-10 mx-auto flex min-h-screen max-w-[1320px] flex-col items-start justify-center px-6 pt-[110px] pb-16 sm:pt-[125px] lg:pt-[100px]">
         <motion.div
           variants={stagger}
           initial="hidden"
@@ -89,7 +93,7 @@ export default function HeroSection() {
             variants={fadeUp}
             className="mb-6 font-heading font-semibold leading-[1.15] text-[#2E2E2E]"
           >
-            <span className="text-[25px] md:text-[30px] lg:text-[40px]">
+            <span className="text-[26px] sm:text-[30px] md:text-[34px] lg:text-[40px]">
               Find Your Inner
               <br />
               Peace at Kewalya Yogshala

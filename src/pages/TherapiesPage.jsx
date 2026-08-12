@@ -81,7 +81,7 @@ export default function TherapiesPage() {
   return (
     <div data-page="therapies">
       {/* ===== Intro / Hero ===== */}
-      <section className="bg-background pt-[160px] pb-[100px]">
+      <section className="bg-background pt-[120px] pb-[60px] sm:pt-[140px] sm:pb-[80px] md:pt-[160px] md:pb-[100px]">
         <Container className="max-w-[900px]">
           <motion.div
             variants={staggerContainer}
@@ -98,7 +98,7 @@ export default function TherapiesPage() {
 
             <motion.h1
               variants={fadeUp}
-              className="font-heading text-4xl font-semibold leading-tight text-dark md:text-5xl"
+              className="font-heading text-3xl font-semibold leading-tight text-dark sm:text-4xl md:text-5xl"
             >
               Healing Therapies at <span className="text-primary">Vimoksha Yogshala</span>
             </motion.h1>
@@ -130,7 +130,7 @@ export default function TherapiesPage() {
       </section>
 
       {/* ===== Therapies grid ===== */}
-      <section className="bg-white py-[100px]">
+      <section className="bg-white py-[60px] md:py-[100px]">
         <Container className="max-w-[1320px]">
           <motion.div
             variants={staggerContainer}
@@ -141,7 +141,7 @@ export default function TherapiesPage() {
           >
             <motion.h2
               variants={fadeUp}
-              className="font-heading text-3xl font-semibold text-dark md:text-4xl"
+              className="font-heading text-2xl font-semibold text-dark sm:text-3xl md:text-4xl"
             >
               Our Therapies
             </motion.h2>
@@ -184,7 +184,7 @@ export default function TherapiesPage() {
       </section>
 
       {/* ===== How it works ===== */}
-      <section className="bg-background py-[100px]">
+      <section className="bg-background py-[60px] md:py-[100px]">
         <Container className="max-w-[900px]">
           <motion.div
             variants={staggerContainer}
@@ -195,7 +195,7 @@ export default function TherapiesPage() {
           >
             <motion.h2
               variants={fadeUp}
-              className="font-heading text-3xl font-semibold text-dark md:text-4xl"
+              className="font-heading text-2xl font-semibold text-dark sm:text-3xl md:text-4xl"
             >
               How a Therapy Session Works
             </motion.h2>
@@ -228,7 +228,7 @@ export default function TherapiesPage() {
       </section>
 
       {/* ===== Contact card ===== */}
-      <section className="bg-white py-[100px]">
+      <section className="bg-white py-[60px] md:py-[100px]">
         <Container className="max-w-[900px]">
           <motion.div
             initial="hidden"
@@ -239,7 +239,7 @@ export default function TherapiesPage() {
           >
             <motion.h3
               variants={fadeUp}
-              className="font-heading text-2xl font-semibold text-dark md:text-3xl"
+              className="font-heading text-xl font-semibold text-dark sm:text-2xl md:text-3xl"
             >
               Not sure which therapy is right for you?
             </motion.h3>
@@ -269,7 +269,7 @@ export default function TherapiesPage() {
       </section>
 
       {/* ===== Closing CTA ===== */}
-      <section className="bg-background py-[100px]">
+      <section className="bg-background py-[60px] md:py-[100px]">
         <Container className="max-w-[700px]">
           <motion.div
             variants={staggerContainer}

@@ -5,7 +5,7 @@ export default function GalleryPage() {
   usePageMeta('gallery');
 
   return (
-    <div data-page="gallery" className="pt-[110px]">
+    <div data-page="gallery" className="pt-[90px] sm:pt-[110px]">
       <GallerySection />
     </div>
   );

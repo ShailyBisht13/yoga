@@ -5,7 +5,7 @@ export default function BlogPage() {
   usePageMeta('blog');
 
   return (
-    <div data-page="blog" className="pt-[110px]">
+    <div data-page="blog" className="pt-[90px] sm:pt-[110px]">
       <BlogsSection />
     </div>
   );
