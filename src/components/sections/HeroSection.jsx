@@ -63,7 +63,7 @@ export default function HeroSection() {
         </div>
 
         {/* ===== Content overlaid on the card ===== */}
-        <div className="relative z-10 flex h-full max-w-[1320px] flex-col items-start justify-center px-6 pt-28 pb-10 sm:px-10 sm:pt-32 md:px-14 md:pt-36">
+        <div className="relative z-10 flex h-full max-w-[1320px] flex-col items-start justify-center px-6 pt-36 pb-10 sm:px-10 sm:pt-40 md:px-14 md:pt-44">
           <motion.div
             variants={stagger}
             initial="hidden"
