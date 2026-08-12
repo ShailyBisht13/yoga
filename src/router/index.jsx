@@ -8,7 +8,7 @@ const ClassesPage = lazy(() => import('@/pages/ClassesPage'));
 const BeginnerClassesPage = lazy(() => import('@/pages/BeginnerClassesPage'));
 const IntermediateClassesPage = lazy(() => import('@/pages/IntermediateClassesPage'));
 const AdvanceClassesPage = lazy(() => import('@/pages/AdvanceClassesPage'));
-const TherapiesPage = lazy(() => import('@/pages/Therapiespage'));
+const TherapiesPage = lazy(() => import('@/pages/TherapiesPage'));
 const CoursesPage = lazy(() => import('@/pages/CoursesPage'));
 const GalleryPage = lazy(() => import('@/pages/GalleryPage'));
 const BlogPage = lazy(() => import('@/pages/BlogPage'));

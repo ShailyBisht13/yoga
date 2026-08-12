@@ -4,7 +4,7 @@ export { default as ClassesPage } from './ClassesPage';
 export { default as BeginnerClassesPage } from './BeginnerClassesPage';
 export { default as IntermediateClassesPage } from './IntermediateClassesPage';
 export { default as AdvanceClassesPage } from './AdvanceClassesPage';
-export { default as Therapiespage } from './Therapiespage';
+export { default as TherapiesPage } from './TherapiesPage';
 export { default as CoursesPage } from './CoursesPage';
 export { default as GalleryPage } from './GalleryPage';
 export { default as BlogPage } from './BlogPage';
