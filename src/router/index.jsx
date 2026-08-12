@@ -5,10 +5,10 @@ import { MainLayout } from '@/components/layout';
 const HomePage = lazy(() => import('@/pages/HomePage'));
 const AboutPage = lazy(() => import('@/pages/AboutPage'));
 const ClassesPage = lazy(() => import('@/pages/ClassesPage'));
-const OnlineClassesPage = lazy(() => import('@/pages/OnlineClassesPage'));
-const OfflineClassesPage = lazy(() => import('@/pages/OfflineClassesPage'));
-const HomeClassesPage = lazy(() => import('@/pages/HomeClassesPage'));
-const CorporateClassesPage = lazy(() => import('@/pages/CorporateClassesPage'));
+const BeginnerClassesPage = lazy(() => import('@/pages/BeginnerClassesPage'));
+const IntermediateClassesPage = lazy(() => import('@/pages/IntermediateClassesPage'));
+const AdvanceClassesPage = lazy(() => import('@/pages/AdvanceClassesPage'));
+const TherapiesPage = lazy(() => import('@/pages/Therapiespage'));
 const CoursesPage = lazy(() => import('@/pages/CoursesPage'));
 const GalleryPage = lazy(() => import('@/pages/GalleryPage'));
 const BlogPage = lazy(() => import('@/pages/BlogPage'));
@@ -39,10 +39,10 @@ export const router = createBrowserRouter([
       { index: true, element: withSuspense(HomePage) },
       { path: 'about', element: withSuspense(AboutPage) },
       { path: 'classes', element: withSuspense(ClassesPage) },
-      { path: 'classes/online', element: withSuspense(OnlineClassesPage) },
-      { path: 'classes/offline', element: withSuspense(OfflineClassesPage) },
-      { path: 'classes/home', element: withSuspense(HomeClassesPage) },
-      { path: 'classes/corporate', element: withSuspense(CorporateClassesPage) },
+      { path: 'classes/beginner', element: withSuspense(BeginnerClassesPage) },
+      { path: 'classes/intermediate', element: withSuspense(IntermediateClassesPage) },
+      { path: 'classes/advance', element: withSuspense(AdvanceClassesPage) },
+      { path: 'therapies', element: withSuspense(TherapiesPage) },
       { path: 'courses', element: withSuspense(CoursesPage) },
       { path: 'gallery', element: withSuspense(GalleryPage) },
       { path: 'blog', element: withSuspense(BlogPage) },

@@ -5,21 +5,16 @@ import { Container, Button } from '@/components/ui';
 import { HiArrowRight } from 'react-icons/hi2';
 import {
   IoCheckmarkCircle,
-  IoPersonOutline,
-  IoSchoolOutline,
-  IoPeopleOutline,
+  IoTimeOutline,
   IoTrendingUpOutline,
-  IoMedkitOutline,
+  IoBodyOutline,
   IoBulbOutline,
-  IoPulseOutline,
-  IoWomanOutline,
-  IoHomeOutline,
-  IoHeartOutline,
-  IoPersonCircleOutline,
+  IoFlashOutline,
   IoMailOutline,
   IoCallOutline,
+  IoLocationOutline,
 } from 'react-icons/io5';
-import { GiLotus, GiMuscleUp } from 'react-icons/gi';
+import { GiYinYang, GiMeditation } from 'react-icons/gi';
 
 /* ===== Animation variants ===== */
 const fadeUp = {
@@ -39,100 +34,72 @@ const staggerContainer = {
   },
 };
 
-/* ===== Benefits of personal yoga training ===== */
+/* ===== Why move up a level ===== */
 const benefits = [
   {
-    title: 'Individualized, Not Group',
-    description: 'Unlike group yoga classes, personal sessions are built entirely around you.',
-    icon: IoPersonOutline,
-  },
-  {
-    title: 'Great for Beginners',
-    description: 'A comfortable starting point before stepping into a group setting.',
-    icon: IoSchoolOutline,
-  },
-  {
-    title: 'One-on-One Attention',
-    description: 'You get personal attention and learn directly from one experienced instructor.',
-    icon: IoPeopleOutline,
-  },
-  {
-    title: 'Deepen an Existing Practice',
-    description: 'Ideal for experienced practitioners working toward specific goals like balance or stamina.',
+    title: 'Longer Holds',
+    description: 'Postures are held further into the breath, building real strength and stamina instead of just form.',
     icon: IoTrendingUpOutline,
   },
   {
-    title: 'Modified for You',
-    description: 'Poses are adapted to your ability, or to accommodate injuries and disabilities.',
-    icon: IoMedkitOutline,
+    title: 'Flowing Sequences',
+    description: 'Poses connect through breath-led transitions rather than isolated holds, raising the pace and challenge.',
+    icon: IoBodyOutline,
   },
   {
-    title: 'Focused on Your Goals',
-    description: 'Sessions built around your personal interests, concerns, and goals.',
+    title: 'Deeper Focus Work',
+    description: 'Meditation and pranayama sessions extend, sharpening concentration alongside the physical practice.',
     icon: IoBulbOutline,
   },
   {
-    title: 'Sharper Mental Focus',
-    description: 'Regular practice helps build concentration and mental clarity.',
-    icon: GiLotus,
-  },
-  {
-    title: 'Supports Weight Loss & Strength',
-    description: 'Highly beneficial when incorporated into a weight loss or strength training program.',
-    icon: GiMuscleUp,
-  },
-  {
-    title: 'Therapeutic Issues Addressed',
-    description: 'Specific therapeutic concerns are targeted and worked through directly.',
-    icon: IoPulseOutline,
-  },
-  {
-    title: 'Pre & Post Natal Yoga',
-    description: 'A personal trainer makes pre- and post-natal sessions safer and more effective.',
-    icon: IoWomanOutline,
+    title: 'Real Conditioning',
+    description: 'Classes are built to leave you stronger week over week, not just more flexible.',
+    icon: IoFlashOutline,
   },
 ];
 
-/* ===== Occasions for home yoga ===== */
-const occasions = [
-  { title: 'Personal Yoga Class', icon: IoPersonOutline },
-  { title: 'Family Yoga Class', icon: IoHomeOutline },
-  { title: 'Couple Yoga Class', icon: IoHeartOutline },
-  { title: 'Senior Citizen', icon: IoPersonCircleOutline },
+/* ===== Styles taught at this level ===== */
+const styles = [
+  {
+    title: 'Ashtanga & Vinyasa Yoga',
+    description:
+      'Flowing sequences that connect breath with movement through a continuous, more dynamic series of poses.',
+    icon: GiYinYang,
+  },
+  {
+    title: 'Chakra Yoga',
+    description:
+      'Physical postures, breathing, and meditation combined to work with subtler energy through the body.',
+    icon: GiMeditation,
+  },
 ];
 
 /* ===== What each class includes ===== */
 const classIncludes = [
-  'Stretching / Flexibility / Strength / Weight Loss',
-  'Asana Practice (Hatha, Ashtanga & Vinyasa Flow)',
-  'Shatkriya',
-  'Pranayam',
-  'Meditation',
+  'Vinyasa & Ashtanga Flow',
+  'Extended Pranayam',
+  'Bandha & Breath Control',
+  'Deeper Meditation Practice',
+  'Strength-building Holds',
   'Yog Nidra',
 ];
 
+/* ===== Batch timings ===== */
+const batchTimings = ['7:00 – 8:00 AM', '5:00 – 6:00 PM', '7:00 – 8:00 PM'];
+
 /* ===== Gallery ===== */
 const gallery = [
-  {
-    src: '/images/home-partner-boat-pose.jpg',
-    alt: 'Instructor assisting a student with a partner boat pose at home',
-  },
-  {
-    src: '/images/home-side-stretch.jpg',
-    alt: 'Instructor guiding a student through a standing side stretch',
-  },
-  {
-    src: '/images/home-downdog-adjustment.jpg',
-    alt: 'Instructor adjusting a student in downward dog at home',
-  },
+  { src: '/images/home-downdog-adjustment.jpg', alt: 'Instructor guiding a student through a flowing transition' },
+  { src: '/images/corporate-warrior-pose.webp', alt: 'Group holding Warrior pose through a longer flow' },
+  { src: '/images/offline-warrior-pose.jpg', alt: 'Studio class deepening a standing pose' },
 ];
 
-export default function HomeClassesPage() {
-  usePageMeta('homeClasses');
+export default function IntermediateClassesPage() {
+  usePageMeta('classesIntermediate');
 
   return (
-    <div data-page="home-classes">
-      {/* ===== Intro / Welcome ===== */}
+    <div data-page="intermediate-classes">
+      {/* ===== Intro ===== */}
       <section className="bg-background pt-[160px] pb-[100px]">
         <Container className="max-w-[900px]">
           <motion.div
@@ -145,32 +112,29 @@ export default function HomeClassesPage() {
               variants={fadeUp}
               className="inline-block rounded-full border border-secondary/30 bg-secondary/5 px-4 py-1.5 font-body text-xs font-semibold uppercase tracking-[0.25em] text-secondary"
             >
-              Home Classes
+              Intermediate
             </motion.span>
 
             <motion.h1
               variants={fadeUp}
               className="font-heading text-4xl font-semibold leading-tight text-dark md:text-5xl"
             >
-              Get a Certified <span className="text-primary">Yoga Trainer</span> at Home
+              Build on the <span className="text-primary">Basics</span>
             </motion.h1>
 
             <motion.p
               variants={fadeUp}
               className="text-base leading-relaxed text-muted md:text-lg"
             >
-              Start your journey of self-discovery and inner peace through
-              personalized yoga sessions. Personal yoga classes at home give
-              you individualized attention, a schedule that suits you, and
-              the comfort of practicing in your own space — with privacy,
-              personalized feedback, and a deeper connection to your
-              practice.
+              Comfortable with the fundamentals and ready for more? Intermediate
+              classes raise the pace with flowing sequences, longer holds, and
+              deeper breathwork — building real strength session by session.
             </motion.p>
           </motion.div>
         </Container>
       </section>
 
-      {/* ===== Benefits ===== */}
+      {/* ===== Why This Level ===== */}
       <section className="bg-white py-[100px]">
         <Container className="max-w-[1320px]">
           <motion.div
@@ -184,7 +148,7 @@ export default function HomeClassesPage() {
               variants={fadeUp}
               className="font-heading text-3xl font-semibold text-dark md:text-4xl"
             >
-              Benefits of Personal Yoga Training
+              What Changes at This Level
             </motion.h2>
           </motion.div>
 
@@ -193,7 +157,7 @@ export default function HomeClassesPage() {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.1 }}
-            className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3"
+            className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4"
           >
             {benefits.map((item) => {
               const Icon = item.icon;
@@ -208,12 +172,8 @@ export default function HomeClassesPage() {
                   <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-full bg-primary/10 text-primary transition-all duration-300 group-hover:bg-primary group-hover:text-white">
                     <Icon className="text-2xl" />
                   </div>
-                  <h3 className="font-heading text-xl font-semibold text-dark">
-                    {item.title}
-                  </h3>
-                  <p className="mt-2 text-sm leading-relaxed text-muted">
-                    {item.description}
-                  </p>
+                  <h3 className="font-heading text-xl font-semibold text-dark">{item.title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-muted">{item.description}</p>
                 </motion.div>
               );
             })}
@@ -239,18 +199,14 @@ export default function HomeClassesPage() {
                 transition={{ type: 'spring', stiffness: 300, damping: 22 }}
                 className="overflow-hidden rounded-[24px] shadow-soft"
               >
-                <img
-                  src={photo.src}
-                  alt={photo.alt}
-                  className="aspect-[4/3] w-full object-cover"
-                />
+                <img src={photo.src} alt={photo.alt} className="aspect-[4/3] w-full object-cover" />
               </motion.div>
             ))}
           </motion.div>
         </Container>
       </section>
 
-      {/* ===== Home Yoga For Any Occasion ===== */}
+      {/* ===== Styles Taught ===== */}
       <section className="bg-white py-[100px]">
         <Container className="max-w-[1100px]">
           <motion.div
@@ -264,35 +220,32 @@ export default function HomeClassesPage() {
               variants={fadeUp}
               className="font-heading text-3xl font-semibold text-dark md:text-4xl"
             >
-              Home Yoga Classes For Any Occasion
+              Styles Taught at This Level
             </motion.h2>
-            <motion.p variants={fadeUp} className="text-base leading-relaxed text-muted">
-              The best moments in life are better with some mindfulness and
-              self-care.
-            </motion.p>
           </motion.div>
 
           <motion.div
             variants={staggerContainer}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, amount: 0.2 }}
-            className="grid grid-cols-2 gap-5 sm:grid-cols-4"
+            viewport={{ once: true, amount: 0.1 }}
+            className="grid grid-cols-1 gap-6 sm:grid-cols-2"
           >
-            {occasions.map((item) => {
-              const Icon = item.icon;
+            {styles.map((style) => {
+              const Icon = style.icon;
               return (
                 <motion.div
-                  key={item.title}
+                  key={style.title}
                   variants={fadeUp}
-                  className="flex flex-col items-center gap-3 rounded-[24px] border border-border bg-background p-6 text-center shadow-soft"
+                  whileHover={{ y: -6 }}
+                  transition={{ type: 'spring', stiffness: 300, damping: 22 }}
+                  className="group flex flex-col rounded-[24px] border border-border bg-background p-7 shadow-soft transition-shadow duration-300 hover:shadow-elevated"
                 >
-                  <div className="flex h-14 w-14 items-center justify-center rounded-full bg-primary/10 text-primary">
+                  <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-full bg-primary/10 text-primary transition-all duration-300 group-hover:bg-primary group-hover:text-white">
                     <Icon className="text-2xl" />
                   </div>
-                  <h3 className="font-heading text-sm font-semibold text-dark md:text-base">
-                    {item.title}
-                  </h3>
+                  <h3 className="font-heading text-xl font-semibold text-dark">{style.title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-muted">{style.description}</p>
                 </motion.div>
               );
             })}
@@ -300,36 +253,40 @@ export default function HomeClassesPage() {
         </Container>
       </section>
 
-      {/* ===== Class Includes ===== */}
+      {/* ===== Class Includes + Batch Timings ===== */}
       <section className="bg-background py-[100px]">
-        <Container className="max-w-[700px]">
+        <Container className="max-w-[1100px]">
           <motion.div
             variants={staggerContainer}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.2 }}
-            className="rounded-[28px] border border-border bg-white p-8 shadow-soft md:p-10"
+            className="grid grid-cols-1 gap-10 lg:grid-cols-2"
           >
-            <motion.h2
-              variants={fadeUp}
-              className="text-center font-heading text-2xl font-semibold text-dark md:text-3xl"
-            >
-              Class Includes
-            </motion.h2>
-            <motion.ul
-              variants={fadeUp}
-              className="mx-auto mt-6 grid max-w-md grid-cols-1 gap-3.5 sm:grid-cols-2"
-            >
-              {classIncludes.map((item) => (
-                <li
-                  key={item}
-                  className="flex items-start gap-2.5 text-sm leading-relaxed text-dark/80"
-                >
-                  <IoCheckmarkCircle className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
-                  {item}
-                </li>
-              ))}
-            </motion.ul>
+            <motion.div variants={fadeUp} className="rounded-[28px] border border-border bg-white p-8 shadow-soft">
+              <h2 className="font-heading text-2xl font-semibold text-dark">Class Includes</h2>
+              <ul className="mt-6 flex flex-col gap-3.5">
+                {classIncludes.map((item) => (
+                  <li key={item} className="flex items-start gap-2.5 text-sm leading-relaxed text-dark/80">
+                    <IoCheckmarkCircle className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </motion.div>
+
+            <motion.div variants={fadeUp} className="rounded-[28px] border border-border bg-white p-8 shadow-soft">
+              <h2 className="font-heading text-2xl font-semibold text-dark">Batch Timings</h2>
+              <p className="mt-1 font-body text-xs font-semibold uppercase tracking-wider text-muted">Monday to Saturday</p>
+              <ul className="mt-6 flex flex-col gap-3">
+                {batchTimings.map((time) => (
+                  <li key={time} className="flex items-center gap-2.5 border-b border-border/70 pb-3 text-sm font-medium text-dark/80 last:border-b-0 last:pb-0">
+                    <IoTimeOutline className="h-4 w-4 shrink-0 text-primary" />
+                    {time}
+                  </li>
+                ))}
+              </ul>
+            </motion.div>
           </motion.div>
         </Container>
       </section>
@@ -349,19 +306,15 @@ export default function HomeClassesPage() {
                 Get In Touch
               </span>
               <h2 className="font-heading text-3xl font-semibold text-dark md:text-4xl">
-                Bring Your Practice Home
+                Ready to Push Your Practice?
               </h2>
               <p className="max-w-xl text-base leading-relaxed text-muted">
-                Tell us which occasion fits — personal, family, couple, or
-                senior citizen — and we'll match you with the right
-                instructor for your home.
+                Let us know your current practice and goals, and we'll place
+                you in the right intermediate batch.
               </p>
             </motion.div>
 
-            <motion.div
-              variants={fadeUp}
-              className="mt-8 flex flex-wrap items-center justify-center gap-4"
-            >
+            <motion.div variants={fadeUp} className="mt-8 flex flex-wrap items-center justify-center gap-4">
               <a
                 href="mailto:info@vimokshayogshala.in"
                 className="flex items-center gap-2 rounded-full border border-border bg-white px-4 py-2 transition-colors hover:border-primary/40"
@@ -376,6 +329,10 @@ export default function HomeClassesPage() {
                 <IoCallOutline className="h-4 w-4 text-primary" />
                 <span className="font-body text-sm text-dark/80">+91 9026612796</span>
               </a>
+              <div className="flex items-center gap-2 rounded-full border border-border bg-white px-4 py-2">
+                <IoLocationOutline className="h-4 w-4 text-primary" />
+                <span className="font-body text-sm text-dark/80">Dehradun, Uttarakhand</span>
+              </div>
             </motion.div>
 
             <motion.div variants={fadeUp} className="mt-8 flex justify-center">

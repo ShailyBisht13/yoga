@@ -56,8 +56,8 @@ export default function HeroSection() {
           fetchpriority="high"
           className="h-full w-full object-cover object-[74%_38%]"
         />
-        {/* Left-side gradient so text stays legible over any photo */}
-        <div className="absolute inset-0 bg-gradient-to-r from-white/90 via-white/50 to-transparent" />
+        {/* Left-side gradient so text stays legible over any photo — lightened so more of the photo shows through */}
+        <div className="absolute inset-0 bg-gradient-to-r from-white/70 via-white/30 to-transparent" />
       </div>
 
       {/* Subtle parallax effect on background */}
