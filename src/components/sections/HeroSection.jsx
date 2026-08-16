@@ -52,7 +52,7 @@ export default function HeroSection() {
             src="/hero.png"
             alt="Vimoksha Yogshala — student meditating in a sunlit courtyard studio"
             fetchPriority="high"
-            className="h-full w-full object-cover object-[70%_15%]"
+            className="h-full w-full object-cover object-[85%_15%] sm:object-[70%_15%]"
           />
         </div>
 
@@ -62,13 +62,13 @@ export default function HeroSection() {
             variants={stagger}
             initial="hidden"
             animate="visible"
-            className="w-full max-w-[620px]"
+            className="w-full max-w-[280px] sm:max-w-[620px]"
           >
             {/* Tagline */}
             <motion.span
               custom={0}
               variants={fadeUp}
-              className="mb-3 inline-block rounded-full border border-black/10 bg-white/70 px-3 py-1 font-body text-[10px] font-semibold uppercase tracking-[0.2em] text-[#742711] backdrop-blur-md sm:text-xs"
+              className="mb-3 inline-block whitespace-nowrap rounded-full border border-black/10 bg-white/70 px-3 py-1 font-body text-[9px] font-semibold uppercase tracking-[0.15em] text-[#742711] backdrop-blur-md sm:text-xs sm:tracking-[0.2em]"
             >
               EST. 2015 · DEHRADUN'S TRUSTED YOGA SHALA
             </motion.span>
