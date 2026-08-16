@@ -2,7 +2,6 @@ import { motion } from 'framer-motion';
 import { Container, Button } from '@/components/ui';
 import { Link } from 'react-router-dom';
 import { HiArrowRight } from 'react-icons/hi2';
-import { IoTimeOutline } from 'react-icons/io5';
 import { useRef } from 'react';
 
 const fadeUp = {
@@ -21,11 +20,6 @@ const stagger = {
     transition: { staggerChildren: 0.15, delayChildren: 0.2 },
   },
 };
-
-const batches = [
-  { label: 'Sunrise Batch', time: '6:00 – 7:30 AM' },
-  { label: 'Evening Batch', time: '5:00 – 6:30 PM' },
-];
 
 /* Delicate high-contrast serif for the hero headline — matches the new
    reference screenshot's font (with italic for the accent line).
@@ -58,12 +52,12 @@ export default function HeroSection() {
             src="/hero.png"
             alt="Vimoksha Yogshala — student meditating in a sunlit courtyard studio"
             fetchPriority="high"
-            className="h-full w-full object-cover object-[70%_center]"
+            className="h-full w-full object-cover object-[70%_15%]"
           />
         </div>
 
         {/* ===== Content overlaid on the card ===== */}
-        <div className="relative z-10 flex h-full max-w-[1320px] flex-col items-start justify-center px-6 pt-36 pb-10 sm:px-10 sm:pt-40 md:px-14 md:pt-44">
+        <div className="relative z-10 flex h-full max-w-[1320px] flex-col items-start justify-center px-6 pt-44 pb-10 sm:px-10 sm:pt-48 md:px-14 md:pt-52">
           <motion.div
             variants={stagger}
             initial="hidden"
@@ -106,34 +100,11 @@ export default function HeroSection() {
               name by the second class.
             </motion.p>
 
-            {/* Batch timings strip — concrete, checkable information beats
-                another line of wellness copy */}
-            <motion.div
-              custom={3}
-              variants={fadeUp}
-              className="mb-8 flex flex-wrap gap-3"
-            >
-              {batches.map((b) => (
-                <div
-                  key={b.label}
-                  className="flex items-center gap-2 rounded-full border border-black/10 bg-white/70 px-4 py-2 backdrop-blur-md"
-                >
-                  <IoTimeOutline className="h-4 w-4 text-[#F69116]" />
-                  <span className="font-body text-xs font-medium text-neutral-900">
-                    {b.label}
-                  </span>
-                  <span className="font-body text-xs text-neutral-500">
-                    {b.time}
-                  </span>
-                </div>
-              ))}
-            </motion.div>
-
-            {/* CTA Buttons */}
+            {/* CTA Button */}
             <motion.div
               custom={4}
               variants={fadeUp}
-              className="mb-10 flex flex-wrap items-center gap-5"
+              className="mb-10 flex items-center gap-3"
             >
               <motion.div
                 whileHover={{ scale: 1.04 }}
@@ -144,25 +115,10 @@ export default function HeroSection() {
                   as={Link}
                   to="/contact"
                   variant="primary"
-                  icon={<HiArrowRight className="h-4 w-4" />}
-                  className="h-[56px] rounded-full px-8 text-base"
+                  icon={<HiArrowRight className="h-3.5 w-3.5" />}
+                  className="h-11 whitespace-nowrap rounded-full px-6 text-sm sm:h-12 sm:px-8 sm:text-base"
                 >
-                  Book Free Trial Class
-                </Button>
-              </motion.div>
-              <motion.div
-                whileHover={{ scale: 1.04 }}
-                whileTap={{ scale: 0.97 }}
-                transition={{ type: 'spring', stiffness: 400, damping: 15 }}
-              >
-                <Button
-                  as={Link}
-                  to="/classes"
-                  variant="outline"
-                  icon={<HiArrowRight className="h-4 w-4" />}
-                  className="h-[56px] rounded-full border-black/20 px-8 text-base text-neutral-900 hover:bg-black/5"
-                >
-                  Explore Classes
+                  Book Free Trial
                 </Button>
               </motion.div>
             </motion.div>

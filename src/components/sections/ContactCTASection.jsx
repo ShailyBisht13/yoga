@@ -71,10 +71,26 @@ const contactInfo = {
   phone: '+91 98765 43210',
   whatsapp: '919876543210',
   email: 'info@kewalyayogshala.com',
-  address: 'Kewalya Yogshala, Rajpur Road, Dehradun, Uttarakhand',
-  mapsQuery: 'Kewalya+Yogshala+Rajpur+Road+Dehradun',
   studioHours: 'Mon – Sat, 6:00 AM – 8:00 PM',
 };
+
+/* ===== Studio locations — two branches, each with its own address & maps link ===== */
+const locations = [
+  {
+    name: 'GMS Road',
+    address:
+      '27, Main Lane, Mohit Nagar, Opposite Wadia Institute, GMS Road, Dehradun',
+    mapsQuery: 'Mohit+Nagar+Opposite+Wadia+Institute+GMS+Road+Dehradun',
+  },
+  {
+    name: 'Dalanwala',
+    address:
+      '10A, Inder Road, Dalanwala, Euro Kids School Campus, Near Nanhi Duniya School, Dehradun',
+    mapsQuery:
+      'Inder+Road+Dalanwala+Euro+Kids+School+Campus+Near+Nanhi+Duniya+School+Dehradun',
+    phone: '7351317975',
+  },
+];
 
 /* ===== Contact items config — each links somewhere real, nothing is a dead "#" ===== */
 const contactItems = [
@@ -90,12 +106,18 @@ const contactItems = [
     value: contactInfo.email,
     href: `mailto:${contactInfo.email}`,
   },
-  {
+  ...locations.map((loc) => ({
     icon: <FiMapPin className="h-5 w-5" />,
-    title: 'Address',
-    value: contactInfo.address,
-    href: `https://www.google.com/maps/search/?api=1&query=${contactInfo.mapsQuery}`,
+    title: `Address — ${loc.name}`,
+    value: loc.address,
+    href: `https://www.google.com/maps/search/?api=1&query=${loc.mapsQuery}`,
     external: true,
+  })),
+  {
+    icon: <FiPhone className="h-5 w-5" />,
+    title: 'Phone — Dalanwala',
+    value: locations[1].phone,
+    href: `tel:${locations[1].phone}`,
   },
 ];
 

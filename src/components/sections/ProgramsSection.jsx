@@ -2,8 +2,6 @@ import { motion } from 'framer-motion';
 import { Container, Button } from '@/components/ui';
 import { Link } from 'react-router-dom';
 import { HiArrowRight } from 'react-icons/hi2';
-import { IoTimeOutline } from 'react-icons/io5';
-import { FiArrowUpRight } from 'react-icons/fi';
 
 // Program images — imports left ready for when assets are added
 import hathaImg from '@/assets/images/programs/hatha.avif';
@@ -112,18 +110,11 @@ export default function ProgramsSection() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.2 }}
-          className="mx-auto mb-16 flex max-w-2xl flex-col items-center gap-4 text-center"
+          className="mx-auto mb-10 flex max-w-2xl flex-col items-center gap-3 text-center"
         >
-          <motion.span
-            variants={fadeUp}
-            className="inline-block rounded-full border border-secondary/30 bg-secondary/5 px-4 py-1.5 font-body text-xs font-semibold uppercase tracking-[0.25em] text-secondary"
-          >
-            Our Programs
-          </motion.span>
-
           <motion.h2
             variants={fadeUp}
-            className="font-heading text-4xl font-semibold leading-tight text-dark md:text-5xl"
+            className="font-heading text-xl font-semibold leading-tight text-dark md:text-2xl"
           >
             Choose Your Perfect
             <br />
@@ -132,7 +123,7 @@ export default function ProgramsSection() {
 
           <motion.p
             variants={fadeUp}
-            className="max-w-xl text-base leading-relaxed text-muted md:text-lg"
+            className="max-w-xl text-xs leading-relaxed text-muted md:text-sm"
           >
             Discover a variety of yoga programs designed for beginners,
             intermediate practitioners, advanced students and therapeutic
@@ -146,7 +137,7 @@ export default function ProgramsSection() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.1 }}
-          className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3"
+          className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3"
         >
           {programs.map((program) => (
             <motion.article
@@ -154,14 +145,14 @@ export default function ProgramsSection() {
               variants={fadeUp}
               whileHover={{ y: -10, scale: 1.03 }}
               transition={{ type: 'spring', stiffness: 300, damping: 20 }}
-              className="group flex flex-col overflow-hidden rounded-[28px] bg-white p-6 shadow-soft transition-shadow duration-300 hover:shadow-elevated"
+              className="group flex flex-col overflow-hidden rounded-[20px] bg-white p-4 shadow-soft transition-shadow duration-300 hover:shadow-elevated"
             >
               {/* Image */}
-              <div className="relative mb-6 overflow-hidden rounded-[20px]">
+              <div className="relative mb-4 overflow-hidden rounded-[14px]">
                 <img
                   src={program.image}
                   alt={program.title}
-                  className="h-[260px] w-full object-cover transition-transform duration-500 ease-out group-hover:scale-110"
+                  className="h-[160px] w-full object-cover transition-transform duration-500 ease-out group-hover:scale-110"
                   loading="lazy"
                 />
                 {/* Difficulty badge overlay */}
@@ -177,28 +168,13 @@ export default function ProgramsSection() {
 
               {/* Content */}
               <div className="flex flex-1 flex-col">
-                <h3 className="font-heading text-2xl font-semibold text-dark transition-colors group-hover:text-primary">
+                <h3 className="font-heading text-lg font-semibold text-dark transition-colors group-hover:text-primary">
                   {program.title}
                 </h3>
 
-                <p className="mt-3 text-sm leading-relaxed text-muted">
+                <p className="mt-2 text-sm leading-relaxed text-muted">
                   {program.description}
                 </p>
-
-                {/* Duration */}
-                <div className="mt-4 flex items-center gap-2 text-sm font-medium text-dark/70">
-                  <IoTimeOutline className="h-4 w-4 text-primary" />
-                  <span>{program.duration}</span>
-                </div>
-
-                {/* Learn More button */}
-                <Link
-                  to={program.link}
-                  className="mt-6 inline-flex items-center gap-2 self-start rounded-full bg-primary px-6 py-3 font-body text-sm font-medium text-white shadow-soft transition-all duration-300 hover:bg-primary-dark hover:shadow-card"
-                >
-                  Learn More
-                  <FiArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                </Link>
               </div>
             </motion.article>
           ))}

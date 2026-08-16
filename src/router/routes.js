@@ -30,7 +30,7 @@ export const navigationLinks = [
     ],
   },
   { label: 'Therapies', path: '/therapies' },
-  { label: 'Teacher Training', path: '/courses' },
+  { label: 'Training', path: '/courses' },
   { label: 'Gallery', path: '/gallery' },
   { label: 'Blogs', path: '/blog' },
   { label: 'Contact', path: '/contact' },

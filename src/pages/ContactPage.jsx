@@ -29,21 +29,39 @@ const staggerContainer = {
   },
 };
 
-/* ===== Contact details ===== */
-const ADDRESS =
-  '27, Main Lane, Mohit Nagar, Opp. Wadia Institute, GMS Road, Dehradun, Uttarakhand 248001';
+/* ===== Contact details — two studio locations ===== */
+const locations = [
+  {
+    name: 'GMS Road',
+    address:
+      '27, Main Lane, Mohit Nagar, Opp. Wadia Institute, GMS Road, Dehradun, Uttarakhand 248001',
+    phone: '+91 90266 12796',
+    phoneHref: 'tel:+919026612796',
+  },
+  {
+    name: 'Dalanwala',
+    address:
+      '10A, Inder Road, Dalanwala, Euro Kids School Campus, Near Nanhi Duniya School, Dehradun, Uttarakhand',
+    phone: '7351317975',
+    phoneHref: 'tel:7351317975',
+  },
+];
+
+// Kept for the mailto: fallback in handleSubmit and as the primary studio
+// address referenced elsewhere on the page.
+const ADDRESS = locations[0].address;
 
 const contactCards = [
   {
     title: 'Visit Us',
     icon: IoLocationOutline,
-    lines: [ADDRESS],
+    lines: locations.map((loc) => `${loc.name} — ${loc.address}`),
   },
   {
     title: 'Call Us',
     icon: IoCallOutline,
-    lines: ['+91 90266 12796'],
-    href: 'tel:+919026612796',
+    lines: locations.map((loc) => `${loc.name} — ${loc.phone}`),
+    hrefs: locations.map((loc) => loc.phoneHref),
   },
   {
     title: 'Mail Us',
@@ -57,10 +75,6 @@ const contactCards = [
     lines: ['Mon – Fri : 5:00 AM – 8:00 PM', 'Saturday : 5:00 AM – 12:00 PM'],
   },
 ];
-
-const MAP_EMBED_SRC = `https://www.google.com/maps?q=${encodeURIComponent(
-  ADDRESS
-)}&output=embed`;
 
 export default function ContactPage() {
   usePageMeta('contact');
@@ -184,20 +198,28 @@ export default function ContactPage() {
             viewport={{ once: true, amount: 0.15 }}
             className="grid grid-cols-1 gap-8 lg:grid-cols-2 lg:items-stretch"
           >
-            {/* Map */}
-            <motion.div
-              variants={fadeUp}
-              className="overflow-hidden rounded-[28px] border border-border shadow-soft min-h-[280px] sm:min-h-[420px]"
-            >
-              <iframe
-                title="Vimoksha Yogshala — Dehradun studio location"
-                src={MAP_EMBED_SRC}
-                className="h-full w-full min-h-[280px] sm:min-h-[420px]"
-                style={{ border: 0 }}
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                allowFullScreen
-              />
+            {/* Maps — one per location */}
+            <motion.div variants={fadeUp} className="flex flex-col gap-6">
+              {locations.map((loc) => (
+                <div key={loc.name}>
+                  <h3 className="mb-2 font-heading text-sm font-semibold uppercase tracking-wide text-dark">
+                    {loc.name}
+                  </h3>
+                  <div className="overflow-hidden rounded-[28px] border border-border shadow-soft min-h-[200px] sm:min-h-[280px]">
+                    <iframe
+                      title={`Vimoksha Yogshala — ${loc.name} studio location`}
+                      src={`https://www.google.com/maps?q=${encodeURIComponent(
+                        loc.address
+                      )}&output=embed`}
+                      className="h-full w-full min-h-[200px] sm:min-h-[280px]"
+                      style={{ border: 0 }}
+                      loading="lazy"
+                      referrerPolicy="no-referrer-when-downgrade"
+                      allowFullScreen
+                    />
+                  </div>
+                </div>
+              ))}
             </motion.div>
 
             {/* Form */}

@@ -81,17 +81,17 @@ const features = [
 /* ───── Component ───── */
 export default function WhyChooseUs() {
   return (
-    <section className="relative overflow-hidden bg-background py-[120px]">
+    <section className="relative overflow-hidden bg-[var(--color-background)] py-[120px]">
       {/* ─── Subtle Decorative Background ─── */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
         {/* Large blurred circle top-left */}
-        <div className="absolute -top-40 -left-40 h-[500px] w-[500px] rounded-full bg-[#f9b35c]/20 blur-[120px]" />
+        <div className="absolute -top-40 -left-40 h-[500px] w-[500px] rounded-full bg-[var(--color-secondary-light)]/20 blur-[120px]" />
         {/* Small blurred circle bottom-right */}
-        <div className="absolute -bottom-32 -right-32 h-[400px] w-[400px] rounded-full bg-[#9a3617]/10 blur-[100px]" />
+        <div className="absolute -bottom-32 -right-32 h-[400px] w-[400px] rounded-full bg-[var(--color-primary)]/10 blur-[100px]" />
         {/* Leaf-like decorative dots */}
-        <div className="absolute top-[20%] right-[8%] h-3 w-3 rounded-full bg-[#f9b35c]/30 blur-[2px]" />
-        <div className="absolute top-[35%] right-[5%] h-2 w-2 rounded-full bg-[#f9b35c]/20 blur-[1px]" />
-        <div className="absolute bottom-[25%] left-[6%] h-4 w-4 rounded-full bg-[#9a3617]/15 blur-[2px]" />
+        <div className="absolute top-[20%] right-[8%] h-3 w-3 rounded-full bg-[var(--color-secondary-light)]/30 blur-[2px]" />
+        <div className="absolute top-[35%] right-[5%] h-2 w-2 rounded-full bg-[var(--color-secondary-light)]/20 blur-[1px]" />
+        <div className="absolute bottom-[25%] left-[6%] h-4 w-4 rounded-full bg-[var(--color-primary)]/15 blur-[2px]" />
       </div>
 
       {/* ─── Header ─── */}
@@ -100,13 +100,13 @@ export default function WhyChooseUs() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: '-60px' }}
-          className="mx-auto mb-16 max-w-[700px] text-center md:mb-20"
+          className="mx-auto mb-10 max-w-[620px] text-center md:mb-14"
         >
           {/* Premium Pill Badge */}
           <motion.span
             custom={0}
             variants={fadeUp}
-            className="mb-5 inline-block rounded-full border border-[#f69116]/30 bg-white/80 px-5 py-1.5 font-body text-[10px] font-semibold uppercase tracking-[0.22em] text-[#9a3617] shadow-sm backdrop-blur-md sm:text-xs"
+            className="mb-3 inline-block rounded-full border border-[var(--color-secondary)]/30 bg-[var(--color-surface)]/80 px-4 py-1 font-body text-[10px] font-semibold uppercase tracking-[0.22em] text-[var(--color-primary)] shadow-sm backdrop-blur-md"
           >
             WHY CHOOSE KEWALYA YOGSHALA
           </motion.span>
@@ -115,7 +115,7 @@ export default function WhyChooseUs() {
           <motion.h2
             custom={1}
             variants={fadeUp}
-            className="font-heading text-[clamp(2rem,5vw,3.5rem)] font-semibold leading-[1.15] tracking-tight text-[#2E2E2E]"
+            className="font-heading text-[clamp(1.5rem,3.2vw,2.25rem)] font-semibold leading-[1.2] tracking-tight text-[var(--color-dark)]"
           >
             Experience Authentic Yoga
             <br />
@@ -126,7 +126,7 @@ export default function WhyChooseUs() {
           <motion.p
             custom={2}
             variants={fadeUp}
-            className="mx-auto mt-5 max-w-[580px] text-base leading-relaxed text-[#6B6B6B] md:text-lg"
+            className="mx-auto mt-3 max-w-[460px] text-sm leading-relaxed text-[var(--color-muted)] md:text-base"
           >
             Discover what makes Kewalya Yogshala a sanctuary for authentic yoga
             practice. Our dedicated team of experts provides a transformative
@@ -149,26 +149,26 @@ export default function WhyChooseUs() {
                   key={index}
                   variants={staggerItem}
                   whileHover={{ y: -6, transition: { duration: 0.3 } }}
-                  className="group relative flex flex-col rounded-[24px] border border-transparent bg-white p-7 shadow-[0_4px_24px_rgba(46,46,46,0.06)] transition-all duration-300 hover:border-[#9a3617]/30 hover:shadow-[0_12px_40px_rgba(46,46,46,0.10)]"
+                  className="group relative flex flex-col rounded-[24px] border border-[var(--color-border)] bg-[var(--color-surface)] p-7 shadow-[0_4px_24px_rgba(46,46,46,0.08)] transition-all duration-300 hover:border-[var(--color-primary)]/40 hover:shadow-[0_12px_40px_rgba(46,46,46,0.14)]"
                 >
                   {/* Circular Icon */}
-                  <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-full bg-[#f9b35c]/30 text-[#9a3617] transition-all duration-300 group-hover:rotate-6 group-hover:bg-[#f9b35c]/50">
+                  <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-full bg-[var(--color-secondary-light)]/35 text-[var(--color-primary)] transition-all duration-300 group-hover:rotate-6 group-hover:bg-[var(--color-secondary-light)]/60">
                     <IconComponent className="text-xl" />
                   </div>
 
                   {/* Title */}
-                  <h3 className="font-heading text-xl font-semibold text-[#2E2E2E]">
+                  <h3 className="font-serif text-xl font-bold text-[var(--color-dark)]">
                     {feature.title}
                   </h3>
 
                   {/* Description */}
-                  <p className="mt-2 flex-1 text-sm leading-relaxed text-[#6B6B6B]">
+                  <p className="mt-2 flex-1 text-sm font-medium leading-relaxed text-[var(--color-dark)]/70">
                     {feature.description}
                   </p>
 
                   {/* Small Arrow - bottom right */}
                   <div className="mt-4 flex items-center justify-end">
-                    <span className="flex h-7 w-7 items-center justify-center rounded-full bg-[#f9b35c]/20 text-[10px] text-[#9a3617] transition-all duration-300 group-hover:bg-[#9a3617] group-hover:text-white">
+                    <span className="flex h-7 w-7 items-center justify-center rounded-full bg-[var(--color-secondary-light)]/25 text-[10px] text-[var(--color-primary)] transition-all duration-300 group-hover:bg-[var(--color-primary)] group-hover:text-white">
                       <svg
                         className="h-3 w-3"
                         fill="none"
@@ -198,7 +198,7 @@ export default function WhyChooseUs() {
           <motion.span
             custom={0}
             variants={fadeUp}
-            className="mb-4 inline-block rounded-full border border-[#f69116]/30 bg-white/80 px-4 py-1 font-body text-[10px] font-semibold uppercase tracking-[0.2em] text-[#9a3617] shadow-sm backdrop-blur-md sm:text-xs"
+            className="mb-4 inline-block rounded-full border border-[var(--color-secondary)]/30 bg-[var(--color-surface)]/80 px-4 py-1 font-body text-[10px] font-semibold uppercase tracking-[0.2em] text-[var(--color-primary)] shadow-sm backdrop-blur-md sm:text-xs"
           >
             BEGIN YOUR JOURNEY
           </motion.span>
@@ -206,7 +206,7 @@ export default function WhyChooseUs() {
           <motion.h3
             custom={1}
             variants={fadeUp}
-            className="font-heading text-[clamp(1.75rem,4vw,2.75rem)] font-semibold leading-[1.15] text-[#2E2E2E]"
+            className="font-heading text-[clamp(1.75rem,4vw,2.75rem)] font-semibold leading-[1.15] text-[var(--color-dark)]"
           >
             Start Your Wellness Journey Today
           </motion.h3>
@@ -214,7 +214,7 @@ export default function WhyChooseUs() {
           <motion.p
             custom={2}
             variants={fadeUp}
-            className="mx-auto mt-4 max-w-[520px] text-base leading-relaxed text-[#6B6B6B]"
+            className="mx-auto mt-4 max-w-[520px] text-base leading-relaxed text-[var(--color-muted)]"
           >
             Join hundreds of students improving their physical and mental
             well-being through authentic yoga.

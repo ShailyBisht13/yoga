@@ -137,7 +137,7 @@ export default function BlogsSection() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.1 }}
-          className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3"
+          className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3"
         >
           {blogs.map((blog, index) => (
             <motion.article
@@ -145,20 +145,20 @@ export default function BlogsSection() {
               variants={fadeUp}
               whileHover={{ y: -10 }}
               transition={{ type: 'spring', stiffness: 300, damping: 20 }}
-              className="group flex flex-col overflow-hidden rounded-[28px] bg-white shadow-soft transition-shadow duration-300 hover:shadow-elevated"
+              className="group flex flex-col overflow-hidden rounded-[20px] bg-white shadow-soft transition-shadow duration-300 hover:shadow-elevated"
             >
               {/* Featured image */}
-              <div className="relative overflow-hidden rounded-t-[28px]">
+              <div className="relative overflow-hidden rounded-t-[20px]">
                 {blog.image ? (
                   <img
                     src={blog.image}
                     alt={blog.title}
-                    className="h-[240px] w-full object-cover transition-transform duration-500 ease-out group-hover:scale-110"
+                    className="h-[160px] w-full object-cover transition-transform duration-500 ease-out group-hover:scale-110"
                     loading="lazy"
                   />
                 ) : (
                   <div
-                    className={`flex h-[240px] w-full items-center justify-center bg-gradient-to-br ${gradients[index % gradients.length]} transition-transform duration-500 ease-out group-hover:scale-110`}
+                    className={`flex h-[160px] w-full items-center justify-center bg-gradient-to-br ${gradients[index % gradients.length]} transition-transform duration-500 ease-out group-hover:scale-110`}
                   >
                     <span className="font-heading text-xl text-white/60">
                       {blog.category}
@@ -168,7 +168,7 @@ export default function BlogsSection() {
 
                 {/* Category badge overlay */}
                 <span
-                  className={`absolute left-4 top-4 rounded-full px-3 py-1 font-body text-xs font-semibold backdrop-blur-md ${
+                  className={`absolute left-3 top-3 rounded-full px-2.5 py-1 font-body text-[11px] font-semibold backdrop-blur-md ${
                     categoryStyles[blog.category] || 'bg-white/80 text-dark'
                   }`}
                 >
@@ -177,36 +177,36 @@ export default function BlogsSection() {
               </div>
 
               {/* Content */}
-              <div className="flex flex-1 flex-col p-6">
+              <div className="flex flex-1 flex-col p-4">
                 {/* Date & reading time */}
-                <div className="mb-4 flex items-center gap-4 font-body text-xs text-muted">
-                  <span className="flex items-center gap-1.5">
-                    <IoCalendarOutline className="h-4 w-4 text-primary" />
+                <div className="mb-2.5 flex items-center gap-3 font-body text-[11px] text-muted">
+                  <span className="flex items-center gap-1">
+                    <IoCalendarOutline className="h-3.5 w-3.5 text-primary" />
                     {blog.date}
                   </span>
-                  <span className="flex items-center gap-1.5">
-                    <IoTimeOutline className="h-4 w-4 text-primary" />
+                  <span className="flex items-center gap-1">
+                    <IoTimeOutline className="h-3.5 w-3.5 text-primary" />
                     {blog.readTime} read
                   </span>
                 </div>
 
                 {/* Title */}
-                <h3 className="font-heading text-xl font-semibold leading-snug text-dark transition-colors group-hover:text-primary">
+                <h3 className="font-heading text-base font-semibold leading-snug text-dark transition-colors group-hover:text-primary">
                   {blog.title}
                 </h3>
 
                 {/* Excerpt */}
-                <p className="mt-3 flex-1 text-sm leading-relaxed text-muted">
+                <p className="mt-2 flex-1 text-xs leading-relaxed text-muted">
                   {blog.excerpt}
                 </p>
 
                 {/* Read More button */}
                 <Link
                   to={blog.link}
-                  className="mt-6 inline-flex items-center gap-2 self-start font-body text-sm font-medium text-primary transition-all duration-300 hover:gap-3"
+                  className="mt-3 inline-flex items-center gap-1 self-start font-body text-xs font-medium text-primary transition-all duration-300 hover:gap-1.5"
                 >
                   Read More
-                  <FiArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                  <FiArrowUpRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                 </Link>
               </div>
             </motion.article>

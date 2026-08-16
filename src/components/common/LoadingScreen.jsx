@@ -37,12 +37,12 @@ export default function LoadingScreen() {
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-            className="flex flex-col items-center gap-6"
+            className="flex flex-col items-center gap-3"
           >
             <motion.img
-              src="/logo.png"
-              alt="Kewalya Yogshala"
-              className="h-20 w-auto object-contain"
+              src="/logo png2.png"
+              alt="Vimoksha Yogshala"
+              className="h-48 w-auto object-contain"
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}

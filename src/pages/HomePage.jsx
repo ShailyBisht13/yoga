@@ -1,7 +1,7 @@
 import usePageMeta from '@/hooks/usePageMeta';
+import PathwaysSection from '@/components/sections/PathwaysSection';
 import {
   HeroSection,
-  StatisticsAboutPreview,
   WhyChooseUs,
   Services,
   ProgramsSection,
@@ -17,9 +17,9 @@ export default function HomePage() {
   return (
     <>
       <HeroSection />
-      <StatisticsAboutPreview />
-      <WhyChooseUs />
+      <PathwaysSection />
       <Services />
+      <WhyChooseUs />
       <ProgramsSection />
       <TestimonialsSection />
       <GallerySection />

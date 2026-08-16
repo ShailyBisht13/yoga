@@ -53,14 +53,26 @@ export default function FloatingActions() {
         )}
       </AnimatePresence>
 
-      {/* Call Button */}
+      {/* Call Button — GMS Road (main line) */}
       <motion.a
         href={contactInfo.phoneHref}
-        aria-label={`Call us at ${contactInfo.phone}`}
+        aria-label={`Call GMS Road at ${contactInfo.phone}`}
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
         transition={{ type: 'spring', stiffness: 400, damping: 15 }}
         className="flex h-12 w-12 items-center justify-center rounded-full bg-primary text-white shadow-elevated transition-colors duration-300 hover:bg-primary-dark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+      >
+        <HiOutlinePhone className="text-xl" />
+      </motion.a>
+
+      {/* Call Button — Dalanwala */}
+      <motion.a
+        href="tel:7351317975"
+        aria-label="Call Dalanwala at 7351317975"
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.9 }}
+        transition={{ type: 'spring', stiffness: 400, damping: 15 }}
+        className="flex h-12 w-12 items-center justify-center rounded-full bg-primary-dark text-white shadow-elevated transition-colors duration-300 hover:bg-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
       >
         <HiOutlinePhone className="text-xl" />
       </motion.a>
