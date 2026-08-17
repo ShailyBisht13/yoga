@@ -1,7 +1,9 @@
 import { motion } from 'framer-motion';
 import { Container, Button } from '@/components/ui';
 import { Link } from 'react-router-dom';
-import { HiArrowRight } from 'react-icons/hi2';
+import { HiArrowRight, HiOutlineMapPin, HiOutlineCheckBadge } from 'react-icons/hi2';
+import { IoLeafOutline } from 'react-icons/io5';
+import { GiMeditation } from 'react-icons/gi';
 import { useRef } from 'react';
 
 const fadeUp = {
@@ -20,6 +22,17 @@ const stagger = {
     transition: { staggerChildren: 0.15, delayChildren: 0.2 },
   },
 };
+
+const stats = [
+  { icon: IoLeafOutline, value: '500+', label: 'Happy Students' },
+  { icon: GiMeditation, value: '6+', label: 'Years Experience' },
+  { icon: HiOutlineCheckBadge, value: 'Certified', label: 'Yoga Teachers' },
+  { icon: HiOutlineMapPin, value: 'Dehradun', label: 'Uttarakhand, India' },
+];
+
+/* Brand primary — reused for the stat-strip accent bars and value text
+   so the strip visually ties back to the CTA button above it. */
+const colorPrimary = '#9a3617';
 
 /* Delicate high-contrast serif for the hero headline — matches the new
    reference screenshot's font (with italic for the accent line).
@@ -70,7 +83,7 @@ export default function HeroSection() {
               variants={fadeUp}
               className="mb-3 inline-block whitespace-nowrap rounded-full border border-black/10 bg-white/70 px-3 py-1 font-body text-[9px] font-semibold uppercase tracking-[0.15em] text-[#742711] backdrop-blur-md sm:text-xs sm:tracking-[0.2em]"
             >
-              EST. 2015 · DEHRADUN'S TRUSTED YOGA SHALA
+              EST. 2019 · DEHRADUN'S TRUSTED YOGSHALA
             </motion.span>
 
             {/* Heading */}
@@ -126,6 +139,50 @@ export default function HeroSection() {
           </motion.div>
         </div>
       </div>
+
+      {/* ===== Stats strip — trust markers pulled from the reference
+          design (500+ students, years experience, certification, and
+          location), restyled with the site's serif/sans pairing and
+          brand palette so it reads as one system with the hero above. ===== */}
+      <motion.div
+        variants={stagger}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.4 }}
+        style={{ fontFamily: "'Poppins', sans-serif" }}
+        className="relative z-10 mx-auto -mt-px flex max-w-[1320px] flex-wrap items-center justify-center gap-x-10 gap-y-8 px-6 pt-10 pb-4 sm:justify-between sm:gap-y-0 sm:px-10 sm:pt-14 md:px-14"
+      >
+        {stats.map(({ icon: Icon, value, label }, i) => (
+          <motion.div
+            key={label}
+            custom={i}
+            variants={fadeUp}
+            className="flex items-center gap-3.5 sm:gap-4"
+          >
+            <span className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-[#EAE6DA] sm:h-14 sm:w-14" style={{ color: colorPrimary }}>
+              <Icon className="h-5 w-5 sm:h-6 sm:w-6" />
+            </span>
+            <span className="flex flex-col leading-tight">
+              <span
+                style={{ color: colorPrimary }}
+                className="font-heading text-lg font-semibold sm:text-xl"
+              >
+                {value}
+              </span>
+              <span className="text-xs font-light text-neutral-500 sm:text-sm">
+                {label}
+              </span>
+            </span>
+
+            {i < stats.length - 1 && (
+              <span
+                style={{ backgroundColor: colorPrimary }}
+                className="ml-6 hidden h-8 w-[3px] flex-shrink-0 rounded-full opacity-25 sm:ml-8 sm:block lg:ml-10"
+              />
+            )}
+          </motion.div>
+        ))}
+      </motion.div>
     </section>
   );
 }

@@ -4,7 +4,7 @@
  * Features:
  *   - Linear gradient background (#9A3617 → #742711)
  *   - Left (55%): Badge, heading, description, CTA buttons
- *   - Right (45%): Floating white info card with contact details
+ *   - Right (45%): Floating white info card with contact details + social links
  *   - Subtle blurred circles + leaf pattern for luxury feel
  *   - Framer Motion: fade up, floating card, button hover
  *   - Responsive: two columns → stack → single column
@@ -19,6 +19,9 @@ import {
   FiMail,
   FiMapPin,
   FiClock,
+  FiFacebook,
+  FiInstagram,
+  FiYoutube,
 } from 'react-icons/fi';
 
 /* ===== Animation variants ===== */
@@ -68,11 +71,30 @@ const floating = {
    them, since "open 6 AM–8 PM" and "class runs 6:00–7:30 AM" answer
    different questions. */
 const contactInfo = {
-  phone: '+91 98765 43210',
-  whatsapp: '919876543210',
-  email: 'info@kewalyayogshala.com',
+  phone: '+91 9026612796',
+  whatsapp: '919026612796',
+  email: 'info@vimokshayogshala.in',
   studioHours: 'Mon – Sat, 6:00 AM – 8:00 PM',
 };
+
+/* ===== Social links — each opens the studio's real profile in a new tab ===== */
+const socialLinks = [
+  {
+    icon: <FiFacebook className="h-5 w-5" />,
+    label: 'Facebook',
+    href: 'https://www.facebook.com/profile.php?id=100063818964128&mibextid=ZbWKwL',
+  },
+  {
+    icon: <FiInstagram className="h-5 w-5" />,
+    label: 'Instagram',
+    href: 'https://www.instagram.com/vimokshayogshala?igsh=MTQ3M2NkeGMzM3h3dQ==',
+  },
+  {
+    icon: <FiYoutube className="h-5 w-5" />,
+    label: 'YouTube',
+    href: 'https://youtube.com/@vimokshayogshala?si=r7SS660qdwQqsrOe',
+  },
+];
 
 /* ===== Studio locations — two branches, each with its own address & maps link ===== */
 const locations = [
@@ -310,6 +332,25 @@ export default function ContactCTASection() {
                       {contactInfo.studioHours}
                     </span>
                   </div>
+                </motion.div>
+
+                {/* Social links — tap to open each profile in a new tab */}
+                <motion.div
+                  variants={fadeUp}
+                  className="mt-2 flex items-center gap-3 border-t border-border pt-5"
+                >
+                  {socialLinks.map((social) => (
+                    <a
+                      key={social.label}
+                      href={social.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={social.label}
+                      className="flex h-11 w-11 items-center justify-center rounded-full bg-primary/10 text-primary transition-all duration-300 hover:bg-primary hover:text-white"
+                    >
+                      {social.icon}
+                    </a>
+                  ))}
                 </motion.div>
               </motion.div>
             </motion.div>

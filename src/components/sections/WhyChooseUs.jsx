@@ -108,7 +108,7 @@ export default function WhyChooseUs() {
             variants={fadeUp}
             className="mb-3 inline-block rounded-full border border-[var(--color-secondary)]/30 bg-[var(--color-surface)]/80 px-4 py-1 font-body text-[10px] font-semibold uppercase tracking-[0.22em] text-[var(--color-primary)] shadow-sm backdrop-blur-md"
           >
-            WHY CHOOSE KEWALYA YOGSHALA
+            WHY CHOOSE VIMOKSHA YOGSHALA
           </motion.span>
 
           {/* Heading */}
@@ -128,7 +128,7 @@ export default function WhyChooseUs() {
             variants={fadeUp}
             className="mx-auto mt-3 max-w-[460px] text-sm leading-relaxed text-[var(--color-muted)] md:text-base"
           >
-            Discover what makes Kewalya Yogshala a sanctuary for authentic yoga
+            Discover what makes Vimoksha Yogshala a sanctuary for authentic yoga
             practice. Our dedicated team of experts provides a transformative
             experience rooted in tradition and tailored to modern needs.
           </motion.p>

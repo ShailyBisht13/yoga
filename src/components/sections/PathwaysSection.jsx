@@ -21,20 +21,20 @@ const pathways = [
     targetId: 'classes',
   },
   {
-    title: 'Therapy',
-    description: 'Healing therapies to release stress, restore energy and bring inner peace.',
-    icon: GiLotus,
-    color: 'var(--color-accent)',
-    image: therapyImg,
-    targetId: 'therapies',
-  },
-  {
     title: 'Training',
     description: 'Become a certified yoga teacher with world-class training and guidance.',
     icon: HiAcademicCap,
     color: 'var(--color-secondary)',
     image: trainingImg,
     targetId: 'training',
+  },
+  {
+    title: 'Therapy',
+    description: 'Healing therapies to release stress, restore energy and bring inner peace.',
+    icon: GiLotus,
+    color: 'var(--color-accent)',
+    image: therapyImg,
+    targetId: 'therapies',
   },
 ];
 

@@ -158,7 +158,7 @@ export default function FAQSection() {
                 <div className="flex h-[500px] w-full items-center justify-center bg-gradient-to-br from-primary/30 to-primary-dark/40">
                   <div className="text-center">
                     <span className="font-heading text-3xl text-white/70">
-                      Kewalya Yogshala
+                      Vimoksha Yogshala
                     </span>
                     <p className="mt-3 font-body text-sm text-white/50">
                       FAQ photo will appear here
@@ -260,7 +260,7 @@ export default function FAQSection() {
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, amount: 0.4 }}
-              href="https://wa.me/919999999999"
+              href="https://wa.me/917351317975"
               target="_blank"
               rel="noopener noreferrer"
               className="mt-6 flex items-center justify-between gap-4 rounded-[20px] border border-primary/20 bg-primary/5 p-5 transition-colors hover:bg-primary/10"

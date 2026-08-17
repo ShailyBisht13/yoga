@@ -1,10 +1,10 @@
 /**
- * Footer — Premium 5-column footer for Kewalya Yogshala.
+ * Footer — Premium 5-column footer for Vimoksha Yogshala.
  *
  * Features:
  *   - Background #2E2E2E, white text, accent #A98C5A
  *   - Container: max-width 1320px, padding-top 100px, padding-bottom 40px
- *   - Column 1: Logo, description, social icons (FB, IG, YT, LinkedIn)
+ *   - Column 1: Logo, description, social icons (FB, IG, YT, Email)
  *   - Column 2: Quick Links
  *   - Column 3: Programs
  *   - Column 4: Contact (each item with icon)
@@ -18,7 +18,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { FaFacebookF, FaInstagram, FaYoutube, FaLinkedinIn } from 'react-icons/fa';
+import { FaFacebookF, FaInstagram, FaYoutube } from 'react-icons/fa';
 import { FiPhone, FiMail, FiMapPin, FiClock, FiArrowRight } from 'react-icons/fi';
 import { contactInfo, siteConfig } from '@/utils/constants';
 
@@ -61,10 +61,10 @@ const programs = [
 ];
 
 const socialLinks = [
-  { label: 'Facebook', icon: <FaFacebookF />, href: 'https://www.facebook.com/kewalyayogshala' },
-  { label: 'Instagram', icon: <FaInstagram />, href: 'https://www.instagram.com/kewalyayogshala' },
-  { label: 'YouTube', icon: <FaYoutube />, href: 'https://www.youtube.com/@kewalyayogshala' },
-  { label: 'LinkedIn', icon: <FaLinkedinIn />, href: 'https://www.linkedin.com/company/kewalyayogshala' },
+  { label: 'Facebook', icon: <FaFacebookF />, href: 'https://www.facebook.com/profile.php?id=100063818964128&mibextid=ZbWKwL', external: true },
+  { label: 'Instagram', icon: <FaInstagram />, href: 'https://www.instagram.com/vimokshayogshala?igsh=MTQ3M2NkeGMzM3h3dQ==', external: true },
+  { label: 'YouTube', icon: <FaYoutube />, href: 'https://youtube.com/@vimokshayogshala?si=r7SS660qdwQqsrOe', external: true },
+  { label: 'Email', icon: <FiMail />, href: 'mailto:info@vimokshayogshala.in', external: false },
 ];
 
 const contactItems = [
@@ -124,12 +124,12 @@ return (
           <motion.div variants={fadeUp} className="flex flex-col gap-5">
             <Link
               to="/"
-              aria-label="Kewalya Yogshala home"
+              aria-label="Vimoksha Yogshala home"
               className="inline-block w-[160px]"
             >
               <img
                 src="/logo.png"
-                alt="Kewalya Yogshala"
+                alt="Vimoksha Yogshala"
                 className="h-auto w-full object-contain"
               />
             </Link>
@@ -141,9 +141,8 @@ return (
                 <motion.a
                   key={social.label}
                   href={social.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
                   aria-label={social.label}
+                  {...(social.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
                   whileHover={{ scale: 1.15 }}
                   whileTap={{ scale: 0.9 }}
                   transition={{ type: 'spring', stiffness: 400, damping: 12 }}
@@ -254,7 +253,7 @@ return (
           <div className="mb-8 h-px w-full bg-white/10" />
           <div className="flex flex-col items-center justify-between gap-4 text-sm text-white/60 md:flex-row">
             {/* Left */}
-            <p>&copy; 2026 Kewalya Yogshala. All Rights Reserved.</p>
+            <p>&copy; 2026 Vimoksha Yogshala. All Rights Reserved.</p>
             {/* Right */}
             <div className="flex flex-wrap items-center gap-6">
               {policyLinks.map((link) => (

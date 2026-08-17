@@ -226,15 +226,6 @@ export default function Services() {
 
         <ServiceGrid items={classItems} />
 
-        {/* ===== Therapies ===== */}
-        <div id="therapies" className="mt-12 md:mt-16">
-          <SectionHeading
-            title="Our Therapies"
-            description="Restorative therapies drawn from ancient healing traditions, guided by experienced practitioners for lasting relief."
-          />
-          <ServiceGrid items={therapyItems} />
-        </div>
-
         {/* ===== Training ===== */}
         <div id="training" className="mt-12 md:mt-16">
           <SectionHeading
@@ -242,6 +233,15 @@ export default function Services() {
             description="Become a confident, certified yoga teacher through hands-on practicum, personalized guidance, and immersive group practice."
           />
           <ServiceGrid items={trainingItems} />
+        </div>
+
+        {/* ===== Therapies ===== */}
+        <div id="therapies" className="mt-12 md:mt-16">
+          <SectionHeading
+            title="Our Therapies"
+            description="Restorative therapies drawn from ancient healing traditions, guided by experienced practitioners for lasting relief."
+          />
+          <ServiceGrid items={therapyItems} />
         </div>
       </Container>
     </section>
