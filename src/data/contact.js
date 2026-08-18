@@ -7,7 +7,7 @@ export const contactData = {
   cta: {
     heading: 'Reserve Your Spot in Our Next Class and Experience the Benefits of Yoga',
     description:
-      'Join our community of wellness seekers and begin your transformative yoga journey with Kewalya Yogshala today.',
+      'Join our community of wellness seekers and begin your transformative yoga journey with Vimoksha Yogshala today.',
     buttonText: 'Book Free Trial',
   },
 
@@ -32,7 +32,7 @@ export const contactData = {
 
   phoneNumbers: ['+91 78951 60756', '+91 80576 57609'],
 
-  email: 'info@kewalyayogshala.com',
+  email: 'info@vimokshayogshala.in',
 
   workingHours: {
     weekdays: 'Mon - Fri: 6:00 AM - 8:00 PM',
@@ -40,10 +40,10 @@ export const contactData = {
   },
 
   socialLinks: [
-    { platform: 'Facebook', url: 'https://www.facebook.com/kewalyayogshala', icon: 'facebook' },
-    { platform: 'Instagram', url: 'https://www.instagram.com/kewalyayogshala', icon: 'instagram' },
-    { platform: 'YouTube', url: 'https://www.youtube.com/@kewalyayogshala', icon: 'youtube' },
-    { platform: 'LinkedIn', url: 'https://www.linkedin.com/company/kewalyayogshala', icon: 'linkedin' },
+    { platform: 'Facebook', url: 'https://www.facebook.com/profile.php?id=100063818964128&mibextid=ZbWKwL', icon: 'facebook' },
+    { platform: 'Instagram', url: 'https://www.instagram.com/vimokshayogshala?igsh=MTQ3M2NkeGMzM3h3dQ==', icon: 'instagram' },
+    { platform: 'YouTube', url: 'https://youtube.com/@vimokshayogshala?si=r7SS660qdwQqsrOe', icon: 'youtube' },
+    { platform: 'LinkedIn', url: 'https://www.linkedin.com/company/vimokshayogshala', icon: 'linkedin' },
   ],
 
   footerLinks: {
@@ -75,7 +75,7 @@ export const contactData = {
     ],
   },
 
-  copyright: 'Copyright © 2025 Kewalya Yogshala. All Rights Reserved.',
+  copyright: 'Copyright © 2025 Vimoksha Yogshala. All Rights Reserved.',
   developer: {
     name: 'Amica Solution Pvt. Ltd.',
     url: 'https://amicasolution.com/',

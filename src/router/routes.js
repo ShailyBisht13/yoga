@@ -37,17 +37,17 @@ export const navigationLinks = [
 ];
 
 export const routeMeta = {
-  home: { title: 'Home', description: 'Kewalya Yogshala — Premium yoga & wellness in Dehradun.' },
-  about: { title: 'About', description: 'Learn about Kewalya Yogshala and our philosophy.' },
+  home: { title: 'Home', description: 'Vimoksha Yogshala — Premium yoga & wellness in Dehradun.' },
+  about: { title: 'About', description: 'Learn about Vimoksha Yogshala and our philosophy.' },
   classes: { title: 'Classes', description: 'Explore our yoga classes and schedules.' },
   classesBeginner: { title: 'Beginner Classes', description: 'Foundational yoga classes for those new to the mat.' },
   classesIntermediate: { title: 'Intermediate Classes', description: 'Flowing sequences and deeper breathwork for practitioners building on the basics.' },
   classesAdvance: { title: 'Advance Classes', description: 'Fast-paced, high-intensity classes for practitioners with an established foundation.' },
-  therapies: { title: 'Therapies', description: 'Yoga Therapy, Naturopathy, Acupressure and Cupping Therapy at Kewalya Yogshala.' },
+  therapies: { title: 'Therapies', description: 'Yoga Therapy, Naturopathy, Acupressure and Cupping Therapy at Vimoksha Yogshala.' },
   courses: { title: 'Courses', description: 'Yoga Teacher Training Courses in Dehradun.' },
-  gallery: { title: 'Gallery', description: 'Moments from Kewalya Yogshala.' },
+  gallery: { title: 'Gallery', description: 'Moments from Vimoksha Yogshala.' },
   blog: { title: 'Blog', description: 'Wellness insights and yoga articles.' },
-  contact: { title: 'Contact', description: 'Get in touch with Kewalya Yogshala.' },
+  contact: { title: 'Contact', description: 'Get in touch with Vimoksha Yogshala.' },
   notFound: { title: 'Page Not Found', description: 'The page you are looking for does not exist.' },
 };
 

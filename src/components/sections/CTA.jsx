@@ -19,7 +19,7 @@ export default function CTA() {
               Join Us for a Transformational Journey
             </h2>
             <p className="text-lg text-white/90 leading-relaxed mb-8">
-              At Kewalya Yogshala, we are committed to helping you achieve a healthier and more fulfilling life. Whether you want to practice yoga, undergo therapy, or become a certified yoga teacher, we are here to guide you every step of the way.
+              At Vimoksha Yogshala, we are committed to helping you achieve a healthier and more fulfilling life. Whether you want to practice yoga, undergo therapy, or become a certified yoga teacher, we are here to guide you every step of the way.
             </p>
             <div className="flex flex-wrap gap-4 mb-8">
               <Button

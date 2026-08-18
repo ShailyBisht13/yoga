@@ -5,10 +5,10 @@
 
 export const aboutData = {
   hero: {
-    title: 'Welcome To Kewalya Yogshala',
+    title: 'Welcome To Vimoksha Yogshala',
     subtitle: 'Embracing The Essence Of Yogic Wisdom',
     description:
-      'Nestled in the serene beauty of Dehradun, Kewalya Yogshala offers a sanctuary for those seeking physical vitality, mental clarity, and spiritual transformation through authentic yoga practices.',
+      'Nestled in the serene beauty of Dehradun, Vimoksha Yogshala offers a sanctuary for those seeking physical vitality, mental clarity, and spiritual transformation through authentic yoga practices.',
   },
 
   pillars: [
@@ -30,8 +30,8 @@ export const aboutData = {
   ],
 
   aboutPreview: {
-    badge: 'ABOUT KEWALYA YOGSHALA',
-    heading: 'Experience the Next Level of Yoga with Kewalya Yogshala',
+    badge: 'ABOUT VIMOKSHA YOGSHALA',
+    heading: 'Experience the Next Level of Yoga with Vimoksha Yogshala',
     description:
       'Our yoga programs are not just about flexibility or strength — they are designed to harmonize your body, mind, and spirit for true balance and inner peace. We cover every aspect of yoga, from asanas and pranayama to dhyana.',
     featurePoints: [
@@ -42,10 +42,10 @@ export const aboutData = {
   },
 
   whyChooseUs: {
-    badge: 'WHY CHOOSE KEWALYA YOGSHALA',
+    badge: 'WHY CHOOSE VIMOKSHA YOGSHALA',
     heading: 'Discover the Difference in Every Practice',
     description:
-      'Discover what makes Kewalya Yogshala a sanctuary for authentic yoga practice. Our dedicated team of experts provides a transformative experience rooted in tradition and tailored to modern needs.',
+      'Discover what makes Vimoksha Yogshala a sanctuary for authentic yoga practice. Our dedicated team of experts provides a transformative experience rooted in tradition and tailored to modern needs.',
     features: [
       {
         title: 'Certified Yoga Experts',

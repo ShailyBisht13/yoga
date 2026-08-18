@@ -60,9 +60,9 @@ const businessJsonLd = {
     addressCountry: 'IN',
   },
   sameAs: [
-    'https://www.facebook.com/kewalyayogshala',
-    'https://www.instagram.com/kewalyayogshala',
-    'https://www.youtube.com/@kewalyayogshala',
+    'https://www.facebook.com/profile.php?id=100063818964128&mibextid=ZbWKwL',
+    'https://www.instagram.com/vimokshayogshala',
+    'https://youtube.com/@vimokshayogshala',
   ],
 };
 

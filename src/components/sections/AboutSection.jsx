@@ -32,7 +32,7 @@ export default function AboutSection() {
           >
             <img
               src="/72f80c8f-f566-427b-9e07-1ae26cbc16e6.png"
-              alt="Kewalya Yogshala Yoga Studio"
+              alt="Vimoksha Yogshala Yoga Studio"
               className="rounded-2xl shadow-2xl w-full object-cover"
             />
 
@@ -77,7 +77,7 @@ export default function AboutSection() {
               variants={fadeInUp}
               className="mt-6 text-lg text-dark/70 leading-relaxed md:text-xl"
             >
-              Kewalya Yogshala was started in 2015 by Devendra and Radha
+              Vimoksha Yogshala was started in 2015 by Devendra and Radha
               Uniyal out of a single rented hall in Dehradun, with eleven
               students. Today it's grown into a full studio — but the
               batches are still kept small on purpose, because the thing

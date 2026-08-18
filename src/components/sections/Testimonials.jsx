@@ -4,11 +4,11 @@ export default function Testimonials() {
   const testimonials = [
     {
       name: 'Neeraj Chandra',
-      text: "I love going to Kewalya Yogshala. All teachers provide very good practice. My life has changed a lot in just one month. I would ask everyone to join once for good health and peace of mind.",
+      text: "I love going to Vimoksha Yogshala. All teachers provide very good practice. My life has changed a lot in just one month. I would ask everyone to join once for good health and peace of mind.",
     },
     {
       name: 'Jaya Kunwar',
-      text: "I joined Yoga at Kewalya before 2 months and found out that I could not even do some basic stretches completely. Sir and Mam are very hardworking and dedicated and put immense efforts to bring the best in all of us.",
+      text: "I joined Yoga at Vimoksha before 2 months and found out that I could not even do some basic stretches completely. Sir and Mam are very hardworking and dedicated and put immense efforts to bring the best in all of us.",
     },
     {
       name: 'Yoga Master Shyam',

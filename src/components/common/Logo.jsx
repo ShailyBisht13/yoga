@@ -13,13 +13,13 @@ export default function Logo({ className, showText = true, size = 'md' }) {
     <div className={cn('flex items-center gap-2.5', className)}>
       <img
         src="/logo.png"
-        alt="Kewalya Yogshala"
+        alt="Vimoksha Yogshala"
         className={cn(icon, 'shrink-0 object-contain')}
       />
       {showText && (
         <div className="flex flex-col leading-none">
           <span className={cn('font-heading font-semibold tracking-wide text-primary', text)}>
-            KEWALYA
+            VIMOKSHA
           </span>
           <span className="text-[0.65em] font-medium uppercase tracking-[0.2em] text-dark/70">
             Yogshala

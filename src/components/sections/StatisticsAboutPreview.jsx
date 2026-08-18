@@ -44,7 +44,7 @@ export default function StatisticsAboutPreview() {
               variants={fadeUp}
               className="mb-5 inline-block rounded-full border border-[#f69116]/30 bg-[#f69116]/10 px-4 py-1.5 font-body text-[11px] font-semibold uppercase tracking-[0.18em] text-[#f69116]"
             >
-              ABOUT KEWALYA YOGSHALA
+              ABOUT VIMOKSHA YOGSHALA
             </motion.span>
 
             {/* Heading */}
@@ -64,7 +64,7 @@ export default function StatisticsAboutPreview() {
               variants={fadeUp}
               className="mt-6 text-base leading-[1.8] text-[#6B6B6B] md:text-lg"
             >
-              Nestled in the serene beauty of Dehradun, Kewalya Yogshala offers a
+              Nestled in the serene beauty of Dehradun, Vimoksha Yogshala offers a
               transformative yoga experience that nurtures physical vitality, mental
               clarity, and spiritual growth. Our authentic approach combines
               traditional teachings with modern wellness practices to create a truly
@@ -109,7 +109,7 @@ export default function StatisticsAboutPreview() {
             >
               <motion.img
                 src={heroImage}
-                alt="Kewalya Yogshala — Yoga practice in serene environment"
+                alt="Vimoksha Yogshala — Yoga practice in serene environment"
                 loading="lazy"
                 className="h-[280px] w-full object-cover sm:h-[400px] md:h-[620px]"
                 animate={{ y: [0, -10, 0] }}

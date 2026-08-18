@@ -150,7 +150,7 @@ export default function FAQSection() {
               {faqImage ? (
                 <img
                   src={faqImage}
-                  alt="Students practicing at Kewalya Yogshala"
+                  alt="Students practicing at Vimoksha Yogshala"
                   className="h-[500px] w-full object-cover"
                   loading="lazy"
                 />

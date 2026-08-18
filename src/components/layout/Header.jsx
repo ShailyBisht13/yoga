@@ -86,8 +86,8 @@ export default function Header() {
           )}
         >
           {/* Logo — 150px, never stretch */}
-          <Link to="/" aria-label="Kewalya Yogshala home" className="w-[150px] shrink-0" onClick={() => isMobileOpen && setIsMobileOpen(false)}>
-            <img src="/logo.png" alt="Kewalya Yogshala" className="h-auto w-full object-contain" />
+          <Link to="/" aria-label="Vimoksha Yogshala home" className="w-[150px] shrink-0" onClick={() => isMobileOpen && setIsMobileOpen(false)}>
+            <img src="/logo.png" alt="Vimoksha Yogshala" className="h-auto w-full object-contain" />
           </Link>
 
           {/* Center navigation — evenly spaced, with breathing room from the logo */}
@@ -211,8 +211,8 @@ function MobileMenu({ onClose, onNavClick }) {
     >
       <div className="mx-auto w-full max-w-[1440px] px-4 pt-10 sm:px-6 lg:px-10">
         <div className="flex items-center justify-between">
-          <Link to="/" onClick={onClose} aria-label="Home" className="w-[140px] sm:w-[180px] lg:w-[200px]">
-            <img src="/logo.png" alt="Kewalya Yogshala" className="h-auto w-full object-contain" />
+          <Link to="/" onClick={onClose} aria-label="Vimoksha Yogshala home" className="w-[140px] sm:w-[180px] lg:w-[200px]">
+            <img src="/logo.png" alt="Vimoksha Yogshala" className="h-auto w-full object-contain" />
           </Link>
           <button
             type="button"

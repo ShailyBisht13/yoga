@@ -1,4 +1,4 @@
-# Kewalya Yogshala
+# Vimoksha Yogshala
 
 Premium Yoga & Wellness website built with React 19, Vite, and Tailwind CSS.
 

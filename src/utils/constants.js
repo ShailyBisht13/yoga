@@ -1,9 +1,9 @@
 export const siteConfig = {
-  name: 'Kewalya Yogshala',
+  name: 'Vimoksha Yogshala',
   tagline: 'Yoga • Therapy • Wellness',
   description:
     'A sanctuary dedicated to the holistic integration of Yoga, Ayurveda, and Acupressure in Dehradun.',
-  url: 'https://kewalyayogshala.com',
+  url: 'https://vimokshayogshala.in',
   established: 2017,
 };
 
@@ -12,15 +12,15 @@ export const contactInfo = {
   phoneHref: 'tel:+919026612796',
   whatsapp: '+919026612796',
   whatsappHref: 'https://wa.me/919026612796',
-  email: 'info@kewalyayogshala.com',
-  emailHref: 'mailto:info@kewalyayogshala.com',
+  email: 'info@vimokshayogshala.in',
+  emailHref: 'mailto:info@vimokshayogshala.in',
   address: 'Dehradun, Uttarakhand, India',
 };
 
 export const socialLinks = {
-  facebook: 'https://www.facebook.com/kewalyayogshala',
-  instagram: 'https://www.instagram.com/kewalyayogshala',
-  youtube: 'https://www.youtube.com/@kewalyayogshala',
+  facebook: 'https://www.facebook.com/profile.php?id=100063818964128&mibextid=ZbWKwL',
+  instagram: 'https://www.instagram.com/vimokshayogshala?igsh=MTQ3M2NkeGMzM3h3dQ==',
+  youtube: 'https://youtube.com/@vimokshayogshala?si=r7SS660qdwQqsrOe',
 };
 
 export default siteConfig;
