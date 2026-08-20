@@ -5,6 +5,7 @@ import { HiArrowRight, HiOutlineMapPin, HiOutlineCheckBadge } from 'react-icons/
 import { IoLeafOutline } from 'react-icons/io5';
 import { GiMeditation } from 'react-icons/gi';
 import { useRef } from 'react';
+import { useAppContext } from '@/context/AppContext';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 50 },
@@ -45,17 +46,14 @@ const HeadingFont = () => (
 );
 
 export default function HeroSection() {
+  const { openTrialModal } = useAppContext();
   const sectionRef = useRef(null);
 
   return (
     <section className="relative bg-[#F3F1EC] pb-6 sm:pb-10">
       <HeadingFont />
 
-      {/* ===== Full-width, bottom-cropped hero card — flush with the navbar
-          above it (no top gap/rounding), full browser width, rounded only
-          at the bottom so the image reads as "cut off" there. No dark
-          overlay: the photo's own light wall gives the dark text its
-          contrast, so the copy sits directly on the image. ===== */}
+      {/* ===== Full-width, bottom-cropped hero card ===== */}
       <div
         ref={sectionRef}
         className="relative h-[calc(100vh-1rem)] w-full overflow-hidden rounded-b-[28px]"
@@ -125,8 +123,8 @@ export default function HeroSection() {
                 transition={{ type: 'spring', stiffness: 400, damping: 15 }}
               >
                 <Button
-                  as={Link}
-                  to="/contact"
+                  type="button"
+                  onClick={openTrialModal}
                   variant="primary"
                   icon={<HiArrowRight className="h-3.5 w-3.5" />}
                   className="h-11 whitespace-nowrap rounded-full px-6 text-sm sm:h-12 sm:px-8 sm:text-base"

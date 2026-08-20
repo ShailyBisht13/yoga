@@ -13,6 +13,7 @@
 import { motion } from 'framer-motion';
 import { Container, Button } from '@/components/ui';
 import { Link } from 'react-router-dom';
+import { useAppContext } from '@/context/AppContext';
 import { HiArrowRight } from 'react-icons/hi2';
 import {
   FiPhone,
@@ -151,6 +152,8 @@ const contactItemClass =
   'group flex items-center gap-4 rounded-2xl border border-border p-4 transition-all duration-300 hover:border-primary/40 hover:shadow-soft';
 
 export default function ContactCTASection() {
+  const { openTrialModal } = useAppContext();
+
   return (
     <section
       id="contact-cta"
@@ -234,8 +237,8 @@ export default function ContactCTASection() {
                   transition={{ type: 'spring', stiffness: 400, damping: 15 }}
                 >
                   <Button
-                    as={Link}
-                    to="/contact"
+                    type="button"
+                    onClick={openTrialModal}
                     variant="primary"
                     size="lg"
                     icon={<HiArrowRight className="h-4 w-4" />}

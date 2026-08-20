@@ -12,6 +12,13 @@ dist
 dist-ssr
 *.local
 
+# Environment variables
+.env
+.env.*
+!.env.example
+vimoksha-express/server/node_modules
+vimoksha-express/server/.env
+
 # Editor
 .vscode/*
 !.vscode/extensions.json

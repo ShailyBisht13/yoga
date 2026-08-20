@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import usePageMeta from '@/hooks/usePageMeta';
 import { Container, Button } from '@/components/ui';
+import { api } from '@/lib/api';
 import { HiArrowRight } from 'react-icons/hi2';
 import {
   IoLocationOutline,
@@ -80,26 +81,44 @@ export default function ContactPage() {
   usePageMeta('contact');
 
   const [form, setForm] = useState({ name: '', email: '', phone: '', message: '' });
-  const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [status, setStatus] = useState({ type: '', message: '' });
 
   const handleChange = (e) => {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+    if (status.message) setStatus({ type: '', message: '' });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // No backend is wired up yet — this opens the visitor's email client with
-    // the form prefilled. Swap this out for a real endpoint (e.g. an API
-    // route, Formspree, or EmailJS) when one is available.
-    const subject = encodeURIComponent(`New enquiry from ${form.name || 'website visitor'}`);
-    const body = encodeURIComponent(
-      `Name: ${form.name}\nEmail: ${form.email}\nPhone: ${form.phone}\n\n${form.message}`
-    );
-    window.location.href = `mailto:info@vimokshayogshala.in?subject=${subject}&body=${body}`;
+    if (!form.name.trim() || !form.phone.trim()) {
+      setStatus({ type: 'error', message: 'Please enter your name and phone number.' });
+      return;
+    }
 
-    setSubmitted(true);
-    setForm({ name: '', email: '', phone: '', message: '' });
+    setSubmitting(true);
+    try {
+      await api.createBooking({
+        name: form.name,
+        phone: form.phone,
+        email: form.email,
+        preferredBatch: 'General Contact',
+        message: form.message,
+      });
+
+      setStatus({
+        type: 'success',
+        message: "Thank you for reaching out! Your message has been sent, and we'll contact you shortly.",
+      });
+      setForm({ name: '', email: '', phone: '', message: '' });
+    } catch {
+      setStatus({
+        type: 'error',
+        message: 'Something went wrong. Please try again or call us directly.',
+      });
+    }
+    setSubmitting(false);
   };
 
   return (
@@ -260,6 +279,7 @@ export default function ContactPage() {
                       id="phone"
                       name="phone"
                       type="tel"
+                      required
                       value={form.phone}
                       onChange={handleChange}
                       placeholder="Your phone number"
@@ -276,10 +296,9 @@ export default function ContactPage() {
                     id="email"
                     name="email"
                     type="email"
-                    required
                     value={form.email}
                     onChange={handleChange}
-                    placeholder="you@example.com"
+                    placeholder="you@example.com (optional)"
                     className="rounded-xl border border-border bg-background px-4 py-3 font-body text-sm text-dark outline-none transition-colors focus:border-primary"
                   />
                 </div>
@@ -302,22 +321,25 @@ export default function ContactPage() {
 
                 <Button
                   type="submit"
+                  disabled={submitting}
                   variant="primary"
                   size="lg"
                   icon={<HiArrowRight className="h-4 w-4" />}
-                  className="mt-2 h-[56px] rounded-full px-8 text-base"
+                  className="mt-2 h-[56px] rounded-full px-8 text-base disabled:opacity-60"
                 >
-                  Send Message
+                  {submitting ? 'Sending…' : 'Send Message'}
                 </Button>
 
-                {submitted && (
+                {status.message && (
                   <motion.p
                     initial={{ opacity: 0, y: -6 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className="flex items-center gap-2 text-sm font-medium text-primary"
+                    className={`flex items-center gap-2 text-sm font-medium ${
+                      status.type === 'error' ? 'text-red-600' : 'text-primary'
+                    }`}
                   >
-                    <IoCheckmarkCircle className="h-4 w-4" />
-                    Your email app should be opening now with your message ready to send.
+                    <IoCheckmarkCircle className="h-4 w-4 shrink-0" />
+                    {status.message}
                   </motion.p>
                 )}
               </form>

@@ -9,12 +9,14 @@ import { navigationLinks } from '@/router/routes';
 import Logo from '@/components/common/Logo';
 import NavLink from '@/components/common/NavLink';
 import Button from '@/components/ui/Button';
+import { useAppContext } from '@/context/AppContext';
 
 /* Height to offset scroll target by, so a section doesn't land hidden
    underneath the fixed pill header. Matches header height + breathing room. */
 const SCROLL_OFFSET = 110;
 
 export default function Header() {
+  const { openTrialModal } = useAppContext();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileOpen, setIsMobileOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState(null);
@@ -161,8 +163,8 @@ export default function Header() {
               <span>{contactInfo.phone}</span>
             </a>
             <Button
-              as={Link}
-              to="/contact"
+              type="button"
+              onClick={openTrialModal}
               variant="primary"
               icon={<IoArrowForward />}
               className="w-[160px] rounded-full text-sm"
@@ -199,6 +201,7 @@ export default function Header() {
 }
 
 function MobileMenu({ onClose, onNavClick }) {
+  const { openTrialModal } = useAppContext();
   const [openSection, setOpenSection] = useState(null);
 
   return (
@@ -309,14 +312,17 @@ function MobileMenu({ onClose, onNavClick }) {
               <HiOutlinePhone className="text-lg" />
               {contactInfo.phone}
             </a>
-            <Link
-              to="/contact"
-              onClick={onClose}
+            <button
+              type="button"
+              onClick={() => {
+                onClose();
+                openTrialModal();
+              }}
               className="inline-flex items-center justify-center gap-2 rounded-full bg-primary px-7 py-3 text-sm font-medium text-white shadow-soft transition-colors hover:bg-primary-dark"
             >
               Book Trial
               <IoArrowForward />
-            </Link>
+            </button>
           </div>
         </div>
       </div>

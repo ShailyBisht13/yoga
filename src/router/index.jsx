@@ -1,5 +1,5 @@
 import { lazy, Suspense } from 'react';
-import { createBrowserRouter } from 'react-router-dom';
+import { createBrowserRouter, Navigate } from 'react-router-dom';
 import { MainLayout } from '@/components/layout';
 
 const HomePage = lazy(() => import('@/pages/HomePage'));
@@ -12,8 +12,15 @@ const TherapiesPage = lazy(() => import('@/pages/TherapiesPage'));
 const CoursesPage = lazy(() => import('@/pages/CoursesPage'));
 const GalleryPage = lazy(() => import('@/pages/GalleryPage'));
 const BlogPage = lazy(() => import('@/pages/BlogPage'));
+const BlogPostPage = lazy(() => import('@/pages/BlogPostPage'));
 const ContactPage = lazy(() => import('@/pages/ContactPage'));
 const NotFoundPage = lazy(() => import('@/pages/NotFoundPage'));
+
+// Admin pages
+const AdminLogin = lazy(() => import('@/pages/admin/AdminLogin'));
+const AdminBookingsPage = lazy(() => import('@/pages/admin/AdminBookingsPage'));
+const AdminBlogPage = lazy(() => import('@/pages/admin/AdminBlogPage'));
+const AdminGalleryPage = lazy(() => import('@/pages/admin/AdminGalleryPage'));
 
 function PageLoader() {
   return (
@@ -46,9 +53,30 @@ export const router = createBrowserRouter([
       { path: 'courses', element: withSuspense(CoursesPage) },
       { path: 'gallery', element: withSuspense(GalleryPage) },
       { path: 'blog', element: withSuspense(BlogPage) },
+      { path: 'blog/:slug', element: withSuspense(BlogPostPage) },
       { path: 'contact', element: withSuspense(ContactPage) },
       { path: '*', element: withSuspense(NotFoundPage) },
     ],
+  },
+  {
+    path: 'admin/login',
+    element: withSuspense(AdminLogin),
+  },
+  {
+    path: 'admin',
+    element: <Navigate to="/admin/bookings" replace />,
+  },
+  {
+    path: 'admin/bookings',
+    element: withSuspense(AdminBookingsPage),
+  },
+  {
+    path: 'admin/blog',
+    element: withSuspense(AdminBlogPage),
+  },
+  {
+    path: 'admin/gallery',
+    element: withSuspense(AdminGalleryPage),
   },
 ]);
 
