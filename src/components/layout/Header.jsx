@@ -4,8 +4,9 @@ import { HiOutlinePhone } from 'react-icons/hi';
 import { IoArrowForward, IoChevronDown } from 'react-icons/io5';
 import { motion, AnimatePresence } from 'framer-motion';
 import { cn } from '@/utils';
-import { contactInfo } from '@/utils/constants';
+import { contactInfo as staticContactInfo } from '@/utils/constants';
 import { navigationLinks } from '@/router/routes';
+import { api } from '@/lib/api';
 import Logo from '@/components/common/Logo';
 import NavLink from '@/components/common/NavLink';
 import Button from '@/components/ui/Button';
@@ -15,14 +16,38 @@ import { useAppContext } from '@/context/AppContext';
    underneath the fixed pill header. Matches header height + breathing room. */
 const SCROLL_OFFSET = 110;
 
+/* Shared text styling for top-level desktop nav items (plain links and the
+   "Classes" dropdown trigger alike) so they can never drift out of sync —
+   previously the dropdown button hardcoded its own size separately from
+   NavLink's default + override, which made "Classes" render larger. */
+const NAV_ITEM_TEXT_CLASS = 'text-base font-medium tracking-wide';
+
 export default function Header() {
   const { openTrialModal } = useAppContext();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileOpen, setIsMobileOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState(null);
+  const [contact, setContact] = useState(staticContactInfo);
   const location = useLocation();
   const navigate = useNavigate();
   const isHome = location.pathname === '/';
+
+  /* Pull the phone number from the admin-editable contact info; fall back to
+     the static constant (above) if the API hasn't responded yet or fails. */
+  useEffect(() => {
+    api
+      .getContactInfo()
+      .then((data) => {
+        if (data?.phone) {
+          setContact({
+            ...staticContactInfo,
+            phone: data.phone,
+            phoneHref: `tel:${data.phone.replace(/[\s()-]/g, '')}`,
+          });
+        }
+      })
+      .catch(() => {});
+  }, []);
 
   useEffect(() => {
     const onScroll = () => setIsScrolled(window.scrollY > 20);
@@ -104,7 +129,10 @@ export default function Header() {
                 >
                   <button
                     type="button"
-                    className="flex items-center gap-1 py-1 text-base font-medium tracking-wide text-dark/80 transition-colors duration-300 hover:text-primary"
+                    className={cn(
+                      'flex items-center gap-1 py-1 text-dark/80 transition-colors duration-300 hover:text-primary',
+                      NAV_ITEM_TEXT_CLASS,
+                    )}
                     aria-expanded={openDropdown === link.path}
                   >
                     {link.label}
@@ -144,7 +172,7 @@ export default function Header() {
                   key={link.path}
                   to={link.path}
                   onClick={(e) => handleNavClick(e, link.path)}
-                  className="text-base font-medium tracking-wide"
+                  className={NAV_ITEM_TEXT_CLASS}
                 >
                   {link.label}
                 </NavLink>
@@ -155,12 +183,12 @@ export default function Header() {
           {/* Right buttons */}
           <div className="hidden items-center gap-3 lg:flex">
             <a
-              href={contactInfo.phoneHref}
+              href={contact.phoneHref}
               className="inline-flex w-[170px] items-center justify-center gap-2 rounded-full border border-border px-4 py-2 text-sm font-medium text-dark whitespace-nowrap transition-colors duration-300 hover:border-primary hover:text-primary"
               style={{ height: '48px' }}
             >
               <HiOutlinePhone className="text-lg shrink-0" />
-              <span>{contactInfo.phone}</span>
+              <span>{contact.phone}</span>
             </a>
             <Button
               type="button"
@@ -193,14 +221,18 @@ export default function Header() {
 
       <AnimatePresence>
         {isMobileOpen && (
-          <MobileMenu onClose={() => setIsMobileOpen(false)} onNavClick={handleNavClick} />
+          <MobileMenu
+            onClose={() => setIsMobileOpen(false)}
+            onNavClick={handleNavClick}
+            contact={contact}
+          />
         )}
       </AnimatePresence>
     </header>
   );
 }
 
-function MobileMenu({ onClose, onNavClick }) {
+function MobileMenu({ onClose, onNavClick, contact = staticContactInfo }) {
   const { openTrialModal } = useAppContext();
   const [openSection, setOpenSection] = useState(null);
 
@@ -306,11 +338,11 @@ function MobileMenu({ onClose, onNavClick }) {
         <div className="mx-auto w-full max-w-[1440px] px-4 sm:px-6 lg:px-10">
           <div className="flex flex-col gap-3">
             <a
-              href={contactInfo.phoneHref}
+              href={contact.phoneHref}
               className="inline-flex items-center justify-center gap-2 rounded-full border border-border px-7 py-3 text-sm font-medium text-dark transition-colors hover:border-primary hover:text-primary"
             >
               <HiOutlinePhone className="text-lg" />
-              {contactInfo.phone}
+              {contact.phone}
             </a>
             <button
               type="button"

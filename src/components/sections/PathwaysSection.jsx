@@ -84,7 +84,7 @@ export default function PathwaysSection() {
         >
           <motion.h2
             variants={fadeUp}
-            className="font-heading text-3xl font-semibold text-[var(--color-primary)] md:text-4xl"
+            className="font-heading text-4xl font-semibold text-[var(--color-primary)] md:text-5xl"
           >
             Explore Our Pathways
           </motion.h2>
@@ -96,7 +96,7 @@ export default function PathwaysSection() {
             <GiLotus className="h-3 w-3 shrink-0 text-[var(--color-primary)]/40" />
             <span className="h-px flex-1 bg-[var(--color-primary)]/25" />
           </motion.div>
-          <motion.p variants={fadeUp} className="text-sm text-[var(--color-muted)] md:text-base">
+          <motion.p variants={fadeUp} className="text-base text-[var(--color-muted)] md:text-lg">
             Choose what speaks to your journey today.
           </motion.p>
         </motion.div>
@@ -130,7 +130,7 @@ export default function PathwaysSection() {
                       {p.title}
                     </h3>
                   </div>
-                  <p className="text-xs leading-relaxed text-[var(--color-muted)]">
+                  <p className="text-sm leading-relaxed text-[var(--color-muted)]">
                     {p.description}
                   </p>
                 </div>

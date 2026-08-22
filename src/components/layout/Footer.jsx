@@ -125,12 +125,12 @@ return (
             <Link
               to="/"
               aria-label="Vimoksha Yogshala home"
-              className="inline-block w-[160px]"
+              className="inline-flex w-fit items-center rounded-2xl bg-white p-3 shadow-soft"
             >
               <img
                 src="/logo.png"
                 alt="Vimoksha Yogshala"
-                className="h-auto w-full object-contain"
+                className="h-auto w-[140px] object-contain"
               />
             </Link>
             <p className="max-w-xs text-sm leading-relaxed text-white/70">

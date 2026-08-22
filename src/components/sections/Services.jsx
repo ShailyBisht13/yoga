@@ -140,10 +140,10 @@ function ServiceGrid({ items }) {
 
           {/* Content */}
           <div className="flex flex-1 flex-col p-4">
-            <h3 className="font-heading text-base font-semibold text-primary">
+            <h3 className="font-heading text-lg font-semibold text-primary">
               {service.title}
             </h3>
-            <p className="mt-1.5 flex-1 text-xs leading-relaxed text-dark/70">
+            <p className="mt-1.5 flex-1 text-sm leading-relaxed text-dark/70">
               {service.description}
             </p>
             <Link
@@ -179,14 +179,14 @@ function SectionHeading({ badge, title, description }) {
 
       <motion.h2
         variants={fadeUp}
-        className="font-heading text-3xl font-semibold leading-tight text-primary md:text-4xl"
+        className="font-heading text-4xl font-semibold leading-tight text-primary md:text-5xl"
       >
         {title}
       </motion.h2>
 
       <motion.p
         variants={fadeUp}
-        className="max-w-xl text-sm leading-relaxed text-dark/70 md:text-base"
+        className="max-w-xl text-base leading-relaxed text-dark/70 md:text-lg"
       >
         {description}
       </motion.p>

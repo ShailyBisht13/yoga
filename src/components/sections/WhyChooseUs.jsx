@@ -106,7 +106,7 @@ export default function WhyChooseUs() {
           <motion.span
             custom={0}
             variants={fadeUp}
-            className="mb-3 inline-block rounded-full border border-[var(--color-secondary)]/30 bg-[var(--color-surface)]/80 px-4 py-1 font-body text-[10px] font-semibold uppercase tracking-[0.22em] text-[var(--color-primary)] shadow-sm backdrop-blur-md"
+            className="mb-3 inline-block rounded-full border border-[var(--color-secondary)]/30 bg-[var(--color-surface)]/80 px-4 py-1 font-body text-xs font-semibold uppercase tracking-[0.25em] text-[var(--color-primary)] shadow-sm backdrop-blur-md"
           >
             WHY CHOOSE VIMOKSHA YOGSHALA
           </motion.span>
@@ -115,7 +115,7 @@ export default function WhyChooseUs() {
           <motion.h2
             custom={1}
             variants={fadeUp}
-            className="font-heading text-[clamp(1.5rem,3.2vw,2.25rem)] font-semibold leading-[1.2] tracking-tight text-[var(--color-dark)]"
+            className="font-heading text-4xl font-semibold leading-tight tracking-tight text-[var(--color-dark)] md:text-5xl"
           >
             Experience Authentic Yoga
             <br />
@@ -126,7 +126,7 @@ export default function WhyChooseUs() {
           <motion.p
             custom={2}
             variants={fadeUp}
-            className="mx-auto mt-3 max-w-[460px] text-sm leading-relaxed text-[var(--color-muted)] md:text-base"
+            className="mx-auto mt-3 max-w-[460px] text-base leading-relaxed text-[var(--color-muted)] md:text-lg"
           >
             Discover what makes Vimoksha Yogshala a sanctuary for authentic yoga
             practice. Our dedicated team of experts provides a transformative
@@ -157,12 +157,12 @@ export default function WhyChooseUs() {
                   </div>
 
                   {/* Title */}
-                  <h3 className="font-serif text-xl font-bold text-[var(--color-dark)]">
+                  <h3 className="font-heading text-lg font-semibold text-[var(--color-dark)]">
                     {feature.title}
                   </h3>
 
                   {/* Description */}
-                  <p className="mt-2 flex-1 text-sm font-medium leading-relaxed text-[var(--color-dark)]/70">
+                  <p className="mt-2 flex-1 text-sm leading-relaxed text-[var(--color-dark)]/70">
                     {feature.description}
                   </p>
 
@@ -198,7 +198,7 @@ export default function WhyChooseUs() {
           <motion.span
             custom={0}
             variants={fadeUp}
-            className="mb-4 inline-block rounded-full border border-[var(--color-secondary)]/30 bg-[var(--color-surface)]/80 px-4 py-1 font-body text-[10px] font-semibold uppercase tracking-[0.2em] text-[var(--color-primary)] shadow-sm backdrop-blur-md sm:text-xs"
+            className="mb-4 inline-block rounded-full border border-[var(--color-secondary)]/30 bg-[var(--color-surface)]/80 px-4 py-1 font-body text-xs font-semibold uppercase tracking-[0.25em] text-[var(--color-primary)] shadow-sm backdrop-blur-md"
           >
             BEGIN YOUR JOURNEY
           </motion.span>
@@ -206,7 +206,7 @@ export default function WhyChooseUs() {
           <motion.h3
             custom={1}
             variants={fadeUp}
-            className="font-heading text-[clamp(1.75rem,4vw,2.75rem)] font-semibold leading-[1.15] text-[var(--color-dark)]"
+            className="font-heading text-4xl font-semibold leading-tight text-[var(--color-dark)] md:text-5xl"
           >
             Start Your Wellness Journey Today
           </motion.h3>
@@ -214,7 +214,7 @@ export default function WhyChooseUs() {
           <motion.p
             custom={2}
             variants={fadeUp}
-            className="mx-auto mt-4 max-w-[520px] text-base leading-relaxed text-[var(--color-muted)]"
+            className="mx-auto mt-4 max-w-[520px] text-base leading-relaxed text-[var(--color-muted)] md:text-lg"
           >
             Join hundreds of students improving their physical and mental
             well-being through authentic yoga.

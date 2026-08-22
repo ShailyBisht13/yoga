@@ -24,7 +24,7 @@ const staggerContainer = {
    If it's already been injected elsewhere (e.g. in index.html), this
    effect just no-ops via the duplicate check below. */
 const ELFSIGHT_SCRIPT_SRC = 'https://elfsightcdn.com/platform.js';
-const ELFSIGHT_WIDGET_CLASS = 'elfsight-app-b9b841eb-b379-4e1e-86d3-c4639c2543ca';
+const ELFSIGHT_WIDGET_CLASS = 'elfsight-app-2cd94589-7dc9-46bf-bdfd-8f6f5de8654c';
 
 function useElfsightScript() {
   useEffect(() => {
@@ -52,7 +52,7 @@ export default function TestimonialsSection() {
         >
           <motion.h2
             variants={fadeUp}
-            className="font-heading text-2xl font-semibold leading-none text-dark md:text-3xl"
+            className="font-heading text-4xl font-semibold leading-tight text-dark md:text-5xl"
           >
             What Our Students
             <br />
@@ -61,7 +61,7 @@ export default function TestimonialsSection() {
 
           <motion.p
             variants={fadeUp}
-            className="mt-7 max-w-[640px] text-sm leading-snug text-muted md:text-base"
+            className="mt-7 max-w-[640px] text-base leading-relaxed text-muted md:text-lg"
           >
             Real, live reviews straight from Google — nothing written or
             curated by us.

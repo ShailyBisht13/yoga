@@ -191,12 +191,12 @@ export default function BlogsSection() {
                 </div>
 
                 {/* Title */}
-                <h3 className="font-heading text-base font-semibold leading-snug text-dark transition-colors group-hover:text-primary">
+                <h3 className="font-heading text-lg font-semibold leading-snug text-dark transition-colors group-hover:text-primary">
                   {blog.title}
                 </h3>
 
                 {/* Excerpt */}
-                <p className="mt-2 flex-1 text-xs leading-relaxed text-muted">
+                <p className="mt-2 flex-1 text-sm leading-relaxed text-muted">
                   {blog.excerpt}
                 </p>
 

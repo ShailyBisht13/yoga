@@ -23,7 +23,7 @@ export default function Testimonials() {
           <h2 className="font-heading text-4xl font-semibold text-primary md:text-5xl">
             What Our Students Say
           </h2>
-          <p className="mt-4 text-lg text-dark/70">
+          <p className="mt-4 text-base text-dark/70 md:text-lg">
             Real experiences from our yoga community
           </p>
         </div>

@@ -1,24 +1,65 @@
 import { Navigate, NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '@/lib/useAuth';
 import { clearToken } from '@/lib/api';
+import {
+  LuLayoutDashboard,
+  LuCalendarCheck,
+  LuNewspaper,
+  LuImage,
+  LuFilePenLine,
+  LuPhone,
+  LuLogOut,
+} from 'react-icons/lu';
 
 const navItems = [
-  { label: 'Bookings', path: '/admin/bookings' },
-  { label: 'Blog', path: '/admin/blog' },
-  { label: 'Gallery', path: '/admin/gallery' },
+  { label: 'Dashboard', path: '/admin/dashboard', icon: LuLayoutDashboard },
+  { label: 'Bookings', path: '/admin/bookings', icon: LuCalendarCheck },
+  { label: 'Blog', path: '/admin/blog', icon: LuNewspaper },
+  { label: 'Gallery', path: '/admin/gallery', icon: LuImage },
+  { label: 'Site Content', path: '/admin/content', icon: LuFilePenLine },
+  { label: 'Contact Info', path: '/admin/contact', icon: LuPhone },
 ];
 
+/** Decorative sunburst mark echoing the Vimoksha logo — used once, as a watermark. */
+function Sunburst({ className }) {
+  const rays = Array.from({ length: 16 });
+  return (
+    <svg className={className} viewBox="0 0 100 100" fill="none" aria-hidden="true">
+      {rays.map((_, i) => (
+        <rect
+          key={i}
+          x="49"
+          y="2"
+          width="2"
+          height="26"
+          rx="1"
+          fill="currentColor"
+          transform={`rotate(${i * 22.5} 50 50)`}
+        />
+      ))}
+      <circle cx="50" cy="50" r="18" fill="currentColor" />
+    </svg>
+  );
+}
+
 /**
- * Wrap any admin page's content with <AdminShell>...</AdminShell>.
- * Handles the login redirect and renders the sidebar.
+ * Wrap any admin page's content with <AdminShell>. Pass `eyebrow`, `title`,
+ * `subtitle` and `actions` to render the page header consistently.
  */
-export default function AdminShell({ children }) {
+export default function AdminShell({ children, eyebrow, title, subtitle, actions }) {
   const { authenticated, loading } = useAuth();
   const location = useLocation();
   const navigate = useNavigate();
 
   if (loading) {
-    return <div className="flex min-h-screen items-center justify-center text-muted">Loading…</div>;
+    return (
+      <div className="flex min-h-screen items-center justify-center bg-[#FBF8F2]">
+        <div className="flex flex-col items-center gap-3 text-muted">
+          <div className="h-8 w-8 animate-spin rounded-full border-2 border-secondary border-t-transparent" />
+          <p className="text-sm">Loading dashboard…</p>
+        </div>
+      </div>
+    );
   }
 
   if (!authenticated) {
@@ -30,41 +71,76 @@ export default function AdminShell({ children }) {
     navigate('/admin/login');
   };
 
+  const currentNav = navItems.find((item) => location.pathname.startsWith(item.path));
+
   return (
-    <div className="flex min-h-screen bg-[#F7F4F0]">
-      <aside className="flex w-60 shrink-0 flex-col border-r border-[#EBE5DC] bg-[#FAF8F5] p-6">
-        <h2
-          style={{ fontFamily: "'Cormorant Garamond', serif" }}
-          className="text-xl font-semibold text-[#1F1F1F]"
-        >
-          Vimoksha Admin
-        </h2>
-        <nav className="mt-10 flex flex-col gap-2">
-          {navItems.map((item) => (
-            <NavLink
-              key={item.path}
-              to={item.path}
-              className={({ isActive }) =>
-                `rounded-full px-6 py-2.5 text-sm font-medium transition-all duration-200 ${
-                  isActive
-                    ? 'bg-[#8B2E14] text-white shadow-sm'
-                    : 'text-[#665C54] hover:bg-[#8B2E14]/10 hover:text-[#8B2E14]'
-                }`
-              }
-            >
-              {item.label}
-            </NavLink>
-          ))}
+    <div className="flex min-h-screen bg-[#FBF8F2]">
+      {/* Sidebar */}
+      <aside className="relative flex w-72 shrink-0 flex-col overflow-hidden bg-[#241611]">
+        <Sunburst className="pointer-events-none absolute -right-14 -top-14 h-56 w-56 text-secondary opacity-[0.07]" />
+
+        <div className="relative z-10 px-7 pb-7 pt-9">
+          <div className="inline-block rounded-xl bg-[#FBF8F2] px-4 py-3 shadow-elevated">
+            <img src="/logo.png" alt="Vimoksha Yogshala" className="h-8 w-auto" />
+          </div>
+          <p className="mt-5 text-[11px] font-semibold uppercase tracking-[0.22em] text-secondary-light">
+            Administrator Console
+          </p>
+        </div>
+
+        <div className="relative z-10 mx-7 h-px bg-gradient-to-r from-secondary/60 via-white/10 to-transparent" />
+
+        <nav className="relative z-10 flex flex-1 flex-col gap-1 px-4 pt-6">
+          {navItems.map((item) => {
+            const Icon = item.icon;
+            return (
+              <NavLink
+                key={item.path}
+                to={item.path}
+                className={({ isActive }) =>
+                  `flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium transition-colors ${
+                    isActive
+                      ? 'bg-white/[0.08] text-white shadow-[inset_3px_0_0_0_var(--color-secondary)]'
+                      : 'text-[#C9BBA9] hover:bg-white/[0.05] hover:text-white'
+                  }`
+                }
+              >
+                <Icon className="h-[18px] w-[18px] shrink-0" />
+                {item.label}
+              </NavLink>
+            );
+          })}
         </nav>
-        <button
-          onClick={handleLogout}
-          className="mt-auto rounded-full px-6 py-2.5 text-left text-sm font-medium text-[#665C54] transition-colors hover:bg-red-50 hover:text-red-600"
-        >
-          Log Out
-        </button>
+
+        <div className="relative z-10 mt-auto border-t border-white/10 px-4 py-5">
+          <button
+            onClick={handleLogout}
+            className="flex w-full items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium text-[#C9BBA9] transition-colors hover:bg-white/[0.05] hover:text-white"
+          >
+            <LuLogOut className="h-[18px] w-[18px]" />
+            Log Out
+          </button>
+        </div>
       </aside>
 
-      <main className="flex-1 overflow-y-auto p-10">{children}</main>
+      {/* Main */}
+      <div className="flex flex-1 flex-col overflow-y-auto">
+        {(title || actions) && (
+          <header className="border-b border-border bg-white/80 px-10 py-8 backdrop-blur">
+            <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-secondary">
+              {eyebrow || currentNav?.label || 'Dashboard'}
+            </p>
+            <div className="mt-1.5 flex flex-wrap items-end justify-between gap-4">
+              <div>
+                <h1 className="font-heading text-3xl font-semibold text-dark">{title}</h1>
+                {subtitle && <p className="mt-1 text-sm text-muted">{subtitle}</p>}
+              </div>
+              {actions && <div className="flex items-center gap-3">{actions}</div>}
+            </div>
+          </header>
+        )}
+        <main className="flex-1 p-10">{children}</main>
+      </div>
     </div>
   );
 }

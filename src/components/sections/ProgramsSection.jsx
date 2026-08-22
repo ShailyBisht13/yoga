@@ -114,7 +114,7 @@ export default function ProgramsSection() {
         >
           <motion.h2
             variants={fadeUp}
-            className="font-heading text-xl font-semibold leading-tight text-dark md:text-2xl"
+            className="font-heading text-4xl font-semibold leading-tight text-dark md:text-5xl"
           >
             Choose Your Perfect
             <br />
@@ -123,7 +123,7 @@ export default function ProgramsSection() {
 
           <motion.p
             variants={fadeUp}
-            className="max-w-xl text-xs leading-relaxed text-muted md:text-sm"
+            className="max-w-xl text-base leading-relaxed text-muted md:text-lg"
           >
             Discover a variety of yoga programs designed for beginners,
             intermediate practitioners, advanced students and therapeutic

@@ -63,7 +63,7 @@ export default function AboutSection() {
           >
             <motion.span
               variants={fadeInUp}
-              className="inline-block px-4 py-2 mb-6 text-sm font-semibold tracking-wider text-primary uppercase bg-primary/10 rounded-full"
+              className="inline-block px-4 py-2 mb-6 text-xs font-semibold tracking-[0.25em] text-primary uppercase bg-primary/10 rounded-full"
             >
               About Us
             </motion.span>
@@ -75,7 +75,7 @@ export default function AboutSection() {
             </motion.h2>
             <motion.p
               variants={fadeInUp}
-              className="mt-6 text-lg text-dark/70 leading-relaxed md:text-xl"
+              className="mt-6 text-base text-dark/70 leading-relaxed md:text-lg"
             >
               Vimoksha Yogshala was started in 2015 by Devendra and Radha
               Uniyal out of a single rented hall in Dehradun, with eleven

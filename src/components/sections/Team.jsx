@@ -29,7 +29,7 @@ export default function Team() {
           <h2 className="font-heading text-4xl font-semibold text-primary md:text-5xl">
             Our Key People
           </h2>
-          <p className="mt-4 text-lg text-dark/70">
+          <p className="mt-4 text-base text-dark/70 md:text-lg">
             Practice Yoga to perfect physical beauty, take care of your soul and enjoy life more fully!
           </p>
         </div>
@@ -43,7 +43,7 @@ export default function Team() {
               <div className="mx-auto mb-6 flex h-32 w-32 items-center justify-center rounded-full bg-primary/10 text-6xl group-hover:bg-primary/20 transition-colors">
                 {member.image}
               </div>
-              <h3 className="font-heading text-xl font-semibold text-primary mb-2">
+              <h3 className="font-heading text-lg font-semibold text-primary mb-2">
                 {member.name}
               </h3>
               <p className="text-primary/80 font-medium mb-3">{member.role}</p>

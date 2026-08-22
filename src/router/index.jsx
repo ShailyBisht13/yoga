@@ -1,8 +1,8 @@
 import { lazy, Suspense } from 'react';
 import { createBrowserRouter, Navigate } from 'react-router-dom';
 import { MainLayout } from '@/components/layout';
+import HomePage from '@/pages/HomePage';
 
-const HomePage = lazy(() => import('@/pages/HomePage'));
 const AboutPage = lazy(() => import('@/pages/AboutPage'));
 const ClassesPage = lazy(() => import('@/pages/ClassesPage'));
 const BeginnerClassesPage = lazy(() => import('@/pages/BeginnerClassesPage'));
@@ -10,6 +10,7 @@ const IntermediateClassesPage = lazy(() => import('@/pages/IntermediateClassesPa
 const AdvanceClassesPage = lazy(() => import('@/pages/AdvanceClassesPage'));
 const TherapiesPage = lazy(() => import('@/pages/TherapiesPage'));
 const CoursesPage = lazy(() => import('@/pages/CoursesPage'));
+const TeacherTrainingPage = lazy(() => import('@/pages/TeacherTrainingPage'));
 const GalleryPage = lazy(() => import('@/pages/GalleryPage'));
 const BlogPage = lazy(() => import('@/pages/BlogPage'));
 const BlogPostPage = lazy(() => import('@/pages/BlogPostPage'));
@@ -21,10 +22,13 @@ const AdminLogin = lazy(() => import('@/pages/admin/AdminLogin'));
 const AdminBookingsPage = lazy(() => import('@/pages/admin/AdminBookingsPage'));
 const AdminBlogPage = lazy(() => import('@/pages/admin/AdminBlogPage'));
 const AdminGalleryPage = lazy(() => import('@/pages/admin/AdminGalleryPage'));
+const AdminDashboardPage = lazy(() => import('@/pages/admin/AdminDashboardPage'));
+const AdminContactPage = lazy(() => import('@/pages/admin/AdminContactPage'));
+const AdminContentPage = lazy(() => import('@/pages/admin/AdminContentPage'));
 
 function PageLoader() {
   return (
-    <div className="flex min-h-[50vh] items-center justify-center">
+    <div className="flex min-h-screen items-center justify-center">
       <div className="h-8 w-8 animate-spin rounded-full border-2 border-primary border-t-transparent" />
     </div>
   );
@@ -43,7 +47,7 @@ export const router = createBrowserRouter([
     path: '/',
     element: <MainLayout />,
     children: [
-      { index: true, element: withSuspense(HomePage) },
+      { index: true, element: <HomePage /> },
       { path: 'about', element: withSuspense(AboutPage) },
       { path: 'classes', element: withSuspense(ClassesPage) },
       { path: 'classes/beginner', element: withSuspense(BeginnerClassesPage) },
@@ -51,6 +55,7 @@ export const router = createBrowserRouter([
       { path: 'classes/advance', element: withSuspense(AdvanceClassesPage) },
       { path: 'therapies', element: withSuspense(TherapiesPage) },
       { path: 'courses', element: withSuspense(CoursesPage) },
+      { path: 'teacher-training', element: withSuspense(TeacherTrainingPage) },
       { path: 'gallery', element: withSuspense(GalleryPage) },
       { path: 'blog', element: withSuspense(BlogPage) },
       { path: 'blog/:slug', element: withSuspense(BlogPostPage) },
@@ -64,7 +69,11 @@ export const router = createBrowserRouter([
   },
   {
     path: 'admin',
-    element: <Navigate to="/admin/bookings" replace />,
+    element: <Navigate to="/admin/dashboard" replace />,
+  },
+  {
+    path: 'admin/dashboard',
+    element: withSuspense(AdminDashboardPage),
   },
   {
     path: 'admin/bookings',
@@ -77,6 +86,14 @@ export const router = createBrowserRouter([
   {
     path: 'admin/gallery',
     element: withSuspense(AdminGalleryPage),
+  },
+  {
+    path: 'admin/contact',
+    element: withSuspense(AdminContactPage),
+  },
+  {
+    path: 'admin/content',
+    element: withSuspense(AdminContentPage),
   },
 ]);
 

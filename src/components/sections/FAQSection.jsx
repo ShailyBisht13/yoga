@@ -61,32 +61,32 @@ const faqs = [
   {
     question: 'Do I need prior yoga experience?',
     answer:
-      "No. Most students who join us have never done yoga before. Radha ma'am starts every new student on the same foundational sequence for the first two weeks, regardless of age or fitness level, before anyone moves into a faster-paced batch.",
+      'No prior experience is required. Every new student begins with the same foundational sequence for the first two weeks, regardless of age or fitness level, before progressing to a faster-paced batch.',
   },
   {
     question: 'What should I bring to my first class?',
     answer:
-      'Just water and clothes you can move in. Mats, blocks, and straps are provided free of charge. If you already own a mat, bring it — floor space is assigned by mat, so it helps you keep the same spot each class.',
+      'Please bring water and comfortable clothing suitable for movement. Mats, blocks, and straps are provided free of charge. If you own a mat, you are welcome to bring your own, as floor space is assigned by mat to help you retain the same spot each class.',
   },
   {
     question: 'Do you offer yoga therapy sessions?',
     answer:
-      'Yes. Our therapy track is separate from regular batches and is for specific concerns — chronic back pain, post-injury recovery, stress, and joint issues. You start with a one-on-one assessment so the plan is built around your body, not a fixed syllabus.',
+      'Yes. Our therapy track is separate from regular batches and is designed for specific concerns such as chronic back pain, post-injury recovery, stress, and joint issues. Each program begins with a one-on-one assessment so the plan is tailored to your individual needs.',
   },
   {
     question: 'How can I book a free trial?',
     answer:
-      'Call or WhatsApp us on the number below, or use the "Book Free Trial" button on the homepage. We\'ll confirm a batch and time within the day — no advance payment needed for the trial class.',
+      'Please call or send a WhatsApp message to the number provided below, or use the "Book Free Trial" button on the homepage. We will confirm a batch and time on the same day, and no advance payment is required for the trial class.',
   },
   {
     question: 'What are the class timings?',
     answer:
-      'Sunrise batch runs 6:00–7:30 AM, and the evening batch runs 5:00–6:30 PM, both daily except Sundays. Batches are capped at 12 students, so we\'d recommend confirming a spot a day ahead rather than walking in.',
+      'The sunrise batch runs from 6:00 AM to 7:30 AM, and the evening batch runs from 5:00 PM to 6:30 PM, daily except Sundays. Batches are limited to 12 students, so we recommend confirming your spot at least a day in advance.',
   },
   {
     question: 'Do you provide teacher training certification?',
     answer:
-      'Yes — a 200-hour Yoga Alliance-certified teacher training program, run twice a year. It covers asana, pranayama, meditation, anatomy, and teaching practice. Batches are small and fill from our existing students first, so ask in class if you\'re interested.',
+      'Yes, we offer a 200-hour Yoga Alliance-certified teacher training program, conducted twice a year. The curriculum covers asana, pranayama, meditation, anatomy, and teaching practice. Batch sizes are limited and priority is given to existing students; please speak with us in class if you are interested.',
   },
 ];
 
@@ -131,8 +131,8 @@ export default function FAQSection() {
             variants={fadeUp}
             className="max-w-[700px] text-base leading-relaxed text-muted md:text-lg"
           >
-            The questions we hear most from students before their first
-            class — if yours isn't here, call or WhatsApp us directly.
+            Please review the questions we hear most frequently from students prior to their first
+            class. If your question is not listed here, kindly call or message us on WhatsApp directly.
           </motion.p>
         </motion.div>
 
@@ -274,7 +274,7 @@ export default function FAQSection() {
                     Still have a question?
                   </p>
                   <p className="font-body text-xs text-muted">
-                    Message us on WhatsApp — we usually reply within the hour
+                    Message us on WhatsApp; we typically respond within the hour.
                   </p>
                 </div>
               </div>

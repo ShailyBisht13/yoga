@@ -1,12 +1,23 @@
 import { Navigate, NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '@/lib/useAuth';
 import { clearToken } from '@/lib/api';
-import { LuCalendarCheck, LuNewspaper, LuImage, LuLogOut } from 'react-icons/lu';
+import {
+  LuLayoutDashboard,
+  LuCalendarCheck,
+  LuNewspaper,
+  LuImage,
+  LuFilePenLine,
+  LuPhone,
+  LuLogOut,
+} from 'react-icons/lu';
 
 const navItems = [
+  { label: 'Dashboard', path: '/admin/dashboard', icon: LuLayoutDashboard },
   { label: 'Bookings', path: '/admin/bookings', icon: LuCalendarCheck },
   { label: 'Blog', path: '/admin/blog', icon: LuNewspaper },
   { label: 'Gallery', path: '/admin/gallery', icon: LuImage },
+  { label: 'Site Content', path: '/admin/content', icon: LuFilePenLine },
+  { label: 'Contact Info', path: '/admin/contact', icon: LuPhone },
 ];
 
 /** Decorative sunburst mark echoing the Vimoksha logo — used once, as a watermark. */

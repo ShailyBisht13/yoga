@@ -1,17 +1,12 @@
 import { RouterProvider } from 'react-router-dom';
+import router from '@/router';
 import { AppProvider } from '@/context';
-import { useLenis } from '@/hooks';
-import { router } from '@/router';
 
-function AppProviders({ children }) {
-  useLenis();
-  return <AppProvider value={{}}>{children}</AppProvider>;
-}
-
-export default function App() {
+function App() {
   return (
-    <AppProviders>
+    <AppProvider>
       <RouterProvider router={router} />
-    </AppProviders>
+    </AppProvider>
   );
 }
+export default App;

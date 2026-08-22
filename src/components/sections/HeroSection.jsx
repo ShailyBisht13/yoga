@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 import { Container, Button } from '@/components/ui';
 import { Link } from 'react-router-dom';
 import { HiArrowRight, HiOutlineMapPin, HiOutlineCheckBadge } from 'react-icons/hi2';
-import { IoLeafOutline } from 'react-icons/io5';
+import { IoLeafOutline, IoPlayOutline } from 'react-icons/io5';
 import { GiMeditation } from 'react-icons/gi';
 import { useRef } from 'react';
 import { useAppContext } from '@/context/AppContext';
@@ -25,8 +25,8 @@ const stagger = {
 };
 
 const stats = [
-  { icon: IoLeafOutline, value: '500+', label: 'Happy Students' },
-  { icon: GiMeditation, value: '6+', label: 'Years Experience' },
+  { icon: IoLeafOutline, value: '1000+', label: 'Happy Students' },
+  { icon: GiMeditation, value: '50+', label: 'Years Experience' },
   { icon: HiOutlineCheckBadge, value: 'Certified', label: 'Yoga Teachers' },
   { icon: HiOutlineMapPin, value: 'Dehradun', label: 'Uttarakhand, India' },
 ];
@@ -105,17 +105,17 @@ export default function HeroSection() {
               style={{ fontFamily: "'Poppins', sans-serif" }}
               className="mb-8 max-w-[480px] text-sm font-light leading-[1.8] text-neutral-600 md:text-base"
             >
-              Nestled in the serene beauty of Dehradun, we've guided over 500
+              Nestled in the serene beauty of Dehradun, we've guided over 1000
               students through authentic Hatha yoga, pranayama, and yoga
               therapy — taught in small batches, led by teachers who know your
               name by the second class.
             </motion.p>
 
-            {/* CTA Button */}
+            {/* CTA Buttons */}
             <motion.div
               custom={4}
               variants={fadeUp}
-              className="mb-10 flex items-center gap-3"
+              className="mb-10 flex flex-wrap items-center gap-3 sm:gap-4"
             >
               <motion.div
                 whileHover={{ scale: 1.04 }}
@@ -132,6 +132,20 @@ export default function HeroSection() {
                   Book Free Trial
                 </Button>
               </motion.div>
+
+              {/* Watch Intro — outline button with circular play icon */}
+              <motion.button
+                type="button"
+                whileHover={{ scale: 1.04 }}
+                whileTap={{ scale: 0.97 }}
+                transition={{ type: 'spring', stiffness: 400, damping: 15 }}
+                className="inline-flex h-11 items-center gap-2.5 whitespace-nowrap rounded-full border border-black/10 bg-white/70 px-5 text-sm font-semibold text-[#742711] backdrop-blur-md sm:h-12 sm:px-6 sm:text-base"
+              >
+                <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-[#742711]/40 sm:h-8 sm:w-8">
+                  <IoPlayOutline className="ml-0.5 h-3 w-3 sm:h-3.5 sm:w-3.5" />
+                </span>
+                Watch Intro
+              </motion.button>
             </motion.div>
 
           </motion.div>

@@ -70,6 +70,27 @@ export const api = {
     return request('/api/gallery', { method: 'POST', body: formData, isFormData: true, auth: true });
   },
   deleteGalleryImage: (id) => request(`/api/gallery/${id}`, { method: 'DELETE', auth: true }),
+
+  // Contact info (public GET for the site header/footer, admin PUT to edit)
+  getContactInfo: () => request('/api/contact'),
+  updateContactInfo: (payload) =>
+    request('/api/contact', { method: 'PUT', body: payload, auth: true }),
+
+  // Site content — Hero / Training / Therapy / Classes sections
+  getAllSiteContent: () => request('/api/content'),
+  getSiteContent: (section) => request(`/api/content/${section}`),
+  updateSiteContent: (section, payload) =>
+    request(`/api/content/${section}`, { method: 'PATCH', body: payload, auth: true }),
+  uploadContentImage: (file) => {
+    const formData = new FormData();
+    formData.append('image', file);
+    return request('/api/content/upload-image', {
+      method: 'POST',
+      body: formData,
+      isFormData: true,
+      auth: true,
+    });
+  },
 };
 
 export function setToken(token) {

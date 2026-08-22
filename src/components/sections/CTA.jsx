@@ -18,7 +18,7 @@ export default function CTA() {
             <h2 className="font-heading text-4xl font-semibold md:text-5xl mb-6">
               Join Us for a Transformational Journey
             </h2>
-            <p className="text-lg text-white/90 leading-relaxed mb-8">
+            <p className="text-base md:text-lg text-white/90 leading-relaxed mb-8">
               At Vimoksha Yogshala, we are committed to helping you achieve a healthier and more fulfilling life. Whether you want to practice yoga, undergo therapy, or become a certified yoga teacher, we are here to guide you every step of the way.
             </p>
             <div className="flex flex-wrap gap-4 mb-8">

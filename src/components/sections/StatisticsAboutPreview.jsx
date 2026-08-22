@@ -42,7 +42,7 @@ export default function StatisticsAboutPreview() {
             {/* Badge */}
             <motion.span
               variants={fadeUp}
-              className="mb-5 inline-block rounded-full border border-[#f69116]/30 bg-[#f69116]/10 px-4 py-1.5 font-body text-[11px] font-semibold uppercase tracking-[0.18em] text-[#f69116]"
+              className="mb-5 inline-block rounded-full border border-[#f69116]/30 bg-[#f69116]/10 px-4 py-1.5 font-body text-xs font-semibold uppercase tracking-[0.25em] text-[#f69116]"
             >
               ABOUT VIMOKSHA YOGSHALA
             </motion.span>
@@ -50,7 +50,7 @@ export default function StatisticsAboutPreview() {
             {/* Heading */}
             <motion.h2
               variants={fadeUp}
-              className="font-heading text-[28px] font-semibold leading-[1.2] text-[#2E2E2E] sm:text-[34px] sm:leading-[1.15] md:text-[3.2rem] md:leading-[1.12]"
+              className="font-heading text-4xl font-semibold leading-tight text-[#2E2E2E] md:text-5xl"
             >
               Transform Your Mind,
               <br className="hidden sm:block" />

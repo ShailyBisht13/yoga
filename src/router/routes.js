@@ -1,21 +1,15 @@
-import { lazy } from 'react';
-
-/* ===== Page components, lazy-loaded ===== */
-// Confirmed to exist (built in this project): AboutPage, BeginnerClassesPage,
-// IntermediateClassesPage, AdvanceClassesPage, GalleryPage, BlogPage, ContactPage.
-// Guessed paths/names for the rest (Home, Therapies, Courses, NotFound) —
-// rename these imports if your actual files differ.
-const HomePage = lazy(() => import('@/pages/HomePage'));
-const AboutPage = lazy(() => import('@/pages/AboutPage'));
-const BeginnerClassesPage = lazy(() => import('@/pages/BeginnerClassesPage'));
-const IntermediateClassesPage = lazy(() => import('@/pages/IntermediateClassesPage'));
-const AdvanceClassesPage = lazy(() => import('@/pages/AdvanceClassesPage'));
-const TherapiesPage = lazy(() => import('@/pages/TherapiesPage'));
-const CoursesPage = lazy(() => import('@/pages/CoursesPage'));
-const GalleryPage = lazy(() => import('@/pages/GalleryPage'));
-const BlogPage = lazy(() => import('@/pages/BlogPage'));
-const ContactPage = lazy(() => import('@/pages/ContactPage'));
-const NotFoundPage = lazy(() => import('@/pages/NotFoundPage'));
+import HomePage from '@/pages/HomePage';
+import AboutPage from '@/pages/AboutPage';
+import BeginnerClassesPage from '@/pages/BeginnerClassesPage';
+import IntermediateClassesPage from '@/pages/IntermediateClassesPage';
+import AdvanceClassesPage from '@/pages/AdvanceClassesPage';
+import TherapiesPage from '@/pages/TherapiesPage';
+import CoursesPage from '@/pages/CoursesPage';
+import TeacherTrainingPage from '@/pages/TeacherTrainingPage';
+import GalleryPage from '@/pages/GalleryPage';
+import BlogPage from '@/pages/BlogPage';
+import ContactPage from '@/pages/ContactPage';
+import NotFoundPage from '@/pages/NotFoundPage';
 
 export const navigationLinks = [
   { label: 'Home', path: '/' },
@@ -24,12 +18,12 @@ export const navigationLinks = [
     label: 'Classes',
     path: '/classes',
     children: [
-      { label: 'Beginner', path: '/classes/beginner' },
-      { label: 'Intermediate', path: '/classes/intermediate' },
-      { label: 'Advance', path: '/classes/advance' },
+      { label: 'Student', path: '/classes/beginner' },
+      { label: 'Professional', path: '/classes/intermediate' },
+      { label: 'Adult', path: '/classes/advance' },
     ],
   },
-  { label: 'Training', path: '/courses' },
+  { label: 'Teacher Training', path: '/teacher-training' },
   { label: 'Therapies', path: '/therapies' },
   { label: 'Gallery', path: '/gallery' },
   { label: 'Blogs', path: '/blog' },
@@ -45,6 +39,7 @@ export const routeMeta = {
   classesAdvance: { title: 'Advance Classes', description: 'Fast-paced, high-intensity classes for practitioners with an established foundation.' },
   therapies: { title: 'Therapies', description: 'Yoga Therapy, Naturopathy, Acupressure and Cupping Therapy at Vimoksha Yogshala.' },
   courses: { title: 'Courses', description: 'Yoga Teacher Training Courses in Dehradun.' },
+  teacherTraining: { title: 'Teacher Training', description: '200-Hour Yoga Teacher Training in Dehradun — an eight-week residential certification program.' },
   gallery: { title: 'Gallery', description: 'Moments from Vimoksha Yogshala.' },
   blog: { title: 'Blog', description: 'Wellness insights and yoga articles.' },
   contact: { title: 'Contact', description: 'Get in touch with Vimoksha Yogshala.' },
@@ -62,6 +57,7 @@ export const appRoutes = [
   { path: '/classes/advance', component: AdvanceClassesPage, metaKey: 'classesAdvance' },
   { path: '/therapies', component: TherapiesPage, metaKey: 'therapies' },
   { path: '/courses', component: CoursesPage, metaKey: 'courses' },
+  { path: '/teacher-training', component: TeacherTrainingPage, metaKey: 'teacherTraining' },
   { path: '/gallery', component: GalleryPage, metaKey: 'gallery' },
   { path: '/blog', component: BlogPage, metaKey: 'blog' },
   { path: '/contact', component: ContactPage, metaKey: 'contact' },

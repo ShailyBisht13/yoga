@@ -6,6 +6,9 @@ import authRoutes from './routes/authRoutes.js';
 import bookingRoutes from './routes/bookingRoutes.js';
 import blogRoutes from './routes/blogRoutes.js';
 import galleryRoutes from './routes/galleryRoutes.js';
+import contactRoutes from './routes/contactRoutes.js';
+import contentRoutes from './routes/contentRoutes.js';
+
 
 export function createApp() {
   const app = express();
@@ -36,6 +39,8 @@ export function createApp() {
   app.use('/api/bookings', bookingRoutes);
   app.use('/api/blog', blogRoutes);
   app.use('/api/gallery', galleryRoutes);
+  app.use('/api/contact', contactRoutes);
+  app.use('/api/content', contentRoutes);
 
   // 404 handler
   app.use((req, res) => {

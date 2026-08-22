@@ -119,7 +119,7 @@ const locations = [
 const contactItems = [
   {
     icon: <FiPhone className="h-5 w-5" />,
-    title: 'Phone',
+    title: 'Phone — Head Office',
     value: contactInfo.phone,
     href: `tel:${contactInfo.phone.replace(/\s/g, '')}`,
   },
@@ -129,16 +129,23 @@ const contactItems = [
     value: contactInfo.email,
     href: `mailto:${contactInfo.email}`,
   },
-  ...locations.map((loc) => ({
+  {
     icon: <FiMapPin className="h-5 w-5" />,
-    title: `Address — ${loc.name}`,
-    value: loc.address,
-    href: `https://www.google.com/maps/search/?api=1&query=${loc.mapsQuery}`,
+    title: `Address — ${locations[0].name}`,
+    value: locations[0].address,
+    href: `https://www.google.com/maps/search/?api=1&query=${locations[0].mapsQuery}`,
     external: true,
-  })),
+  },
+  {
+    icon: <FiMapPin className="h-5 w-5" />,
+    title: `Address — ${locations[1].name}`,
+    value: locations[1].address,
+    href: `https://www.google.com/maps/search/?api=1&query=${locations[1].mapsQuery}`,
+    external: true,
+  },
   {
     icon: <FiPhone className="h-5 w-5" />,
-    title: 'Phone — Dalanwala',
+    title: `Phone — ${locations[1].name}`,
     value: locations[1].phone,
     href: `tel:${locations[1].phone}`,
   },
@@ -219,11 +226,12 @@ export default function ContactCTASection() {
                 variants={fadeUp}
                 className="max-w-lg text-base leading-relaxed text-white/80 md:text-lg"
               >
-                One free trial class, no card details, no pressure to
-                continue. Pick the Sunrise or Evening batch, tell us if you're
-                new to yoga or coming back after an injury, and we'll place
-                you with the right instructor — batches are capped at 12, so
-                we'll confirm your spot the same day.
+                One free trial class — no card details required and no
+                obligation to continue. Choose the Sunrise or Evening batch,
+                let us know if you are new to yoga or returning after an
+                injury, and we will place you with the right instructor.
+                Batches are limited to 12 students, so your spot will be
+                confirmed the same day.
               </motion.p>
 
               {/* Buttons */}
@@ -293,8 +301,8 @@ export default function ContactCTASection() {
                     Get in Touch
                   </h3>
                   <p className="mt-1 font-body text-sm text-muted">
-                    Call, email, or drop by — we reply to WhatsApp within the
-                    hour
+                    Call, email, or visit us in person. We typically respond
+                    to WhatsApp messages within the hour.
                   </p>
                 </motion.div>
 
@@ -312,9 +320,9 @@ export default function ContactCTASection() {
                     <span className={iconCircleClass}>{item.icon}</span>
                     <div className="flex flex-col">
                       <span className="font-body text-xs font-medium uppercase tracking-wider text-muted">
-                        {item.title}
+                        {item.title}:
                       </span>
-                      <span className="mt-0.5 font-heading text-base font-medium text-dark">
+                      <span className="mt-0.5 block font-body text-base font-medium text-dark">
                         {item.value}
                       </span>
                     </div>
@@ -331,7 +339,7 @@ export default function ContactCTASection() {
                     <span className="font-body text-xs font-medium uppercase tracking-wider text-muted">
                       Studio Hours
                     </span>
-                    <span className="mt-0.5 font-heading text-base font-medium text-dark">
+                    <span className="mt-0.5 font-body text-base font-medium text-dark">
                       {contactInfo.studioHours}
                     </span>
                   </div>
