@@ -214,14 +214,16 @@ export default function TeacherTrainingPage() {
   return (
     <div className="bg-background font-body text-dark">
       {/* HERO */}
-      <section className="section-padding pt-12 sm:pt-16 relative overflow-hidden">
-        <LotusMark className="pointer-events-none absolute -top-24 -left-24 w-[420px] h-[420px] text-primary-dark opacity-[0.05]" />
+      <section className="section-padding pt-16 sm:pt-20 relative">
+        <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
+          <LotusMark className="absolute -top-24 -left-24 w-[420px] h-[420px] text-primary-dark opacity-[0.05]" />
+        </div>
         <div className="container-custom grid lg:grid-cols-2 gap-10 lg:gap-14 items-center relative">
           <div>
-            <h1 className="font-heading text-4xl sm:text-5xl leading-tight text-dark">
+            <h1 className="font-heading text-4xl sm:text-5xl leading-[1.15] text-dark">
               200 Hour
             </h1>
-            <h2 className="font-heading text-3xl sm:text-4xl leading-tight text-primary mt-1">
+            <h2 className="font-heading text-3xl sm:text-4xl leading-[1.15] text-primary mt-1">
               Yoga Teacher Training
             </h2>
             <p className="font-heading italic text-xl sm:text-2xl text-primary-dark mt-3">
@@ -252,7 +254,7 @@ export default function TeacherTrainingPage() {
 
             <a
               href="/contact"
-              className="inline-flex items-center gap-2 mt-8 bg-primary hover:bg-primary-dark transition-colors text-white font-semibold px-7 py-3.5 rounded-full shadow-elevated"
+              className="inline-flex items-center gap-2 mt-8 mb-20 sm:mb-0 bg-primary hover:bg-primary-dark transition-colors text-white font-semibold px-7 py-3.5 rounded-full shadow-elevated"
             >
               Enroll Now <Flower2 className="w-4 h-4" />
             </a>
