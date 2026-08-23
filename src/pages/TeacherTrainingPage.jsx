@@ -28,9 +28,21 @@ import {
 /* Drop-in image slot: pass a `src` once you have the real photo and it
    renders normally. Until then it shows a labeled dashed placeholder so
    the layout and spacing are already correct. */
-function ImageSlot({ src, alt = '', label, className = '' }) {
+function ImageSlot({ src, alt = '', label, className = '', focus = 'center' }) {
   if (src) {
-    return <img src={src} alt={alt} className={`w-full h-full object-cover ${className}`} />;
+    // The sizing/rounding classes go on the wrapper, and the <img> just
+    // fills it — keeps width/height utilities from colliding on one
+    // element, so the crop is always predictable instead of stretched.
+    return (
+      <div className={`overflow-hidden ${className}`}>
+        <img
+          src={src}
+          alt={alt}
+          className="w-full h-full object-cover"
+          style={{ objectPosition: focus }}
+        />
+      </div>
+    );
   }
   return (
     <div
@@ -38,11 +50,34 @@ function ImageSlot({ src, alt = '', label, className = '' }) {
     >
       <ImageIcon className="w-6 h-6" />
       {label && (
-        <span className="text-[0.65rem] font-semibold uppercase tracking-wide text-center px-2">
+        <span className="text-[11px] font-semibold uppercase tracking-wide text-center px-2">
           {label}
         </span>
       )}
     </div>
+  );
+}
+
+/* Signature decorative device: a quiet radial line motif built from the
+   page's existing Flower2 mark, used once in the hero and once in the
+   closing banner so it reads as the studio's own mark rather than
+   repeated decoration. */
+function LotusMark({ className = '' }) {
+  return (
+    <svg viewBox="0 0 200 200" className={className} fill="none" stroke="currentColor">
+      {[0, 45, 90, 135].map((deg) => (
+        <ellipse
+          key={deg}
+          cx="100"
+          cy="100"
+          rx="90"
+          ry="26"
+          strokeWidth="1"
+          transform={`rotate(${deg} 100 100)`}
+        />
+      ))}
+      <circle cx="100" cy="100" r="6" fill="currentColor" stroke="none" />
+    </svg>
   );
 }
 
@@ -74,6 +109,20 @@ const schedule = [
   ['4:15 PM – 5:15 PM', 'Meditation / Chanting'],
   ['7:00 PM – 8:00 PM', 'Evening Self Practice'],
 ];
+
+// Purely visual classification of the existing schedule text, so the
+// timeline dot's color signals what kind of activity it is (practice /
+// stillness / rest) — no wording is changed or added.
+function scheduleDot(activity) {
+  const a = activity.toLowerCase();
+  if (a.includes('break') || a.includes('lunch') || a.includes('rest')) {
+    return 'bg-border';
+  }
+  if (a.includes('meditation') || a.includes('pranayama') || a.includes('chanting')) {
+    return 'bg-secondary';
+  }
+  return 'bg-primary';
+}
 
 const certBenefits = [
   'Yoga Alliance USA Certified (RYS 200)',
@@ -165,8 +214,9 @@ export default function TeacherTrainingPage() {
   return (
     <div className="bg-background font-body text-dark">
       {/* HERO */}
-      <section className="section-padding pt-12 sm:pt-16">
-        <div className="container-custom grid lg:grid-cols-2 gap-10 lg:gap-14 items-center">
+      <section className="section-padding pt-12 sm:pt-16 relative overflow-hidden">
+        <LotusMark className="pointer-events-none absolute -top-24 -left-24 w-[420px] h-[420px] text-primary-dark opacity-[0.05]" />
+        <div className="container-custom grid lg:grid-cols-2 gap-10 lg:gap-14 items-center relative">
           <div>
             <h1 className="font-heading text-4xl sm:text-5xl leading-tight text-dark">
               200 Hour
@@ -208,30 +258,26 @@ export default function TeacherTrainingPage() {
             </a>
           </div>
 
-          {/* Hero visual — swap in the real class/studio photo via the src prop */}
+          {/* Hero visual */}
           <div className="relative">
             <div className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-elevated border border-border">
               <ImageSlot
-                // src="/images/teacher-training/hero.jpg"
+                src="/images/teacher-training/hero.webp"
                 alt="Yoga teacher training class in session"
                 label="Add hero photo — studio / class in session (4:3)"
                 className="w-full h-full"
               />
-              {/* Om watermark — remove once the real photo is in place, or keep as a subtle overlay */}
-              <span className="pointer-events-none absolute inset-0 flex items-center justify-center font-heading text-7xl sm:text-8xl text-primary-dark/10">
-                ॐ
-              </span>
             </div>
 
             {/* Certification badge */}
-            <div className="absolute -top-4 -right-4 sm:top-4 sm:right-4 w-24 h-24 sm:w-28 sm:h-28 rounded-full bg-surface border-2 border-dashed border-secondary shadow-elevated flex flex-col items-center justify-center text-center leading-none">
-              <span className="text-[0.55rem] font-semibold tracking-wide text-primary-dark uppercase">
+            <div className="absolute -bottom-5 -right-3 sm:-bottom-6 sm:-right-6 w-24 h-24 sm:w-28 sm:h-28 rounded-full bg-surface border-2 border-dashed border-secondary shadow-elevated flex flex-col items-center justify-center text-center leading-none">
+              <span className="text-[10px] font-semibold tracking-wide text-primary-dark uppercase">
                 Yoga Alliance
               </span>
               <span className="font-heading text-xl text-primary font-semibold">
                 RYS 200
               </span>
-              <span className="text-[0.5rem] font-semibold tracking-wide text-primary-dark uppercase">
+              <span className="text-[10px] font-semibold tracking-wide text-primary-dark uppercase">
                 Certified
               </span>
             </div>
@@ -240,7 +286,7 @@ export default function TeacherTrainingPage() {
       </section>
 
       {/* SECTION DIVIDER */}
-      <div className="container-custom flex justify-center">
+      <div className="container-custom flex justify-center py-8">
         <RibbonLabel icon={Info}>Complete Course Information</RibbonLabel>
       </div>
 
@@ -263,25 +309,35 @@ export default function TeacherTrainingPage() {
               ))}
             </ul>
             <ImageSlot
-              // src="/images/teacher-training/curriculum.jpg"
-              alt="Trainee practicing tree pose"
+              src="/images/teacher-training/curriculum.jpg"
+              alt="Trainees practicing yoga poses outdoors"
               label="Add practice photo (3:2)"
               className="aspect-[3/2] rounded-xl mt-auto"
             />
           </Panel>
 
-          {/* Daily Schedule */}
+          {/* Daily Schedule — same content, now a simple timeline */}
           <Panel className="flex flex-col gap-5">
             <RibbonLabel tone="light">Daily Schedule</RibbonLabel>
             <p className="text-xs font-semibold text-muted -mt-3">Sample Day</p>
-            <ul className="flex flex-col divide-y divide-border">
+            <ul className="relative flex flex-col">
+              <span
+                className="absolute left-[5px] top-2 bottom-2 w-px bg-border"
+                aria-hidden="true"
+              />
               {schedule.map(([time, activity]) => (
-                <li key={time} className="flex items-start gap-3 py-2.5">
-                  <Clock className="w-4 h-4 text-secondary shrink-0 mt-0.5" />
-                  <span className="text-xs font-semibold text-primary-dark w-32 shrink-0">
-                    {time}
-                  </span>
-                  <span className="text-sm text-dark">{activity}</span>
+                <li key={time} className="relative flex items-start gap-3 py-2.5">
+                  <span
+                    className={`relative z-10 mt-1.5 w-[11px] h-[11px] rounded-full ring-4 ring-surface ${scheduleDot(
+                      activity
+                    )}`}
+                  />
+                  <div className="flex flex-col sm:flex-row sm:items-baseline sm:gap-3">
+                    <span className="text-xs font-semibold text-primary-dark sm:w-32 sm:shrink-0">
+                      {time}
+                    </span>
+                    <span className="text-sm text-dark">{activity}</span>
+                  </div>
                 </li>
               ))}
             </ul>
@@ -297,12 +353,12 @@ export default function TeacherTrainingPage() {
             <div className="border-2 border-dashed border-primary-light/50 rounded-xl p-5 text-center bg-background">
               <Flower2 className="w-6 h-6 text-primary mx-auto mb-2" />
               <p className="font-heading text-lg text-dark">Certificate of Completion</p>
-              <p className="text-[0.7rem] text-muted mt-1">Proudly presented to</p>
+              <p className="text-xs text-muted mt-1">Proudly presented to</p>
               <p className="font-heading italic text-primary-dark text-base">(Your Name)</p>
-              <p className="text-[0.7rem] text-muted mt-2">
+              <p className="text-xs text-muted mt-2">
                 For successfully completing the 200 Hour Yoga Teacher Training
               </p>
-              <p className="text-[0.65rem] font-semibold text-dark mt-2">
+              <p className="text-[11px] font-semibold text-dark mt-2">
                 Vimoksha Yogshala · Yoga Alliance USA Certified
               </p>
             </div>
@@ -350,7 +406,7 @@ export default function TeacherTrainingPage() {
             >
               Enroll Now <Flower2 className="w-4 h-4" />
             </a>
-            <p className="text-[0.7rem] text-muted text-center">* GST extra as applicable</p>
+            <p className="text-xs text-muted text-center">* GST extra as applicable</p>
           </Panel>
 
           {/* Accommodation */}
@@ -359,11 +415,11 @@ export default function TeacherTrainingPage() {
             <p className="text-xs font-semibold text-muted -mt-3">Optional</p>
             <div className="grid grid-cols-4 gap-3">
               {accommodation.map(({ icon: Icon, label }) => (
-                <div key={label} className="flex flex-col items-center text-center gap-1.5">
-                  <span className="w-11 h-11 rounded-full bg-background border border-border flex items-center justify-center text-primary">
+                <div key={label} className="flex flex-col items-center text-center gap-2">
+                  <span className="w-12 h-12 rounded-full bg-background border border-border flex items-center justify-center text-primary">
                     <Icon className="w-5 h-5" />
                   </span>
-                  <span className="text-[0.62rem] font-medium text-dark leading-tight">
+                  <span className="text-[11px] font-medium text-dark leading-tight">
                     {label}
                   </span>
                 </div>
@@ -371,13 +427,13 @@ export default function TeacherTrainingPage() {
             </div>
             <div className="grid grid-cols-3 gap-2">
               {[
-                { label: 'Add room photo', alt: 'Guest room' },
-                { label: 'Add meal photo', alt: 'Satvik meal spread' },
-                { label: 'Add grounds photo', alt: 'Peaceful outdoor grounds' },
+                { label: 'Add room photo', alt: 'Guest room', src: '/images/teacher-training/room.jpg' },
+                { label: 'Add meal photo', alt: 'Satvik meal spread', src: '/images/teacher-training/meal.jpeg' },
+                { label: 'Add grounds photo', alt: 'Peaceful outdoor grounds', src: '/images/teacher-training/grounds.jpg' },
               ].map((slot) => (
                 <ImageSlot
                   key={slot.label}
-                  // src="/images/teacher-training/____.jpg"
+                  src={slot.src}
                   alt={slot.alt}
                   label={slot.label}
                   className="aspect-square rounded-lg"
@@ -417,6 +473,14 @@ export default function TeacherTrainingPage() {
             <div className="flex justify-center mb-6">
               <RibbonLabel icon={Flower2}>Frequently Asked Questions</RibbonLabel>
             </div>
+            {/* Mobile: wide banner crop above the questions */}
+            <ImageSlot
+              src="/images/teacher-training/faq.jpg"
+              alt="Trainee in a seated yoga pose"
+              label="Add photo (portrait)"
+              focus="50% 20%"
+              className="sm:hidden w-full h-40 rounded-xl mb-6"
+            />
             <div className="flex flex-col sm:flex-row gap-6">
               <div className="flex flex-col divide-y divide-border flex-1">
                 {faqs.map((item, idx) => {
@@ -439,10 +503,12 @@ export default function TeacherTrainingPage() {
                   );
                 })}
               </div>
+              {/* Desktop: tall side crop, matched to the question list's height */}
               <ImageSlot
-                // src="/images/teacher-training/faq.jpg"
-                alt="Trainee in seated meditation"
+                src="/images/teacher-training/faq.jpg"
+                alt="Trainee in a seated yoga pose"
                 label="Add photo (portrait)"
+                focus="50% 15%"
                 className="hidden sm:block w-40 shrink-0 rounded-xl self-stretch"
               />
             </div>
@@ -459,7 +525,7 @@ export default function TeacherTrainingPage() {
                   <span className="w-12 h-12 rounded-full bg-background border border-border flex items-center justify-center text-primary">
                     <Icon className="w-5 h-5" />
                   </span>
-                  <span className="text-[0.68rem] font-medium text-dark leading-tight">
+                  <span className="text-[11px] font-medium text-dark leading-tight">
                     {label}
                   </span>
                 </div>
@@ -470,8 +536,9 @@ export default function TeacherTrainingPage() {
       </section>
 
       {/* CTA BANNER */}
-      <section className="bg-primary-dark">
-        <div className="container-custom py-8 flex flex-col lg:flex-row items-center justify-between gap-6">
+      <section className="bg-primary-dark relative overflow-hidden">
+        <LotusMark className="pointer-events-none absolute -bottom-20 -right-20 w-72 h-72 text-white opacity-[0.06]" />
+        <div className="container-custom py-8 flex flex-col lg:flex-row items-center justify-between gap-6 relative">
           <div className="text-center lg:text-left">
             <p className="text-white font-heading text-xl sm:text-2xl">
               Take the first step towards a meaningful career and a balanced life.
@@ -488,7 +555,7 @@ export default function TeacherTrainingPage() {
               <MessageCircle className="w-4 h-4" />
               <span className="flex flex-col items-start leading-tight">
                 Chat on WhatsApp
-                <span className="text-[0.65rem] font-normal opacity-90">Quick Response</span>
+                <span className="text-[11px] font-normal opacity-90">Quick Response</span>
               </span>
             </a>
             <a
@@ -498,7 +565,7 @@ export default function TeacherTrainingPage() {
               <Phone className="w-4 h-4" />
               <span className="flex flex-col items-start leading-tight">
                 Call Now
-                <span className="text-[0.65rem] font-normal opacity-90">+91 9026612796</span>
+                <span className="text-[11px] font-normal opacity-90">+91 9026612796</span>
               </span>
             </a>
             <a
