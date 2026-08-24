@@ -33,6 +33,10 @@ export function createApp() {
   );
   app.use(express.json());
 
+  app.get('/', (req, res) => {
+    res.json({ status: 'ok', message: 'Yoga backend API is running' });
+  });
+
   app.get('/api/health', (req, res) => res.json({ status: 'ok' }));
 
   app.use('/api/auth', authRoutes);

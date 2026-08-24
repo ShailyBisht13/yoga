@@ -1,0 +1,284 @@
+[
+  {
+    "localPath": "public\\72f80c8f-f566-427b-9e07-1ae26cbc16e6.png",
+    "status": "success",
+    "url": "https://res.cloudinary.com/jgszs9dv/image/upload/v1787592174/vimoksha-yogshala/public/72f80c8f-f566-427b-9e07-1ae26cbc16e6.png",
+    "publicId": "vimoksha-yogshala/public/72f80c8f-f566-427b-9e07-1ae26cbc16e6"
+  },
+  {
+    "localPath": "public\\about-studio.jpg",
+    "status": "success",
+    "url": "https://res.cloudinary.com/jgszs9dv/image/upload/v1787592171/vimoksha-yogshala/public/about-studio.jpg",
+    "publicId": "vimoksha-yogshala/public/about-studio"
+  },
+  {
+    "localPath": "public\\favicon.png",
+    "status": "success",
+    "url": "https://res.cloudinary.com/jgszs9dv/image/upload/v1787592170/vimoksha-yogshala/public/favicon.png",
+    "publicId": "vimoksha-yogshala/public/favicon"
+  },
+  {
+    "localPath": "public\\hero-yoga-pose.webp",
+    "status": "success",
+    "url": "https://res.cloudinary.com/jgszs9dv/image/upload/v1787592171/vimoksha-yogshala/public/hero-yoga-pose.webp",
+    "publicId": "vimoksha-yogshala/public/hero-yoga-pose"
+  },
+  {
+    "localPath": "public\\hero-yoga-pose1.webp",
+    "status": "success",
+    "url": "https://res.cloudinary.com/jgszs9dv/image/upload/v1787592172/vimoksha-yogshala/public/hero-yoga-pose1.webp",
+    "publicId": "vimoksha-yogshala/public/hero-yoga-pose1"
+  },
+  {
+    "localPath": "public\\hero.png",
+    "status": "success",
+    "url": "https://res.cloudinary.com/jgszs9dv/image/upload/v1787592177/vimoksha-yogshala/public/hero.png",
+    "publicId": "vimoksha-yogshala/public/hero"
+  },
+  {
+    "localPath": "public\\hero1.png",
+    "status": "success",
+    "url": "https://res.cloudinary.com/jgszs9dv/image/upload/v1787592180/vimoksha-yogshala/public/hero1.png",
+    "publicId": "vimoksha-yogshala/public/hero1"
+  },
+  {
+    "localPath": "public\\images\\about-hero-yoga.jpg",
+    "status": "success",
+    "url": "https://res.cloudinary.com/jgszs9dv/image/upload/v1787592176/vimoksha-yogshala/public/images/about-hero-yoga.jpg",
+    "publicId": "vimoksha-yogshala/public/images/about-hero-yoga"
+  },
+  {
+    "localPath": "public\\images\\about-instructor.jpg",
+    "status": "success",
+    "url": "https://res.cloudinary.com/jgszs9dv/image/upload/v1787592176/vimoksha-yogshala/public/images/about-instructor.jpg",
+    "publicId": "vimoksha-yogshala/public/images/about-instructor"
+  },
+  {
+    "localPath": "public\\images\\Acupressure_Therapy.jpg",
+    "status": "success",
+    "url": "https://res.cloudinary.com/jgszs9dv/image/upload/v1787592178/vimoksha-yogshala/public/images/Acupressure_Therapy.jpg",
+    "publicId": "vimoksha-yogshala/public/images/Acupressure_Therapy"
+  },
+  {
+    "localPath": "public\\images\\corporate-office-meditation.jpg",
+    "status": "success",
+    "url": "https://res.cloudinary.com/jgszs9dv/image/upload/v1787592181/vimoksha-yogshala/public/images/corporate-office-meditation.jpg",
+    "publicId": "vimoksha-yogshala/public/images/corporate-office-meditation"
+  },
+  {
+    "localPath": "public\\images\\corporate-studio-group.jpg",
+    "status": "success",
+    "url": "https://res.cloudinary.com/jgszs9dv/image/upload/v1787592181/vimoksha-yogshala/public/images/corporate-studio-group.jpg",
+    "publicId": "vimoksha-yogshala/public/images/corporate-studio-group"
+  },
+  {
+    "localPath": "public\\images\\corporate-warrior-pose.webp",
+    "status": "success",
+    "url": "https://res.cloudinary.com/jgszs9dv/image/upload/v1787592181/vimoksha-yogshala/public/images/corporate-warrior-pose.webp",
+    "publicId": "vimoksha-yogshala/public/images/corporate-warrior-pose"
+  },
+  {
+    "localPath": "public\\images\\Cupping_Therapy.jpg",
+    "status": "success",
+    "url": "https://res.cloudinary.com/jgszs9dv/image/upload/v1787592181/vimoksha-yogshala/public/images/Cupping_Therapy.jpg",
+    "publicId": "vimoksha-yogshala/public/images/Cupping_Therapy"
+  },
+  {
+    "localPath": "public\\images\\home-downdog-adjustment.jpg",
+    "status": "success",
+    "url": "https://res.cloudinary.com/jgszs9dv/image/upload/v1787592181/vimoksha-yogshala/public/images/home-downdog-adjustment.jpg",
+    "publicId": "vimoksha-yogshala/public/images/home-downdog-adjustment"
+  },
+  {
+    "localPath": "public\\images\\home-partner-boat-pose.jpg",
+    "status": "success",
+    "url": "https://res.cloudinary.com/jgszs9dv/image/upload/v1787592183/vimoksha-yogshala/public/images/home-partner-boat-pose.jpg",
+    "publicId": "vimoksha-yogshala/public/images/home-partner-boat-pose"
+  },
+  {
+    "localPath": "public\\images\\home-side-stretch.jpg",
+    "status": "success",
+    "url": "https://res.cloudinary.com/jgszs9dv/image/upload/v1787592183/vimoksha-yogshala/public/images/home-side-stretch.jpg",
+    "publicId": "vimoksha-yogshala/public/images/home-side-stretch"
+  },
+  {
+    "localPath": "public\\images\\Janu_Basti.webp",
+    "status": "success",
+    "url": "https://res.cloudinary.com/jgszs9dv/image/upload/v1787592183/vimoksha-yogshala/public/images/Janu_Basti.webp",
+    "publicId": "vimoksha-yogshala/public/images/Janu_Basti"
+  },
+  {
+    "localPath": "public\\images\\Kati_Basti.webp",
+    "status": "success",
+    "url": "https://res.cloudinary.com/jgszs9dv/image/upload/v1787592183/vimoksha-yogshala/public/images/Kati_Basti.webp",
+    "publicId": "vimoksha-yogshala/public/images/Kati_Basti"
+  },
+  {
+    "localPath": "public\\images\\Naturopathy.jpg",
+    "status": "success",
+    "url": "https://res.cloudinary.com/jgszs9dv/image/upload/v1787592183/vimoksha-yogshala/public/images/Naturopathy.jpg",
+    "publicId": "vimoksha-yogshala/public/images/Naturopathy"
+  },
+  {
+    "localPath": "public\\images\\offline-aerial-yoga.jpg",
+    "status": "success",
+    "url": "https://res.cloudinary.com/jgszs9dv/image/upload/v1787592184/vimoksha-yogshala/public/images/offline-aerial-yoga.jpg",
+    "publicId": "vimoksha-yogshala/public/images/offline-aerial-yoga"
+  },
+  {
+    "localPath": "public\\images\\offline-park-session.jpeg",
+    "status": "success",
+    "url": "https://res.cloudinary.com/jgszs9dv/image/upload/v1787592184/vimoksha-yogshala/public/images/offline-park-session.jpg",
+    "publicId": "vimoksha-yogshala/public/images/offline-park-session"
+  },
+  {
+    "localPath": "public\\images\\offline-studio-stretch.jpeg",
+    "status": "success",
+    "url": "https://res.cloudinary.com/jgszs9dv/image/upload/v1787592184/vimoksha-yogshala/public/images/offline-studio-stretch.jpg",
+    "publicId": "vimoksha-yogshala/public/images/offline-studio-stretch"
+  },
+  {
+    "localPath": "public\\images\\offline-warrior-pose.jpg",
+    "status": "success",
+    "url": "https://res.cloudinary.com/jgszs9dv/image/upload/v1787592184/vimoksha-yogshala/public/images/offline-warrior-pose.jpg",
+    "publicId": "vimoksha-yogshala/public/images/offline-warrior-pose"
+  },
+  {
+    "localPath": "public\\images\\online-class-1.jpg",
+    "status": "success",
+    "url": "https://res.cloudinary.com/jgszs9dv/image/upload/v1787592184/vimoksha-yogshala/public/images/online-class-1.jpg",
+    "publicId": "vimoksha-yogshala/public/images/online-class-1"
+  },
+  {
+    "localPath": "public\\images\\online-class-2.jpg",
+    "status": "success",
+    "url": "https://res.cloudinary.com/jgszs9dv/image/upload/v1787592185/vimoksha-yogshala/public/images/online-class-2.jpg",
+    "publicId": "vimoksha-yogshala/public/images/online-class-2"
+  },
+  {
+    "localPath": "public\\images\\online-class-3.jpg",
+    "status": "success",
+    "url": "https://res.cloudinary.com/jgszs9dv/image/upload/v1787592185/vimoksha-yogshala/public/images/online-class-3.jpg",
+    "publicId": "vimoksha-yogshala/public/images/online-class-3"
+  },
+  {
+    "localPath": "public\\images\\Shirodhara.jpeg",
+    "status": "success",
+    "url": "https://res.cloudinary.com/jgszs9dv/image/upload/v1787592185/vimoksha-yogshala/public/images/Shirodhara.jpg",
+    "publicId": "vimoksha-yogshala/public/images/Shirodhara"
+  },
+  {
+    "localPath": "public\\images\\teacher-training\\curriculum.jpg",
+    "status": "success",
+    "url": "https://res.cloudinary.com/jgszs9dv/image/upload/v1787592185/vimoksha-yogshala/public/images/teacher-training/curriculum.jpg",
+    "publicId": "vimoksha-yogshala/public/images/teacher-training/curriculum"
+  },
+  {
+    "localPath": "public\\images\\teacher-training\\faq.jpg",
+    "status": "success",
+    "url": "https://res.cloudinary.com/jgszs9dv/image/upload/v1787592185/vimoksha-yogshala/public/images/teacher-training/faq.jpg",
+    "publicId": "vimoksha-yogshala/public/images/teacher-training/faq"
+  },
+  {
+    "localPath": "public\\images\\teacher-training\\grounds.jpg",
+    "status": "success",
+    "url": "https://res.cloudinary.com/jgszs9dv/image/upload/v1787592187/vimoksha-yogshala/public/images/teacher-training/grounds.jpg",
+    "publicId": "vimoksha-yogshala/public/images/teacher-training/grounds"
+  },
+  {
+    "localPath": "public\\images\\teacher-training\\hero.webp",
+    "status": "success",
+    "url": "https://res.cloudinary.com/jgszs9dv/image/upload/v1787592187/vimoksha-yogshala/public/images/teacher-training/hero.webp",
+    "publicId": "vimoksha-yogshala/public/images/teacher-training/hero"
+  },
+  {
+    "localPath": "public\\images\\teacher-training\\meal.jpeg",
+    "status": "success",
+    "url": "https://res.cloudinary.com/jgszs9dv/image/upload/v1787592187/vimoksha-yogshala/public/images/teacher-training/meal.jpg",
+    "publicId": "vimoksha-yogshala/public/images/teacher-training/meal"
+  },
+  {
+    "localPath": "public\\images\\teacher-training\\room.jpg",
+    "status": "success",
+    "url": "https://res.cloudinary.com/jgszs9dv/image/upload/v1787592187/vimoksha-yogshala/public/images/teacher-training/room.jpg",
+    "publicId": "vimoksha-yogshala/public/images/teacher-training/room"
+  },
+  {
+    "localPath": "public\\images\\Therapeutic_Massage.webp",
+    "status": "success",
+    "url": "https://res.cloudinary.com/jgszs9dv/image/upload/v1787592187/vimoksha-yogshala/public/images/Therapeutic_Massage.webp",
+    "publicId": "vimoksha-yogshala/public/images/Therapeutic_Massage"
+  },
+  {
+    "localPath": "public\\images\\therapies\\Acupressure_Therapy.jpg",
+    "status": "success",
+    "url": "https://res.cloudinary.com/jgszs9dv/image/upload/v1787592189/vimoksha-yogshala/public/images/therapies/Acupressure_Therapy.jpg",
+    "publicId": "vimoksha-yogshala/public/images/therapies/Acupressure_Therapy"
+  },
+  {
+    "localPath": "public\\images\\therapies\\Cupping_Therapy.jpg",
+    "status": "success",
+    "url": "https://res.cloudinary.com/jgszs9dv/image/upload/v1787592188/vimoksha-yogshala/public/images/therapies/Cupping_Therapy.jpg",
+    "publicId": "vimoksha-yogshala/public/images/therapies/Cupping_Therapy"
+  },
+  {
+    "localPath": "public\\images\\therapies\\hero.jpg",
+    "status": "success",
+    "url": "https://res.cloudinary.com/jgszs9dv/image/upload/v1787592188/vimoksha-yogshala/public/images/therapies/hero.jpg",
+    "publicId": "vimoksha-yogshala/public/images/therapies/hero"
+  },
+  {
+    "localPath": "public\\images\\therapies\\Janu_Basti.webp",
+    "status": "success",
+    "url": "https://res.cloudinary.com/jgszs9dv/image/upload/v1787592188/vimoksha-yogshala/public/images/therapies/Janu_Basti.webp",
+    "publicId": "vimoksha-yogshala/public/images/therapies/Janu_Basti"
+  },
+  {
+    "localPath": "public\\images\\therapies\\Kati_Basti.webp",
+    "status": "success",
+    "url": "https://res.cloudinary.com/jgszs9dv/image/upload/v1787592188/vimoksha-yogshala/public/images/therapies/Kati_Basti.webp",
+    "publicId": "vimoksha-yogshala/public/images/therapies/Kati_Basti"
+  },
+  {
+    "localPath": "public\\images\\therapies\\Naturopathy.jpg",
+    "status": "success",
+    "url": "https://res.cloudinary.com/jgszs9dv/image/upload/v1787592190/vimoksha-yogshala/public/images/therapies/Naturopathy.jpg",
+    "publicId": "vimoksha-yogshala/public/images/therapies/Naturopathy"
+  },
+  {
+    "localPath": "public\\images\\therapies\\Shirodhara.jpeg",
+    "status": "success",
+    "url": "https://res.cloudinary.com/jgszs9dv/image/upload/v1787592190/vimoksha-yogshala/public/images/therapies/Shirodhara.jpg",
+    "publicId": "vimoksha-yogshala/public/images/therapies/Shirodhara"
+  },
+  {
+    "localPath": "public\\images\\therapies\\Therapeutic_Massage.webp",
+    "status": "success",
+    "url": "https://res.cloudinary.com/jgszs9dv/image/upload/v1787592190/vimoksha-yogshala/public/images/therapies/Therapeutic_Massage.webp",
+    "publicId": "vimoksha-yogshala/public/images/therapies/Therapeutic_Massage"
+  },
+  {
+    "localPath": "public\\images\\therapies.jpg",
+    "status": "success",
+    "url": "https://res.cloudinary.com/jgszs9dv/image/upload/v1787592190/vimoksha-yogshala/public/images/therapies.jpg",
+    "publicId": "vimoksha-yogshala/public/images/therapies"
+  },
+  {
+    "localPath": "public\\logo png2.png",
+    "status": "success",
+    "url": "https://res.cloudinary.com/jgszs9dv/image/upload/v1787592190/vimoksha-yogshala/public/logo%20png2.png",
+    "publicId": "vimoksha-yogshala/public/logo png2"
+  },
+  {
+    "localPath": "public\\logo.png",
+    "status": "success",
+    "url": "https://res.cloudinary.com/jgszs9dv/image/upload/v1787592191/vimoksha-yogshala/public/logo.png",
+    "publicId": "vimoksha-yogshala/public/logo"
+  },
+  {
+    "localPath": "public\\meditation.jpeg",
+    "status": "success",
+    "url": "https://res.cloudinary.com/jgszs9dv/image/upload/v1787592191/vimoksha-yogshala/public/meditation.jpg",
+    "publicId": "vimoksha-yogshala/public/meditation"
+  }
+]
