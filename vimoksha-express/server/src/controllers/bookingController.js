@@ -1,4 +1,5 @@
 import Booking from '../models/Booking.js';
+import { sendBookingStatusEmail } from '../utils/mailer.js';
 
 // Public — anyone can submit a trial booking
 export async function createBooking(req, res) {
@@ -26,6 +27,10 @@ export async function updateBookingStatus(req, res) {
 
   const booking = await Booking.findByIdAndUpdate(req.params.id, { status }, { new: true });
   if (!booking) return res.status(404).json({ error: 'Booking not found.' });
+
+  // Fire-and-forget: don't make the admin wait on the email send
+  sendBookingStatusEmail(booking);
+
   res.json(booking);
 }
 

@@ -1,9 +1,9 @@
-import { uploadBufferToCloudinary } from '../config/cloudinary.js';
+﻿import { uploadBufferToCloudinary } from '../config/cloudinary.js';
 import SiteContent from '../models/SiteContent.js';
 
-const SECTIONS = ['hero', 'training', 'therapy', 'classes'];
+const SECTIONS = ['hero', 'training', 'therapy', 'classes', 'programs', 'blogs', 'gallery'];
 
-// GET /api/content — public, returns all sections keyed by section name
+// GET /api/content â€” public, returns all sections keyed by section name
 export const getAllSiteContent = async (req, res) => {
   try {
     const docs = await SiteContent.find();
@@ -17,7 +17,7 @@ export const getAllSiteContent = async (req, res) => {
   }
 };
 
-// GET /api/content/:section — public, single section (used by the admin form)
+// GET /api/content/:section â€” public, single section (used by the admin form)
 export const getSiteContentSection = async (req, res) => {
   const { section } = req.params;
   if (!SECTIONS.includes(section)) {
@@ -31,17 +31,18 @@ export const getSiteContentSection = async (req, res) => {
   }
 };
 
-// PATCH /api/content/:section — admin only, creates or updates a section
+// PATCH /api/content/:section â€” admin only, creates or updates a section
 export const updateSiteContentSection = async (req, res) => {
   const { section } = req.params;
   if (!SECTIONS.includes(section)) {
     return res.status(400).json({ error: 'Unknown section' });
   }
   try {
-    const { heading, subheading, description, image, ctaText, ctaLink, features } = req.body;
+    const { heading, subheading, description, image, ctaText, ctaLink, features, items } =
+      req.body;
     const doc = await SiteContent.findOneAndUpdate(
       { section },
-      { heading, subheading, description, image, ctaText, ctaLink, features },
+      { heading, subheading, description, image, ctaText, ctaLink, features, items },
       { new: true, upsert: true }
     );
     res.json(doc);
@@ -50,7 +51,7 @@ export const updateSiteContentSection = async (req, res) => {
   }
 };
 
-// POST /api/content/upload-image — admin only, mirrors blog's upload-image.
+// POST /api/content/upload-image â€” admin only, mirrors blog's upload-image.
 // Reuses the shared uploadBufferToCloudinary helper from config/cloudinary.js.
 export const uploadContentImage = async (req, res) => {
   try {

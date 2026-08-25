@@ -1,8 +1,13 @@
-/**
- * GallerySection — Premium gallery with true masonry layout, animated filters,
+﻿/**
+ * GallerySection â€” Premium gallery with true masonry layout, animated filters,
  * blur-up image loading, and a swipeable lightbox with thumbnail strip.
  *
- * Images live in `src/assets/images/gallery/`. gallery4 is a .webp file —
+ * The 9 photos (title / category / image) are admin-editable from
+ * Site Content > Gallery. Card heights (for the masonry variety) are assigned
+ * automatically by position â€” not admin-editable, so the layout always looks
+ * intentional regardless of what's uploaded.
+ *
+ * Images live in `src/assets/images/gallery/`. gallery4 is a .webp file â€”
  * keep that extension, don't rename it to .jpg.
  */
 
@@ -12,8 +17,9 @@ import { Container, Button } from '@/components/ui';
 import { Link } from 'react-router-dom';
 import { HiArrowRight } from 'react-icons/hi2';
 import { FiImage, FiX, FiChevronLeft, FiChevronRight } from 'react-icons/fi';
+import useSiteContent from '@/hooks/useSiteContent';
 
-/* ===== Gallery images ===== */
+/* ===== Gallery images â€” fallback photos until the admin uploads replacements ===== */
 import gallery1 from '@/assets/images/gallery/gallery1.jpg';
 import gallery2 from '@/assets/images/gallery/gallery2.jpg';
 import gallery3 from '@/assets/images/gallery/gallery3.jpg';
@@ -57,7 +63,7 @@ const cardVariants = {
   },
 };
 
-/* Lightbox slide variants — direction-aware */
+/* Lightbox slide variants â€” direction-aware */
 const slideVariants = {
   enter: (dir) => ({ opacity: 0, x: dir > 0 ? 80 : -80, scale: 0.96 }),
   center: { opacity: 1, x: 0, scale: 1 },
@@ -74,18 +80,42 @@ const categories = [
   'Workshops',
 ];
 
-/* ===== Gallery data ===== */
-const galleryItems = [
-  { id: 1, image: gallery1, category: 'Yoga Classes', title: 'Hatha Yoga Session', height: 'h-[320px]' },
-  { id: 2, image: gallery2, category: 'Meditation', title: 'Morning Meditation', height: 'h-[420px]' },
-  { id: 3, image: gallery3, category: 'Teacher Training', title: 'Teacher Training Program', height: 'h-[280px]' },
-  { id: 4, image: gallery4, category: 'Events', title: 'Yoga Retreat Event', height: 'h-[380px]' },
-  { id: 5, image: gallery5, category: 'Workshops', title: 'Pranayama Workshop', height: 'h-[300px]' },
-  { id: 6, image: gallery6, category: 'Yoga Classes', title: 'Ashtanga Practice', height: 'h-[440px]' },
-  { id: 7, image: gallery7, category: 'Meditation', title: 'Sunset Meditation', height: 'h-[280px]' },
-  { id: 8, image: gallery8, category: 'Teacher Training', title: 'Alignment Training', height: 'h-[360px]' },
-  { id: 9, image: gallery9, category: 'Events', title: 'Community Yoga Day', height: 'h-[400px]' },
+/* ===== Masonry height presets â€” cycled by position, not admin-editable ===== */
+const HEIGHT_PRESETS = [
+  'h-[320px]',
+  'h-[420px]',
+  'h-[280px]',
+  'h-[380px]',
+  'h-[300px]',
+  'h-[440px]',
+  'h-[280px]',
+  'h-[360px]',
+  'h-[400px]',
 ];
+
+/* ===== Fallback gallery data â€” shown until the admin edits this section,
+   and used to backfill any photo the admin hasn't touched yet. ===== */
+const galleryFallbackItems = [
+  { image: gallery1, category: 'Yoga Classes', title: 'Hatha Yoga Session' },
+  { image: gallery2, category: 'Meditation', title: 'Morning Meditation' },
+  { image: gallery3, category: 'Teacher Training', title: 'Teacher Training Program' },
+  { image: gallery4, category: 'Events', title: 'Yoga Retreat Event' },
+  { image: gallery5, category: 'Workshops', title: 'Pranayama Workshop' },
+  { image: gallery6, category: 'Yoga Classes', title: 'Ashtanga Practice' },
+  { image: gallery7, category: 'Meditation', title: 'Sunset Meditation' },
+  { image: gallery8, category: 'Teacher Training', title: 'Alignment Training' },
+  { image: gallery9, category: 'Events', title: 'Community Yoga Day' },
+];
+
+const galleryFallback = {
+  heading: 'Experience the Journey of Wellness',
+  subheading: 'Our Gallery',
+  description:
+    'Showcase the peaceful environment, yoga sessions, workshops, teacher training, meditation, and community activities.',
+  image: '',
+  features: [],
+  items: galleryFallbackItems,
+};
 
 /* ===== Placeholder gradient colors ===== */
 const gradients = [
@@ -100,13 +130,20 @@ const gradients = [
   'from-primary-dark/30 to-secondary/40',
 ];
 
-/* ===== Category counts, memoized once ===== */
-const categoryCounts = categories.reduce((acc, cat) => {
-  acc[cat] = cat === 'All' ? galleryItems.length : galleryItems.filter((i) => i.category === cat).length;
-  return acc;
-}, {});
-
 export default function GallerySection() {
+  const { content } = useSiteContent('gallery', galleryFallback);
+
+  /* Assign a stable numeric id + a masonry height by position */
+  const galleryItems = useMemo(
+    () =>
+      content.items.map((item, i) => ({
+        ...item,
+        id: i,
+        height: HEIGHT_PRESETS[i % HEIGHT_PRESETS.length],
+      })),
+    [content.items],
+  );
+
   const [activeFilter, setActiveFilter] = useState('All');
   const [lightboxIndex, setLightboxIndex] = useState(null);
   const [direction, setDirection] = useState(0);
@@ -119,7 +156,17 @@ export default function GallerySection() {
       activeFilter === 'All'
         ? galleryItems
         : galleryItems.filter((item) => item.category === activeFilter),
-    [activeFilter],
+    [activeFilter, galleryItems],
+  );
+
+  /* Category counts, recomputed whenever the underlying items change */
+  const categoryCounts = useMemo(
+    () =>
+      categories.reduce((acc, cat) => {
+        acc[cat] = cat === 'All' ? galleryItems.length : galleryItems.filter((i) => i.category === cat).length;
+        return acc;
+      }, {}),
+    [galleryItems],
   );
 
   const markLoaded = useCallback((id) => {
@@ -203,24 +250,21 @@ export default function GallerySection() {
             variants={fadeUp}
             className="inline-block rounded-full border border-secondary/30 bg-secondary/5 px-4 py-1.5 font-body text-xs font-semibold uppercase tracking-[0.25em] text-secondary"
           >
-            Our Gallery
+            {content.subheading}
           </motion.span>
 
           <motion.h2
             variants={fadeUp}
             className="font-heading text-4xl font-semibold leading-tight text-dark md:text-5xl"
           >
-            Experience the
-            <br />
-            <span className="text-primary">Journey of Wellness</span>
+            {content.heading}
           </motion.h2>
 
           <motion.p
             variants={fadeUp}
             className="max-w-[700px] text-base leading-relaxed text-muted md:text-lg"
           >
-            Showcase the peaceful environment, yoga sessions, workshops,
-            teacher training, meditation, and community activities.
+            {content.description}
           </motion.p>
         </motion.div>
 
@@ -316,7 +360,7 @@ export default function GallerySection() {
                   {/* Dark overlay on hover */}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/0 to-black/0 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
 
-                  {/* Hover content — icon + title, rising from the bottom */}
+                  {/* Hover content â€” icon + title, rising from the bottom */}
                   <motion.div
                     initial={false}
                     animate={
@@ -337,9 +381,11 @@ export default function GallerySection() {
                   </motion.div>
 
                   {/* Category badge */}
-                  <span className="absolute left-4 top-4 rounded-full bg-white/80 px-3 py-1 font-body text-xs font-semibold text-primary backdrop-blur-md transition-transform duration-300 group-hover:-translate-y-0.5">
-                    {item.category}
-                  </span>
+                  {item.category && (
+                    <span className="absolute left-4 top-4 rounded-full bg-white/80 px-3 py-1 font-body text-xs font-semibold text-primary backdrop-blur-md transition-transform duration-300 group-hover:-translate-y-0.5">
+                      {item.category}
+                    </span>
+                  )}
                 </motion.div>
               );
             })}
@@ -351,7 +397,7 @@ export default function GallerySection() {
               >
                 <FiImage className="h-10 w-10 text-dark/20" />
                 <p className="font-body text-muted">
-                  No photos in this category yet — check back soon.
+                  No photos in this category yet â€” check back soon.
                 </p>
               </motion.div>
             )}
@@ -417,7 +463,7 @@ export default function GallerySection() {
               <FiChevronLeft className="h-6 w-6" />
             </button>
 
-            {/* Image container — swipeable */}
+            {/* Image container â€” swipeable */}
             <div className="relative flex max-h-[75vh] max-w-[90vw] items-center justify-center">
               <AnimatePresence mode="wait" custom={direction}>
                 <motion.div

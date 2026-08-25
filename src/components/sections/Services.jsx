@@ -1,9 +1,10 @@
-import { motion } from 'framer-motion';
+﻿import { motion } from 'framer-motion';
 import { Container } from '@/components/ui';
 import { Link } from 'react-router-dom';
 import { IoArrowForward } from 'react-icons/io5';
+import useSiteContent from '@/hooks/useSiteContent';
 
-// Service images — replace paths if your project stores images elsewhere
+// Service images â€” replace paths if your project stores images elsewhere
 import yogaClassesImg from '@/assets/images/services/yoga-classes.jpg';
 import yogaTherapyImg from '@/assets/images/services/yoga-therapy.jpg';
 import acupressureImg from '@/assets/images/services/acupressure.jpg';
@@ -14,7 +15,7 @@ import trainingPersonalizedImg from '@/assets/images/training/training-personali
 import trainingGroupImg from '@/assets/images/training/training-group.jpg';
 import trainingPracticumImg from '@/assets/images/training/training-practicum.jpg';
 
-/* ───── Animation Variants (matches WhyChooseUs / ProgramsSection) ───── */
+/* â”€â”€â”€â”€â”€ Animation Variants (matches WhyChooseUs / ProgramsSection) â”€â”€â”€â”€â”€ */
 const fadeUp = {
   hidden: { opacity: 0, y: 50 },
   visible: {
@@ -110,6 +111,38 @@ const classLevels = [
   { label: 'Advance', path: '/classes/advance' },
 ];
 
+/* ===== Fallback copy for each admin-editable section header â€”
+   used until/unless the admin saves content for that section. ===== */
+const classesFallback = {
+  heading: 'Our Classes',
+  subheading: '',
+  description:
+    'Every practice is rooted in tradition and guided by experts who care about your whole wellbeing â€” mind, body, and breath.',
+  image: '',
+  features: [],
+  items: classItems,
+};
+
+const trainingFallback = {
+  heading: 'Our Training',
+  subheading: '',
+  description:
+    'Become a confident, certified yoga teacher through hands-on practicum, personalized guidance, and immersive group practice.',
+  image: '',
+  features: [],
+  items: trainingItems,
+};
+
+const therapyFallback = {
+  heading: 'Our Therapies',
+  subheading: '',
+  description:
+    'Restorative therapies drawn from ancient healing traditions, guided by experienced practitioners for lasting relief.',
+  image: '',
+  features: [],
+  items: therapyItems,
+};
+
 function ServiceGrid({ items }) {
   return (
     <motion.div
@@ -119,9 +152,9 @@ function ServiceGrid({ items }) {
       viewport={{ once: true, amount: 0.1 }}
       className="grid gap-5 md:grid-cols-2 lg:grid-cols-3"
     >
-      {items.map((service) => (
+      {items.map((service, idx) => (
         <motion.div
-          key={service.title}
+          key={`${service.title}-${idx}`}
           variants={fadeUp}
           whileHover={{ y: -8 }}
           transition={{ type: 'spring', stiffness: 300, damping: 20 }}
@@ -147,7 +180,7 @@ function ServiceGrid({ items }) {
               {service.description}
             </p>
             <Link
-              to={service.link}
+              to={service.link || '#'}
               className="mt-3 inline-flex items-center gap-1.5 self-start text-xs font-medium text-primary transition-all hover:gap-2.5"
             >
               Learn More <IoArrowForward className="h-3 w-3" />
@@ -159,7 +192,10 @@ function ServiceGrid({ items }) {
   );
 }
 
-function SectionHeading({ badge, title, description }) {
+/* Section intro â€” heading/description/optional badge, optional banner
+   image, and optional highlight chips. All admin-editable via the
+   Site Content tab matching this section's key. */
+function SectionHeading({ badge, title, description, image, features }) {
   return (
     <motion.div
       variants={staggerContainer}
@@ -168,6 +204,15 @@ function SectionHeading({ badge, title, description }) {
       viewport={{ once: true, amount: 0.2 }}
       className="mx-auto mb-8 flex max-w-2xl flex-col items-center gap-3 text-center md:mb-10"
     >
+      {image && (
+        <motion.div
+          variants={fadeUp}
+          className="mb-2 w-full max-w-[560px] overflow-hidden rounded-[20px] shadow-soft"
+        >
+          <img src={image} alt={title} className="h-[220px] w-full object-cover" loading="lazy" />
+        </motion.div>
+      )}
+
       {badge && (
         <motion.span
           variants={fadeUp}
@@ -190,21 +235,43 @@ function SectionHeading({ badge, title, description }) {
       >
         {description}
       </motion.p>
+
+      {features?.length > 0 && (
+        <motion.div
+          variants={fadeUp}
+          className="mt-1 flex flex-wrap items-center justify-center gap-2"
+        >
+          {features.map((f) => (
+            <span
+              key={f}
+              className="rounded-full border border-primary/20 bg-primary/5 px-3 py-1 font-body text-xs font-medium text-primary"
+            >
+              {f}
+            </span>
+          ))}
+        </motion.div>
+      )}
     </motion.div>
   );
 }
 
 export default function Services() {
+  const { content: classesContent } = useSiteContent('classes', classesFallback);
+  const { content: trainingContent } = useSiteContent('training', trainingFallback);
+  const { content: therapyContent } = useSiteContent('therapy', therapyFallback);
+
   return (
     <section id="classes" className="bg-gradient-to-b from-primary/5 to-white py-[120px]">
       <Container>
         {/* ===== Classes ===== */}
         <SectionHeading
-          title="Our Classes"
-          description="Every practice is rooted in tradition and guided by experts who care about your whole wellbeing — mind, body, and breath."
+          badge={classesContent.subheading}
+          title={classesContent.heading}
+          description={classesContent.description}
+          features={classesContent.features}
         />
 
-        {/* Class level buttons — link to the same pages as the header's Classes dropdown */}
+        {/* Class level buttons â€” link to the same pages as the header's Classes dropdown */}
         <motion.div
           variants={staggerContainer}
           initial="hidden"
@@ -224,24 +291,28 @@ export default function Services() {
           ))}
         </motion.div>
 
-        <ServiceGrid items={classItems} />
+        <ServiceGrid items={classesContent.items} />
 
         {/* ===== Training ===== */}
         <div id="training" className="mt-12 md:mt-16">
           <SectionHeading
-            title="Our Training"
-            description="Become a confident, certified yoga teacher through hands-on practicum, personalized guidance, and immersive group practice."
+            badge={trainingContent.subheading}
+            title={trainingContent.heading}
+            description={trainingContent.description}
+            features={trainingContent.features}
           />
-          <ServiceGrid items={trainingItems} />
+          <ServiceGrid items={trainingContent.items} />
         </div>
 
         {/* ===== Therapies ===== */}
         <div id="therapies" className="mt-12 md:mt-16">
           <SectionHeading
-            title="Our Therapies"
-            description="Restorative therapies drawn from ancient healing traditions, guided by experienced practitioners for lasting relief."
+            badge={therapyContent.subheading}
+            title={therapyContent.heading}
+            description={therapyContent.description}
+            features={therapyContent.features}
           />
-          <ServiceGrid items={therapyItems} />
+          <ServiceGrid items={therapyContent.items} />
         </div>
       </Container>
     </section>

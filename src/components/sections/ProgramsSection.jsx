@@ -1,9 +1,11 @@
-import { motion } from 'framer-motion';
+﻿import { motion } from 'framer-motion';
 import { Container, Button } from '@/components/ui';
 import { Link } from 'react-router-dom';
 import { HiArrowRight } from 'react-icons/hi2';
+import useSiteContent from '@/hooks/useSiteContent';
 
-// Program images — imports left ready for when assets are added
+// Program images â€” used as fallback photos until/unless the admin uploads
+// a replacement for that card in the Programs tab of Site Content.
 import hathaImg from '@/assets/images/programs/hatha.avif';
 import meditationImg from '@/assets/images/programs/meditation.jpg';
 import pranayamaImg from '@/assets/images/programs/pranayama.webp';
@@ -39,8 +41,9 @@ const difficultyStyles = {
   Professional: 'bg-primary-dark/10 text-primary-dark',
 };
 
-/* ===== Program data ===== */
-const programs = [
+/* ===== Fallback program data â€” shown until the admin edits this section,
+   and used to backfill any card the admin hasn't touched yet. ===== */
+const programItems = [
   {
     title: 'Hatha Yoga',
     description:
@@ -97,7 +100,19 @@ const programs = [
   },
 ];
 
+const programsFallback = {
+  heading: 'Choose Your Perfect Yoga Journey',
+  subheading: '',
+  description:
+    'Discover a variety of yoga programs designed for beginners, intermediate practitioners, advanced students and therapeutic healing.',
+  image: '',
+  features: [],
+  items: programItems,
+};
+
 export default function ProgramsSection() {
+  const { content } = useSiteContent('programs', programsFallback);
+
   return (
     <section
       id="programs"
@@ -116,18 +131,14 @@ export default function ProgramsSection() {
             variants={fadeUp}
             className="font-heading text-4xl font-semibold leading-tight text-dark md:text-5xl"
           >
-            Choose Your Perfect
-            <br />
-            <span className="text-primary">Yoga Journey</span>
+            {content.heading}
           </motion.h2>
 
           <motion.p
             variants={fadeUp}
             className="max-w-xl text-base leading-relaxed text-muted md:text-lg"
           >
-            Discover a variety of yoga programs designed for beginners,
-            intermediate practitioners, advanced students and therapeutic
-            healing.
+            {content.description}
           </motion.p>
         </motion.div>
 
@@ -139,9 +150,9 @@ export default function ProgramsSection() {
           viewport={{ once: true, amount: 0.1 }}
           className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3"
         >
-          {programs.map((program) => (
+          {content.items.map((program, idx) => (
             <motion.article
-              key={program.title}
+              key={`${program.title}-${idx}`}
               variants={fadeUp}
               whileHover={{ y: -10, scale: 1.03 }}
               transition={{ type: 'spring', stiffness: 300, damping: 20 }}
@@ -156,14 +167,16 @@ export default function ProgramsSection() {
                   loading="lazy"
                 />
                 {/* Difficulty badge overlay */}
-                <span
-                  className={`absolute left-4 top-4 rounded-full px-3 py-1 font-body text-xs font-semibold backdrop-blur-md ${
-                    difficultyStyles[program.difficulty] ||
-                    'bg-white/80 text-dark'
-                  }`}
-                >
-                  {program.difficulty}
-                </span>
+                {program.difficulty && (
+                  <span
+                    className={`absolute left-4 top-4 rounded-full px-3 py-1 font-body text-xs font-semibold backdrop-blur-md ${
+                      difficultyStyles[program.difficulty] ||
+                      'bg-white/80 text-dark'
+                    }`}
+                  >
+                    {program.difficulty}
+                  </span>
+                )}
               </div>
 
               {/* Content */}

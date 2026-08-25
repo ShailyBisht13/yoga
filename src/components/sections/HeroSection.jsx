@@ -6,6 +6,7 @@ import { IoLeafOutline, IoPlayOutline } from 'react-icons/io5';
 import { GiMeditation } from 'react-icons/gi';
 import { useRef } from 'react';
 import { useAppContext } from '@/context/AppContext';
+import useSiteContent from '@/hooks/useSiteContent';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 50 },
@@ -45,9 +46,23 @@ const HeadingFont = () => (
   />
 );
 
+/* ===== Fallback copy — used until/unless the admin saves Hero content ===== */
+const heroFallback = {
+  heading: 'Find Your Inner Peace at Vimoksha Yogshala',
+  subheading: "EST. 2019 · DEHRADUN'S TRUSTED YOGSHALA",
+  description:
+    "Nestled in the serene beauty of Dehradun, we've guided over 1000 students through authentic Hatha yoga, pranayama, and yoga therapy — taught in small batches, led by teachers who know your name by the second class.",
+  image: '/hero.png',
+  ctaText: 'Book Free Trial',
+  ctaLink: '',
+};
+
 export default function HeroSection() {
   const { openTrialModal } = useAppContext();
   const sectionRef = useRef(null);
+  const { content } = useSiteContent('hero', heroFallback);
+
+  const hasCustomLink = content.ctaLink && content.ctaLink.trim().length > 0;
 
   return (
     <section className="relative bg-[#F3F1EC] pb-6 sm:pb-10">
@@ -60,7 +75,7 @@ export default function HeroSection() {
       >
         <div className="absolute inset-0">
           <img
-            src="/hero.png"
+            src={content.image || heroFallback.image}
             alt="Vimoksha Yogshala — student meditating in a sunlit courtyard studio"
             fetchPriority="high"
             className="h-full w-full object-cover object-[85%_15%] sm:object-[70%_15%]"
@@ -81,7 +96,7 @@ export default function HeroSection() {
               variants={fadeUp}
               className="mb-3 inline-block whitespace-nowrap rounded-full border border-black/10 bg-white/70 px-3 py-1 font-body text-[9px] font-semibold uppercase tracking-[0.15em] text-[#742711] backdrop-blur-md sm:text-xs sm:tracking-[0.2em]"
             >
-              EST. 2019 · DEHRADUN'S TRUSTED YOGSHALA
+              {content.subheading || heroFallback.subheading}
             </motion.span>
 
             {/* Heading */}
@@ -92,9 +107,7 @@ export default function HeroSection() {
               className="mb-6 font-medium leading-[1.15] tracking-tight text-neutral-900"
             >
               <span className="text-[32px] sm:text-[36px] md:text-[42px] lg:text-[48px]">
-                Find Your Inner
-                <br />
-                Peace at <span style={{ color: '#9a3617' }}>Vimoksha Yogshala</span>
+                {content.heading || heroFallback.heading}
               </span>
             </motion.h1>
 
@@ -105,10 +118,7 @@ export default function HeroSection() {
               style={{ fontFamily: "'Poppins', sans-serif" }}
               className="mb-8 max-w-[480px] text-sm font-light leading-[1.8] text-neutral-600 md:text-base"
             >
-              Nestled in the serene beauty of Dehradun, we've guided over 1000
-              students through authentic Hatha yoga, pranayama, and yoga
-              therapy — taught in small batches, led by teachers who know your
-              name by the second class.
+              {content.description || heroFallback.description}
             </motion.p>
 
             {/* CTA Buttons */}
@@ -122,15 +132,27 @@ export default function HeroSection() {
                 whileTap={{ scale: 0.97 }}
                 transition={{ type: 'spring', stiffness: 400, damping: 15 }}
               >
-                <Button
-                  type="button"
-                  onClick={openTrialModal}
-                  variant="primary"
-                  icon={<HiArrowRight className="h-3.5 w-3.5" />}
-                  className="h-11 whitespace-nowrap rounded-full px-6 text-sm sm:h-12 sm:px-8 sm:text-base"
-                >
-                  Book Free Trial
-                </Button>
+                {hasCustomLink ? (
+                  <Button
+                    as={Link}
+                    to={content.ctaLink}
+                    variant="primary"
+                    icon={<HiArrowRight className="h-3.5 w-3.5" />}
+                    className="h-11 whitespace-nowrap rounded-full px-6 text-sm sm:h-12 sm:px-8 sm:text-base"
+                  >
+                    {content.ctaText || heroFallback.ctaText}
+                  </Button>
+                ) : (
+                  <Button
+                    type="button"
+                    onClick={openTrialModal}
+                    variant="primary"
+                    icon={<HiArrowRight className="h-3.5 w-3.5" />}
+                    className="h-11 whitespace-nowrap rounded-full px-6 text-sm sm:h-12 sm:px-8 sm:text-base"
+                  >
+                    {content.ctaText || heroFallback.ctaText}
+                  </Button>
+                )}
               </motion.div>
 
               {/* Watch Intro — outline button with circular play icon */}
@@ -147,15 +169,12 @@ export default function HeroSection() {
                 Watch Intro
               </motion.button>
             </motion.div>
-
           </motion.div>
         </div>
       </div>
 
-      {/* ===== Stats strip — trust markers pulled from the reference
-          design (500+ students, years experience, certification, and
-          location), restyled with the site's serif/sans pairing and
-          brand palette so it reads as one system with the hero above. ===== */}
+      {/* ===== Stats strip — trust markers, kept static (not part of the
+          admin content editor's fields). ===== */}
       <motion.div
         variants={stagger}
         initial="hidden"

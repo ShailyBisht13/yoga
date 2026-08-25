@@ -18,7 +18,12 @@ const emptySection = {
   ctaText: '',
   ctaLink: '',
   features: [],
+  items: [],
 };
+
+const EMPTY_ITEM = { title: '', description: '', image: '', link: '' };
+// Sections that show the 3-card grid on the homepage (Hero has no cards)
+const SECTIONS_WITH_ITEMS = ['training', 'therapy', 'classes'];
 
 export default function AdminContentPage() {
   const [active, setActive] = useState('hero');
@@ -28,6 +33,7 @@ export default function AdminContentPage() {
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState('');
   const [saved, setSaved] = useState(false);
+  const [uploadingItemIndex, setUploadingItemIndex] = useState(null);
 
   const loadSection = (key) => {
     setLoading(true);
@@ -35,8 +41,17 @@ export default function AdminContentPage() {
     setError('');
     api
       .getSiteContent(key)
-      .then((data) => setForm({ ...emptySection, ...data, features: data?.features || [] }))
-      .catch(() => setForm(emptySection))
+      .then((data) => {
+        const savedItems = data?.items || [];
+        const paddedItems = [0, 1, 2].map((i) => ({ ...EMPTY_ITEM, ...savedItems[i] }));
+        setForm({
+          ...emptySection,
+          ...data,
+          features: data?.features || [],
+          items: paddedItems,
+        });
+      })
+      .catch(() => setForm({ ...emptySection, items: [EMPTY_ITEM, EMPTY_ITEM, EMPTY_ITEM] }))
       .finally(() => setLoading(false));
   };
 
@@ -81,6 +96,29 @@ export default function AdminContentPage() {
     setForm((prev) => ({ ...prev, features: prev.features.filter((_, idx) => idx !== i) }));
   };
 
+  const updateItem = (index, field, value) => {
+    setForm((prev) => {
+      const items = [...prev.items];
+      items[index] = { ...items[index], [field]: value };
+      return { ...prev, items };
+    });
+    setSaved(false);
+  };
+
+  const handleItemImageUpload = async (index, e) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    setUploadingItemIndex(index);
+    setError('');
+    try {
+      const { url } = await api.uploadContentImage(file);
+      updateItem(index, 'image', url);
+    } catch (err) {
+      setError('Image upload failed: ' + err.message);
+    }
+    setUploadingItemIndex(null);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setSaving(true);
@@ -91,6 +129,13 @@ export default function AdminContentPage() {
         ...form,
         features: form.features.map((f) => f.trim()).filter(Boolean),
       };
+      if (SECTIONS_WITH_ITEMS.includes(active)) {
+        payload.items = form.items.filter(
+          (item) => item.title.trim() || item.description.trim()
+        );
+      } else {
+        delete payload.items;
+      }
       await api.updateSiteContent(active, payload);
       setSaved(true);
     } catch (err) {
@@ -241,6 +286,81 @@ export default function AdminContentPage() {
               ))}
             </div>
           </div>
+
+          {SECTIONS_WITH_ITEMS.includes(active) && (
+            <div className="border-t border-border pt-5">
+              <label className={labelClass}>Section Cards (3 photos shown below)</label>
+              <p className="mb-3 text-xs text-muted">
+                These are the 3 photo cards displayed under this section on the homepage.
+              </p>
+              <div className="flex flex-col gap-4">
+                {form.items.map((item, index) => (
+                  <div key={index} className="rounded-xl border border-border p-4">
+                    <p className="mb-3 text-xs font-semibold uppercase tracking-wider text-muted">
+                      Card {index + 1}
+                    </p>
+                    <div className="flex flex-col gap-4 sm:flex-row">
+                      <div className="sm:w-36 sm:shrink-0">
+                        <div className="h-24 w-full overflow-hidden rounded-lg bg-[#FBF8F2]">
+                          {item.image ? (
+                            <img
+                              src={item.image}
+                              alt=""
+                              className="h-full w-full object-cover"
+                            />
+                          ) : (
+                            <div className="flex h-full items-center justify-center text-[11px] text-muted">
+                              No photo
+                            </div>
+                          )}
+                        </div>
+                        <input
+                          type="file"
+                          accept="image/*"
+                          onChange={(e) => handleItemImageUpload(index, e)}
+                          className="mt-2 w-full text-[11px] text-muted file:mr-2 file:rounded-full file:border-0 file:bg-primary file:px-3 file:py-1.5 file:text-[11px] file:font-semibold file:text-white file:transition-colors hover:file:bg-primary-dark"
+                        />
+                        {uploadingItemIndex === index && (
+                          <p className="mt-1 text-[11px] text-muted">Uploading…</p>
+                        )}
+                      </div>
+
+                      <div className="flex-1 space-y-3">
+                        <div>
+                          <label className={labelClass}>Title</label>
+                          <input
+                            value={item.title}
+                            onChange={(e) => updateItem(index, 'title', e.target.value)}
+                            className={inputClass}
+                            placeholder="e.g. Personalized Alignment"
+                          />
+                        </div>
+                        <div>
+                          <label className={labelClass}>Description</label>
+                          <textarea
+                            value={item.description}
+                            onChange={(e) => updateItem(index, 'description', e.target.value)}
+                            rows={2}
+                            className={inputClass}
+                            placeholder="Short description shown below the title"
+                          />
+                        </div>
+                        <div>
+                          <label className={labelClass}>"Learn More" Link</label>
+                          <input
+                            value={item.link}
+                            onChange={(e) => updateItem(index, 'link', e.target.value)}
+                            className={inputClass}
+                            placeholder="/courses"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
 
           {error && <p className="rounded-lg bg-red-50 px-4 py-2.5 text-sm text-red-600">{error}</p>}
           {saved && (

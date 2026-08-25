@@ -1,5 +1,9 @@
-/**
- * BlogsSection — Latest blogs with premium card design.
+﻿/**
+ * BlogsSection â€” Latest blogs with premium card design.
+ *
+ * Blog cards are admin-editable from the Site Content > Blogs tab. Until the
+ * admin edits a card (or if an uploaded image is missing), it falls back to
+ * the hardcoded copy/gradient below â€” see `blogsFallback`.
  *
  * TODO: Add the following images to `src/assets/images/blogs/`:
  *   blog1.jpg, blog2.jpg, blog3.jpg
@@ -14,13 +18,14 @@ import { Link } from 'react-router-dom';
 import { HiArrowRight } from 'react-icons/hi2';
 import { IoTimeOutline, IoCalendarOutline } from 'react-icons/io5';
 import { FiArrowUpRight } from 'react-icons/fi';
+import useSiteContent from '@/hooks/useSiteContent';
 
-/* ===== Blog images — uncomment when images are added ===== */
+/* ===== Blog images â€” uncomment when images are added ===== */
 // import blog1 from '@/assets/images/blogs/blog1.jpg';
 // import blog2 from '@/assets/images/blogs/blog2.jpg';
 // import blog3 from '@/assets/images/blogs/blog3.jpg';
 
-/* Placeholder nulls — used until real images are added */
+/* Placeholder nulls â€” used until real images are added */
 const blog1 = null;
 const blog2 = null;
 const blog3 = null;
@@ -57,14 +62,15 @@ const gradients = [
   'from-primary-light/30 to-primary/40',
 ];
 
-/* ===== Blog data ===== */
-const blogs = [
+/* ===== Fallback blog data â€” shown until the admin edits this section,
+   and used to backfill any card the admin hasn't touched yet. ===== */
+const blogItems = [
   {
     title: 'Benefits of Daily Yoga Practice',
     category: 'Yoga',
     readTime: '5 min',
     date: 'July 15, 2026',
-    excerpt:
+    description:
       'Discover how incorporating yoga into your daily routine can transform your physical health, mental clarity, and overall well-being.',
     image: blog1,
     link: '/blog',
@@ -74,7 +80,7 @@ const blogs = [
     category: 'Meditation',
     readTime: '7 min',
     date: 'July 10, 2026',
-    excerpt:
+    description:
       'Learn powerful meditation techniques to calm your mind, reduce anxiety, and cultivate lasting inner peace and emotional balance.',
     image: blog2,
     link: '/blog',
@@ -84,14 +90,26 @@ const blogs = [
     category: 'Lifestyle',
     readTime: '6 min',
     date: 'July 5, 2026',
-    excerpt:
+    description:
       'Build a nourishing morning routine with yoga, pranayama, and mindful habits that set the tone for a productive and balanced day.',
     image: blog3,
     link: '/blog',
   },
 ];
 
+const blogsFallback = {
+  heading: 'Latest Articles & Wellness Insights',
+  subheading: 'Latest Blogs',
+  description:
+    'Share expert yoga tips, meditation techniques, healthy lifestyle advice, and wellness knowledge.',
+  image: '',
+  features: [],
+  items: blogItems,
+};
+
 export default function BlogsSection() {
+  const { content } = useSiteContent('blogs', blogsFallback);
+
   return (
     <section
       id="blogs"
@@ -110,24 +128,21 @@ export default function BlogsSection() {
             variants={fadeUp}
             className="inline-block rounded-full border border-secondary/30 bg-secondary/5 px-4 py-1.5 font-body text-xs font-semibold uppercase tracking-[0.25em] text-secondary"
           >
-            Latest Blogs
+            {content.subheading}
           </motion.span>
 
           <motion.h2
             variants={fadeUp}
             className="font-heading text-4xl font-semibold leading-tight text-dark md:text-5xl"
           >
-            Latest Articles &
-            <br />
-            <span className="text-primary">Wellness Insights</span>
+            {content.heading}
           </motion.h2>
 
           <motion.p
             variants={fadeUp}
             className="max-w-[700px] text-base leading-relaxed text-muted md:text-lg"
           >
-            Share expert yoga tips, meditation techniques, healthy lifestyle
-            advice, and wellness knowledge.
+            {content.description}
           </motion.p>
         </motion.div>
 
@@ -139,9 +154,9 @@ export default function BlogsSection() {
           viewport={{ once: true, amount: 0.1 }}
           className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3"
         >
-          {blogs.map((blog, index) => (
+          {content.items.map((blog, index) => (
             <motion.article
-              key={blog.title}
+              key={`${blog.title}-${index}`}
               variants={fadeUp}
               whileHover={{ y: -10 }}
               transition={{ type: 'spring', stiffness: 300, damping: 20 }}
@@ -167,27 +182,33 @@ export default function BlogsSection() {
                 )}
 
                 {/* Category badge overlay */}
-                <span
-                  className={`absolute left-3 top-3 rounded-full px-2.5 py-1 font-body text-[11px] font-semibold backdrop-blur-md ${
-                    categoryStyles[blog.category] || 'bg-white/80 text-dark'
-                  }`}
-                >
-                  {blog.category}
-                </span>
+                {blog.category && (
+                  <span
+                    className={`absolute left-3 top-3 rounded-full px-2.5 py-1 font-body text-[11px] font-semibold backdrop-blur-md ${
+                      categoryStyles[blog.category] || 'bg-white/80 text-dark'
+                    }`}
+                  >
+                    {blog.category}
+                  </span>
+                )}
               </div>
 
               {/* Content */}
               <div className="flex flex-1 flex-col p-4">
                 {/* Date & reading time */}
                 <div className="mb-2.5 flex items-center gap-3 font-body text-[11px] text-muted">
-                  <span className="flex items-center gap-1">
-                    <IoCalendarOutline className="h-3.5 w-3.5 text-primary" />
-                    {blog.date}
-                  </span>
-                  <span className="flex items-center gap-1">
-                    <IoTimeOutline className="h-3.5 w-3.5 text-primary" />
-                    {blog.readTime} read
-                  </span>
+                  {blog.date && (
+                    <span className="flex items-center gap-1">
+                      <IoCalendarOutline className="h-3.5 w-3.5 text-primary" />
+                      {blog.date}
+                    </span>
+                  )}
+                  {blog.readTime && (
+                    <span className="flex items-center gap-1">
+                      <IoTimeOutline className="h-3.5 w-3.5 text-primary" />
+                      {blog.readTime} read
+                    </span>
+                  )}
                 </div>
 
                 {/* Title */}
@@ -197,12 +218,12 @@ export default function BlogsSection() {
 
                 {/* Excerpt */}
                 <p className="mt-2 flex-1 text-sm leading-relaxed text-muted">
-                  {blog.excerpt}
+                  {blog.description}
                 </p>
 
                 {/* Read More button */}
                 <Link
-                  to={blog.link}
+                  to={blog.link || '/blog'}
                   className="mt-3 inline-flex items-center gap-1 self-start font-body text-xs font-medium text-primary transition-all duration-300 hover:gap-1.5"
                 >
                   Read More
