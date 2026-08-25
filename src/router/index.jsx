@@ -5,9 +5,9 @@ import HomePage from '@/pages/HomePage';
 
 const AboutPage = lazy(() => import('@/pages/AboutPage'));
 const ClassesPage = lazy(() => import('@/pages/ClassesPage'));
-const BeginnerClassesPage = lazy(() => import('@/pages/BeginnerClassesPage'));
-const IntermediateClassesPage = lazy(() => import('@/pages/IntermediateClassesPage'));
-const AdvanceClassesPage = lazy(() => import('@/pages/AdvanceClassesPage'));
+const StudentClassesPage = lazy(() => import('@/pages/StudentClassesPage'));
+const ProfessionalClassesPage = lazy(() => import('@/pages/ProfessionalClassesPage'));
+const AdultClassesPage = lazy(() => import('@/pages/AdultClassesPage'));
 const TherapiesPage = lazy(() => import('@/pages/TherapiesPage'));
 const CoursesPage = lazy(() => import('@/pages/CoursesPage'));
 const TeacherTrainingPage = lazy(() => import('@/pages/TeacherTrainingPage'));
@@ -50,9 +50,9 @@ export const router = createBrowserRouter([
       { index: true, element: <HomePage /> },
       { path: 'about', element: withSuspense(AboutPage) },
       { path: 'classes', element: withSuspense(ClassesPage) },
-      { path: 'classes/beginner', element: withSuspense(BeginnerClassesPage) },
-      { path: 'classes/intermediate', element: withSuspense(IntermediateClassesPage) },
-      { path: 'classes/advance', element: withSuspense(AdvanceClassesPage) },
+      { path: 'classes/beginner', element: withSuspense(StudentClassesPage) },
+      { path: 'classes/intermediate', element: withSuspense(ProfessionalClassesPage) },
+      { path: 'classes/advance', element: withSuspense(AdultClassesPage) },
       { path: 'therapies', element: withSuspense(TherapiesPage) },
       { path: 'courses', element: withSuspense(CoursesPage) },
       { path: 'teacher-training', element: withSuspense(TeacherTrainingPage) },

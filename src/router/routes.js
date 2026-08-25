@@ -1,8 +1,8 @@
 import HomePage from '@/pages/HomePage';
 import AboutPage from '@/pages/AboutPage';
-import BeginnerClassesPage from '@/pages/BeginnerClassesPage';
-import IntermediateClassesPage from '@/pages/IntermediateClassesPage';
-import AdvanceClassesPage from '@/pages/AdvanceClassesPage';
+import StudentClassesPage from '@/pages/StudentClassesPage';
+import ProfessionalClassesPage from '@/pages/ProfessionalClassesPage';
+import AdultClassesPage from '@/pages/AdultClassesPage';
 import TherapiesPage from '@/pages/TherapiesPage';
 import CoursesPage from '@/pages/CoursesPage';
 import TeacherTrainingPage from '@/pages/TeacherTrainingPage';
@@ -34,9 +34,18 @@ export const routeMeta = {
   home: { title: 'Home', description: 'Vimoksha Yogshala — Premium yoga & wellness in Dehradun.' },
   about: { title: 'About', description: 'Learn about Vimoksha Yogshala and our philosophy.' },
   classes: { title: 'Classes', description: 'Explore our yoga classes and schedules.' },
-  classesBeginner: { title: 'Beginner Classes', description: 'Foundational yoga classes for those new to the mat.' },
-  classesIntermediate: { title: 'Intermediate Classes', description: 'Flowing sequences and deeper breathwork for practitioners building on the basics.' },
-  classesAdvance: { title: 'Advance Classes', description: 'Fast-paced, high-intensity classes for practitioners with an established foundation.' },
+  classesBeginner: {
+    title: 'Student Classes',
+    description: 'Beginner, Intermediate & Advance batches for students, all in one place.',
+  },
+  classesIntermediate: {
+    title: 'Professional Classes',
+    description: 'Beginner, Intermediate & Advance batches built around a working schedule.',
+  },
+  classesAdvance: {
+    title: 'Adult Classes',
+    description: 'Beginner, Intermediate & Advance yoga programs for adult practitioners.',
+  },
   therapies: { title: 'Therapies', description: 'Yoga Therapy, Naturopathy, Acupressure and Cupping Therapy at Vimoksha Yogshala.' },
   courses: { title: 'Courses', description: 'Yoga Teacher Training Courses in Dehradun.' },
   teacherTraining: { title: 'Teacher Training', description: '200-Hour Yoga Teacher Training in Dehradun — an eight-week residential certification program.' },
@@ -48,13 +57,17 @@ export const routeMeta = {
 
 /* ===== Single source of truth: path -> page component -> meta key =====
    AppRoutes.jsx renders <Route> elements straight from this list, so
-   registering a page here is the only step needed to make it live. */
+   registering a page here is the only step needed to make it live.
+   Note: each Classes page (Student/Professional/Adult) internally
+   renders all three levels — Beginner, Intermediate, Advance — via a
+   shared level switcher; the path/component below just controls which
+   level tab opens by default. */
 export const appRoutes = [
   { path: '/', component: HomePage, metaKey: 'home' },
   { path: '/about', component: AboutPage, metaKey: 'about' },
-  { path: '/classes/beginner', component: BeginnerClassesPage, metaKey: 'classesBeginner' },
-  { path: '/classes/intermediate', component: IntermediateClassesPage, metaKey: 'classesIntermediate' },
-  { path: '/classes/advance', component: AdvanceClassesPage, metaKey: 'classesAdvance' },
+  { path: '/classes/beginner', component: StudentClassesPage, metaKey: 'classesBeginner' },
+  { path: '/classes/intermediate', component: ProfessionalClassesPage, metaKey: 'classesIntermediate' },
+  { path: '/classes/advance', component: AdultClassesPage, metaKey: 'classesAdvance' },
   { path: '/therapies', component: TherapiesPage, metaKey: 'therapies' },
   { path: '/courses', component: CoursesPage, metaKey: 'courses' },
   { path: '/teacher-training', component: TeacherTrainingPage, metaKey: 'teacherTraining' },
