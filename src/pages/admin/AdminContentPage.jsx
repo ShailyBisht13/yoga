@@ -1,4 +1,4 @@
-﻿import { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { api } from '@/lib/api';
 import AdminShell from './AdminShell';
 import {
@@ -9,6 +9,7 @@ import {
   LuSparkles,
   LuNewspaper,
   LuImage,
+  LuCircleHelp,
   LuPlus,
   LuTrash2,
 } from 'react-icons/lu';
@@ -21,6 +22,7 @@ const sections = [
   { key: 'programs', label: 'Programs', icon: LuSparkles },
   { key: 'blogs', label: 'Blogs', icon: LuNewspaper },
   { key: 'gallery', label: 'Gallery', icon: LuImage },
+  { key: 'faq', label: 'FAQ', icon: LuCircleHelp },
 ];
 
 const emptySection = {
@@ -46,7 +48,7 @@ const EMPTY_ITEM = {
   readTime: '',
 };
 
-// Sections that show a card grid on the homepage (Hero has no cards)
+// Sections that show a fixed-count card grid on the homepage
 const SECTIONS_WITH_ITEMS = ['training', 'therapy', 'classes', 'programs', 'blogs', 'gallery'];
 // How many cards each of those sections has
 const ITEM_COUNTS = { training: 3, therapy: 3, classes: 3, programs: 6, blogs: 3, gallery: 9 };
@@ -72,6 +74,10 @@ const GALLERY_CATEGORY_OPTIONS = [
   'Events',
   'Workshops',
 ];
+// Sections with a single admin-editable top image (not a per-card image)
+const SECTIONS_WITH_IMAGE = ['hero', 'faq'];
+// FAQ has a variable-length list of Q&A pairs instead of a fixed card count
+const DYNAMIC_ITEM_SECTIONS = ['faq'];
 
 export default function AdminContentPage() {
   const [active, setActive] = useState('hero');
@@ -87,6 +93,26 @@ export default function AdminContentPage() {
     setLoading(true);
     setSaved(false);
     setError('');
+
+    if (DYNAMIC_ITEM_SECTIONS.includes(key)) {
+      api
+        .getSiteContent(key)
+        .then((data) => {
+          const savedItems = data?.items || [];
+          setForm({
+            ...emptySection,
+            ...data,
+            features: data?.features || [],
+            items: savedItems.length
+              ? savedItems.map((it) => ({ ...EMPTY_ITEM, ...it }))
+              : [{ ...EMPTY_ITEM }],
+          });
+        })
+        .catch(() => setForm({ ...emptySection, items: [{ ...EMPTY_ITEM }] }))
+        .finally(() => setLoading(false));
+      return;
+    }
+
     const count = ITEM_COUNTS[key] || 3;
     api
       .getSiteContent(key)
@@ -162,6 +188,16 @@ export default function AdminContentPage() {
     setSaved(false);
   };
 
+  const addDynamicItem = () => {
+    setForm((prev) => ({ ...prev, items: [...prev.items, { ...EMPTY_ITEM }] }));
+    setSaved(false);
+  };
+
+  const removeDynamicItem = (index) => {
+    setForm((prev) => ({ ...prev, items: prev.items.filter((_, idx) => idx !== index) }));
+    setSaved(false);
+  };
+
   const handleItemImageUpload = async (index, e) => {
     const file = e.target.files?.[0];
     if (!file) return;
@@ -186,7 +222,11 @@ export default function AdminContentPage() {
         ...form,
         features: form.features.map((f) => f.trim()).filter(Boolean),
       };
-      if (SECTIONS_WITH_ITEMS.includes(active)) {
+      if (DYNAMIC_ITEM_SECTIONS.includes(active)) {
+        payload.items = form.items.filter(
+          (item) => item.title.trim() || item.description.trim()
+        );
+      } else if (SECTIONS_WITH_ITEMS.includes(active)) {
         payload.items = form.items;
       } else {
         delete payload.items;
@@ -271,25 +311,33 @@ export default function AdminContentPage() {
                   className={inputClass}
                 />
               </div>
+            </>
+          )}
 
-              <div>
-                <label className={labelClass}>Image</label>
-                <input
-                  type="file"
-                  accept="image/*"
-                  onChange={handleImageUpload}
-                  className="text-sm text-muted file:mr-4 file:rounded-full file:border-0 file:bg-primary file:px-4 file:py-2 file:text-xs file:font-semibold file:text-white file:transition-colors hover:file:bg-primary-dark"
+          {SECTIONS_WITH_IMAGE.includes(active) && (
+            <div>
+              <label className={labelClass}>
+                {active === 'faq' ? 'FAQ Photo' : 'Image'}
+              </label>
+              <input
+                type="file"
+                accept="image/*"
+                onChange={handleImageUpload}
+                className="text-sm text-muted file:mr-4 file:rounded-full file:border-0 file:bg-primary file:px-4 file:py-2 file:text-xs file:font-semibold file:text-white file:transition-colors hover:file:bg-primary-dark"
+              />
+              {uploading && <p className="mt-2 text-xs text-muted">Uploadingâ€¦</p>}
+              {form.image && (
+                <img
+                  src={form.image}
+                  alt="Preview"
+                  className="mt-3 h-36 w-auto rounded-lg border border-border object-cover"
                 />
-                {uploading && <p className="mt-2 text-xs text-muted">Uploadingâ€¦</p>}
-                {form.image && (
-                  <img
-                    src={form.image}
-                    alt="Preview"
-                    className="mt-3 h-36 w-auto rounded-lg border border-border object-cover"
-                  />
-                )}
-              </div>
+              )}
+            </div>
+          )}
 
+          {active === 'hero' && (
+            <>
               <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
                 <div>
                   <label className={labelClass}>Button Text</label>
@@ -350,6 +398,67 @@ export default function AdminContentPage() {
                 </div>
               </div>
             </>
+          )}
+
+          {DYNAMIC_ITEM_SECTIONS.includes(active) && (
+            <div>
+              <div className="mb-1.5 flex items-center justify-between">
+                <label className={labelClass}>Questions & Answers ({form.items.length})</label>
+                <button
+                  type="button"
+                  onClick={addDynamicItem}
+                  className="flex items-center gap-1 text-xs font-semibold text-secondary hover:underline"
+                >
+                  <LuPlus className="h-3.5 w-3.5" />
+                  Add Question
+                </button>
+              </div>
+              <p className="mb-3 text-xs text-muted">
+                These appear as the accordion list on the homepage FAQ section.
+              </p>
+              <div className="flex flex-col gap-4">
+                {form.items.map((item, index) => (
+                  <div key={index} className="rounded-xl border border-border p-4">
+                    <div className="mb-3 flex items-center justify-between">
+                      <p className="text-xs font-semibold uppercase tracking-wider text-muted">
+                        Question {index + 1}
+                      </p>
+                      {form.items.length > 1 && (
+                        <button
+                          type="button"
+                          onClick={() => removeDynamicItem(index)}
+                          className="rounded-lg p-1.5 text-muted transition-colors hover:bg-red-50 hover:text-red-600"
+                          aria-label="Remove question"
+                        >
+                          <LuTrash2 className="h-4 w-4" />
+                        </button>
+                      )}
+                    </div>
+                    <div className="space-y-3">
+                      <div>
+                        <label className={labelClass}>Question</label>
+                        <input
+                          value={item.title}
+                          onChange={(e) => updateItem(index, 'title', e.target.value)}
+                          className={inputClass}
+                          placeholder="e.g. Do I need prior yoga experience?"
+                        />
+                      </div>
+                      <div>
+                        <label className={labelClass}>Answer</label>
+                        <textarea
+                          value={item.description}
+                          onChange={(e) => updateItem(index, 'description', e.target.value)}
+                          rows={3}
+                          className={inputClass}
+                          placeholder="Answer shown when this question is expanded"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
           )}
 
           {SECTIONS_WITH_ITEMS.includes(active) && (

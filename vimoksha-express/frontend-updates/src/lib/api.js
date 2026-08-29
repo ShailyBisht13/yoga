@@ -91,6 +91,13 @@ export const api = {
       auth: true,
     });
   },
+
+  // FAQ (public GET, admin write)
+  getFaqs: () => request('/api/faqs'),
+  createFaq: (payload) => request('/api/faqs', { method: 'POST', body: payload, auth: true }),
+  updateFaq: (id, payload) =>
+    request(`/api/faqs/${id}`, { method: 'PATCH', body: payload, auth: true }),
+  deleteFaq: (id) => request(`/api/faqs/${id}`, { method: 'DELETE', auth: true }),
 };
 
 export function setToken(token) {

@@ -1,5 +1,9 @@
-/**
- * FAQSection — Frequently Asked Questions with animated accordion.
+﻿/**
+ * FAQSection â€” Frequently Asked Questions with animated accordion.
+ *
+ * The photo and the question/answer list are both admin-editable from
+ * Site Content > FAQ. Until the admin edits them, this falls back to the
+ * hardcoded copy below â€” see `faqFallback`.
  *
  * TODO: Add the image to `src/assets/images/faq/faq.jpg`.
  * Once it's added, uncomment the import below and remove the
@@ -11,11 +15,12 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Container } from '@/components/ui';
 import { FiPlus, FiMinus } from 'react-icons/fi';
 import { IoCheckmarkCircle, IoLogoWhatsapp } from 'react-icons/io5';
+import useSiteContent from '@/hooks/useSiteContent';
 
-/* ===== FAQ image — uncomment when image is added ===== */
+/* ===== FAQ image â€” uncomment when image is added ===== */
 // import faqImage from '@/assets/images/faq/faq.jpg';
 
-/* Placeholder null — used until real image is added */
+/* Placeholder null â€” used until real image is added */
 const faqImage = null;
 
 /* ===== Animation variants ===== */
@@ -54,48 +59,60 @@ const slideInRight = {
   },
 };
 
-/* ===== FAQ data =====
-   Class timings here match the batch schedule shown in the hero section —
-   keep these two in sync if either changes. */
-const faqs = [
+/* ===== Fallback FAQ data â€” shown until the admin edits this section.
+   Class timings here match the batch schedule shown in the hero section â€”
+   keep these two in sync if either changes (in the admin FAQ tab). ===== */
+const faqItems = [
   {
-    question: 'Do I need prior yoga experience?',
-    answer:
+    title: 'Do I need prior yoga experience?',
+    description:
       'No prior experience is required. Every new student begins with the same foundational sequence for the first two weeks, regardless of age or fitness level, before progressing to a faster-paced batch.',
   },
   {
-    question: 'What should I bring to my first class?',
-    answer:
+    title: 'What should I bring to my first class?',
+    description:
       'Please bring water and comfortable clothing suitable for movement. Mats, blocks, and straps are provided free of charge. If you own a mat, you are welcome to bring your own, as floor space is assigned by mat to help you retain the same spot each class.',
   },
   {
-    question: 'Do you offer yoga therapy sessions?',
-    answer:
+    title: 'Do you offer yoga therapy sessions?',
+    description:
       'Yes. Our therapy track is separate from regular batches and is designed for specific concerns such as chronic back pain, post-injury recovery, stress, and joint issues. Each program begins with a one-on-one assessment so the plan is tailored to your individual needs.',
   },
   {
-    question: 'How can I book a free trial?',
-    answer:
+    title: 'How can I book a free trial?',
+    description:
       'Please call or send a WhatsApp message to the number provided below, or use the "Book Free Trial" button on the homepage. We will confirm a batch and time on the same day, and no advance payment is required for the trial class.',
   },
   {
-    question: 'What are the class timings?',
-    answer:
+    title: 'What are the class timings?',
+    description:
       'The sunrise batch runs from 6:00 AM to 7:30 AM, and the evening batch runs from 5:00 PM to 6:30 PM, daily except Sundays. Batches are limited to 12 students, so we recommend confirming your spot at least a day in advance.',
   },
   {
-    question: 'Do you provide teacher training certification?',
-    answer:
+    title: 'Do you provide teacher training certification?',
+    description:
       'Yes, we offer a 200-hour Yoga Alliance-certified teacher training program, conducted twice a year. The curriculum covers asana, pranayama, meditation, anatomy, and teaching practice. Batch sizes are limited and priority is given to existing students; please speak with us in class if you are interested.',
   },
 ];
 
+const faqFallback = {
+  heading: '',
+  subheading: '',
+  description: '',
+  image: '',
+  features: [],
+  items: faqItems,
+};
+
 export default function FAQSection() {
+  const { content } = useSiteContent('faq', faqFallback);
   const [openIndex, setOpenIndex] = useState(0);
 
   const toggleAccordion = (index) => {
     setOpenIndex(openIndex === index ? null : index);
   };
+
+  const photo = content.image || faqImage;
 
   return (
     <section
@@ -147,9 +164,9 @@ export default function FAQSection() {
             className="relative w-full lg:w-[45%]"
           >
             <div className="relative overflow-hidden rounded-[28px] shadow-elevated">
-              {faqImage ? (
+              {photo ? (
                 <img
-                  src={faqImage}
+                  src={photo}
                   alt="Students practicing at Vimoksha Yogshala"
                   className="h-[500px] w-full object-cover"
                   loading="lazy"
@@ -200,7 +217,7 @@ export default function FAQSection() {
               viewport={{ once: true, amount: 0.1 }}
               className="flex flex-col gap-4"
             >
-              {faqs.map((faq, index) => (
+              {content.items.map((faq, index) => (
                 <motion.div
                   key={index}
                   variants={fadeUp}
@@ -217,7 +234,7 @@ export default function FAQSection() {
                     aria-expanded={openIndex === index}
                   >
                     <span className="font-heading text-base font-semibold text-dark md:text-lg">
-                      {faq.question}
+                      {faq.title}
                     </span>
                     <span
                       className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full transition-all duration-300 ${
@@ -245,7 +262,7 @@ export default function FAQSection() {
                         className="overflow-hidden"
                       >
                         <p className="pt-4 text-sm leading-relaxed text-muted">
-                          {faq.answer}
+                          {faq.description}
                         </p>
                       </motion.div>
                     )}
@@ -254,7 +271,7 @@ export default function FAQSection() {
               ))}
             </motion.div>
 
-            {/* Still-have-a-question fallback — a real channel, not a dead end */}
+            {/* Still-have-a-question fallback â€” a real channel, not a dead end */}
             <motion.a
               variants={fadeUp}
               initial="hidden"

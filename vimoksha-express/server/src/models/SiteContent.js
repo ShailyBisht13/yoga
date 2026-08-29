@@ -6,7 +6,7 @@ const siteContentSchema = new mongoose.Schema(
       type: String,
       required: true,
       unique: true,
-      enum: ['hero', 'training', 'therapy', 'classes', 'programs', 'blogs', 'gallery'],
+      enum: ['hero', 'training', 'therapy', 'classes', 'programs', 'blogs', 'gallery', 'faq'],
     },
     heading: { type: String, default: '' },
     subheading: { type: String, default: '' },
@@ -16,7 +16,8 @@ const siteContentSchema = new mongoose.Schema(
     ctaLink: { type: String, default: '' },
     features: { type: [String], default: [] },
     // The photo+text cards shown under this section
-    // (3 for classes/training/therapy/blogs, 6 for programs, 9 for gallery)
+    // (3 for classes/training/therapy/blogs, 6 for programs, 9 for gallery,
+    // any length for faq â€” title/description double as question/answer)
     items: {
       type: [
         {

@@ -9,6 +9,7 @@ import {
   LuFilePenLine,
   LuPhone,
   LuLogOut,
+  LuCircleHelp,
 } from 'react-icons/lu';
 
 const navItems = [
@@ -17,6 +18,7 @@ const navItems = [
   { label: 'Blog', path: '/admin/blog', icon: LuNewspaper },
   { label: 'Gallery', path: '/admin/gallery', icon: LuImage },
   { label: 'Site Content', path: '/admin/content', icon: LuFilePenLine },
+  { label: 'FAQs', path: '/admin/faq', icon: LuCircleHelp },
   { label: 'Contact Info', path: '/admin/contact', icon: LuPhone },
 ];
 

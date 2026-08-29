@@ -4,7 +4,7 @@
  * Features:
  *   - Linear gradient background (#9A3617 → #742711)
  *   - Left (55%): Badge, heading, description, CTA buttons
- *   - Right (45%): Floating white info card with contact details + social links
+ *   - Right (45%): Compact floating white info card with contact details
  *   - Subtle blurred circles + leaf pattern for luxury feel
  *   - Framer Motion: fade up, floating card, button hover
  *   - Responsive: two columns → stack → single column
@@ -20,9 +20,6 @@ import {
   FiMail,
   FiMapPin,
   FiClock,
-  FiFacebook,
-  FiInstagram,
-  FiYoutube,
 } from 'react-icons/fi';
 
 /* ===== Animation variants ===== */
@@ -78,25 +75,6 @@ const contactInfo = {
   studioHours: 'Mon – Sat, 6:00 AM – 8:00 PM',
 };
 
-/* ===== Social links — each opens the studio's real profile in a new tab ===== */
-const socialLinks = [
-  {
-    icon: <FiFacebook className="h-5 w-5" />,
-    label: 'Facebook',
-    href: 'https://www.facebook.com/profile.php?id=100063818964128&mibextid=ZbWKwL',
-  },
-  {
-    icon: <FiInstagram className="h-5 w-5" />,
-    label: 'Instagram',
-    href: 'https://www.instagram.com/vimokshayogshala?igsh=MTQ3M2NkeGMzM3h3dQ==',
-  },
-  {
-    icon: <FiYoutube className="h-5 w-5" />,
-    label: 'YouTube',
-    href: 'https://youtube.com/@vimokshayogshala?si=r7SS660qdwQqsrOe',
-  },
-];
-
 /* ===== Studio locations — two branches, each with its own address & maps link ===== */
 const locations = [
   {
@@ -118,33 +96,33 @@ const locations = [
 /* ===== Contact items config — each links somewhere real, nothing is a dead "#" ===== */
 const contactItems = [
   {
-    icon: <FiPhone className="h-5 w-5" />,
+    icon: <FiPhone className="h-4 w-4" />,
     title: 'Phone — Head Office',
     value: contactInfo.phone,
     href: `tel:${contactInfo.phone.replace(/\s/g, '')}`,
   },
   {
-    icon: <FiMail className="h-5 w-5" />,
+    icon: <FiMail className="h-4 w-4" />,
     title: 'Email',
     value: contactInfo.email,
     href: `mailto:${contactInfo.email}`,
   },
   {
-    icon: <FiMapPin className="h-5 w-5" />,
+    icon: <FiMapPin className="h-4 w-4" />,
     title: `Address — ${locations[0].name}`,
     value: locations[0].address,
     href: `https://www.google.com/maps/search/?api=1&query=${locations[0].mapsQuery}`,
     external: true,
   },
   {
-    icon: <FiMapPin className="h-5 w-5" />,
+    icon: <FiMapPin className="h-4 w-4" />,
     title: `Address — ${locations[1].name}`,
     value: locations[1].address,
     href: `https://www.google.com/maps/search/?api=1&query=${locations[1].mapsQuery}`,
     external: true,
   },
   {
-    icon: <FiPhone className="h-5 w-5" />,
+    icon: <FiPhone className="h-4 w-4" />,
     title: `Phone — ${locations[1].name}`,
     value: locations[1].phone,
     href: `tel:${locations[1].phone}`,
@@ -153,10 +131,10 @@ const contactItems = [
 
 /* ===== Reusable classes ===== */
 const iconCircleClass =
-  'flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary transition-all duration-300 group-hover:bg-primary group-hover:text-white';
+  'flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary transition-all duration-300 group-hover:bg-primary group-hover:text-white [&>svg]:h-4 [&>svg]:w-4';
 
 const contactItemClass =
-  'group flex items-center gap-4 rounded-2xl border border-border p-4 transition-all duration-300 hover:border-primary/40 hover:shadow-soft';
+  'group flex items-center gap-2.5 rounded-lg border border-border p-2 transition-all duration-300 hover:border-primary/40 hover:shadow-soft';
 
 export default function ContactCTASection() {
   const { openTrialModal } = useAppContext();
@@ -164,16 +142,16 @@ export default function ContactCTASection() {
   return (
     <section
       id="contact-cta"
-      className="relative overflow-hidden py-[100px]"
+      className="relative overflow-hidden py-10 md:py-14"
       style={{
         background: 'linear-gradient(135deg, #9a3617 0%, #742711 100%)',
       }}
     >
       {/* ===== Decorative blurred circles ===== */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
-        <div className="absolute -left-20 -top-20 h-72 w-72 rounded-full bg-white/5 blur-3xl" />
-        <div className="absolute -bottom-32 right-10 h-96 w-96 rounded-full bg-white/5 blur-3xl" />
-        <div className="absolute left-1/2 top-1/3 h-48 w-48 -translate-x-1/2 rounded-full bg-secondary/10 blur-2xl" />
+        <div className="absolute -left-16 -top-16 h-56 w-56 rounded-full bg-white/5 blur-3xl" />
+        <div className="absolute -bottom-24 right-10 h-72 w-72 rounded-full bg-white/5 blur-3xl" />
+        <div className="absolute left-1/2 top-1/3 h-36 w-36 -translate-x-1/2 rounded-full bg-secondary/10 blur-2xl" />
       </div>
 
       {/* ===== Subtle leaf pattern overlay ===== */}
@@ -186,8 +164,8 @@ export default function ContactCTASection() {
         }}
       />
 
-      <Container className="relative z-10 max-w-[1320px]">
-        <div className="flex flex-col items-center gap-12 lg:flex-row lg:items-stretch">
+      <Container className="relative z-10 max-w-[980px]">
+        <div className="flex flex-col items-center gap-8 lg:flex-row lg:items-stretch">
           {/* ===== Left: CTA Content (55%) ===== */}
           <motion.div
             variants={slideInLeft}
@@ -201,7 +179,7 @@ export default function ContactCTASection() {
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, amount: 0.2 }}
-              className="flex flex-col gap-6"
+              className="flex flex-col gap-5"
             >
               {/* Badge */}
               <motion.span
@@ -214,7 +192,7 @@ export default function ContactCTASection() {
               {/* Heading */}
               <motion.h2
                 variants={fadeUp}
-                className="font-heading text-4xl font-semibold leading-tight text-white md:text-5xl"
+                className="font-heading text-3xl font-semibold leading-tight text-white md:text-4xl"
               >
                 Your First Class
                 <br />
@@ -227,17 +205,14 @@ export default function ContactCTASection() {
                 className="max-w-lg text-base leading-relaxed text-white/80 md:text-lg"
               >
                 One free trial class — no card details required and no
-                obligation to continue. Choose the Sunrise or Evening batch,
-                let us know if you are new to yoga or returning after an
-                injury, and we will place you with the right instructor.
-                Batches are limited to 12 students, so your spot will be
-                confirmed the same day.
+                obligation to continue. Choose the Sunrise or Evening batch
+                and we&rsquo;ll place you with the right instructor.
               </motion.p>
 
               {/* Buttons */}
               <motion.div
                 variants={fadeUp}
-                className="mt-4 flex flex-wrap items-center gap-5"
+                className="mt-2 flex flex-wrap items-center gap-3"
               >
                 <motion.div
                   whileHover={{ scale: 1.04 }}
@@ -250,7 +225,7 @@ export default function ContactCTASection() {
                     variant="primary"
                     size="lg"
                     icon={<HiArrowRight className="h-4 w-4" />}
-                    className="h-[56px] rounded-full px-8 text-base font-semibold"
+                    className="h-[48px] rounded-full px-7 text-base font-semibold"
                   >
                     Book Free Trial
                   </Button>
@@ -267,7 +242,7 @@ export default function ContactCTASection() {
                     rel="noopener noreferrer"
                     variant="outline"
                     size="lg"
-                    className="h-[56px] rounded-full border-2 border-white/40 px-8 text-base text-white hover:bg-white hover:text-primary"
+                    className="h-[48px] rounded-full border-2 border-white/40 px-7 text-base text-white hover:bg-white hover:text-primary"
                   >
                     WhatsApp Us
                   </Button>
@@ -286,23 +261,22 @@ export default function ContactCTASection() {
           >
             <motion.div
               animate={floating}
-              className="rounded-[32px] bg-white p-8 shadow-elevated md:p-10"
+              className="rounded-[20px] bg-white p-4 shadow-elevated md:p-5"
             >
               <motion.div
                 variants={staggerContainer}
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true, amount: 0.2 }}
-                className="flex flex-col gap-4"
+                className="flex flex-col gap-2"
               >
                 {/* Card heading */}
-                <motion.div variants={fadeUp} className="mb-2">
-                  <h3 className="font-heading text-2xl font-semibold text-dark">
+                <motion.div variants={fadeUp} className="mb-0.5">
+                  <h3 className="font-heading text-base font-semibold text-dark">
                     Get in Touch
                   </h3>
-                  <p className="mt-1 font-body text-sm text-muted">
-                    Call, email, or visit us in person. We typically respond
-                    to WhatsApp messages within the hour.
+                  <p className="mt-0.5 font-body text-xs text-muted">
+                    Call, email, or visit us in person.
                   </p>
                 </motion.div>
 
@@ -319,10 +293,10 @@ export default function ContactCTASection() {
                   >
                     <span className={iconCircleClass}>{item.icon}</span>
                     <div className="flex flex-col">
-                      <span className="font-body text-xs font-medium uppercase tracking-wider text-muted">
+                      <span className="font-body text-[10px] font-medium uppercase tracking-wider text-muted">
                         {item.title}:
                       </span>
-                      <span className="mt-0.5 block font-body text-base font-medium text-dark">
+                      <span className="mt-0.5 block font-body text-sm font-medium text-dark line-clamp-1">
                         {item.value}
                       </span>
                     </div>
@@ -333,35 +307,16 @@ export default function ContactCTASection() {
                     isn't an action a visitor takes */}
                 <motion.div variants={fadeUp} className={contactItemClass}>
                   <span className={iconCircleClass}>
-                    <FiClock className="h-5 w-5" />
+                    <FiClock className="h-4 w-4" />
                   </span>
                   <div className="flex flex-col">
                     <span className="font-body text-xs font-medium uppercase tracking-wider text-muted">
                       Studio Hours
                     </span>
-                    <span className="mt-0.5 font-body text-base font-medium text-dark">
+                    <span className="mt-0.5 font-body text-sm font-medium text-dark">
                       {contactInfo.studioHours}
                     </span>
                   </div>
-                </motion.div>
-
-                {/* Social links — tap to open each profile in a new tab */}
-                <motion.div
-                  variants={fadeUp}
-                  className="mt-2 flex items-center gap-3 border-t border-border pt-5"
-                >
-                  {socialLinks.map((social) => (
-                    <a
-                      key={social.label}
-                      href={social.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label={social.label}
-                      className="flex h-11 w-11 items-center justify-center rounded-full bg-primary/10 text-primary transition-all duration-300 hover:bg-primary hover:text-white"
-                    >
-                      {social.icon}
-                    </a>
-                  ))}
                 </motion.div>
               </motion.div>
             </motion.div>

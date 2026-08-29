@@ -25,6 +25,7 @@ const AdminGalleryPage = lazy(() => import('@/pages/admin/AdminGalleryPage'));
 const AdminDashboardPage = lazy(() => import('@/pages/admin/AdminDashboardPage'));
 const AdminContactPage = lazy(() => import('@/pages/admin/AdminContactPage'));
 const AdminContentPage = lazy(() => import('@/pages/admin/AdminContentPage'));
+const AdminFaqPage = lazy(() => import('@/pages/admin/AdminFaqPage'));
 
 function PageLoader() {
   return (
@@ -94,6 +95,10 @@ export const router = createBrowserRouter([
   {
     path: 'admin/content',
     element: withSuspense(AdminContentPage),
+  },
+  {
+    path: 'admin/faq',
+    element: withSuspense(AdminFaqPage),
   },
 ]);
 

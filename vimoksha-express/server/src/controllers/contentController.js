@@ -1,7 +1,7 @@
 ﻿import { uploadBufferToCloudinary } from '../config/cloudinary.js';
 import SiteContent from '../models/SiteContent.js';
 
-const SECTIONS = ['hero', 'training', 'therapy', 'classes', 'programs', 'blogs', 'gallery'];
+const SECTIONS = ['hero', 'training', 'therapy', 'classes', 'programs', 'blogs', 'gallery', 'faq'];
 
 // GET /api/content â€” public, returns all sections keyed by section name
 export const getAllSiteContent = async (req, res) => {
