@@ -224,10 +224,16 @@ export default function AdminContentPage() {
       };
       if (DYNAMIC_ITEM_SECTIONS.includes(active)) {
         payload.items = form.items.filter(
-          (item) => item.title.trim() || item.description.trim()
+          (item) => item.title?.trim() || item.description?.trim() || item.image?.trim()
         );
       } else if (SECTIONS_WITH_ITEMS.includes(active)) {
-        payload.items = form.items;
+        payload.items = form.items.filter(
+          (item) =>
+            item.title?.trim() ||
+            item.description?.trim() ||
+            item.image?.trim() ||
+            item.category?.trim()
+        );
       } else {
         delete payload.items;
       }
