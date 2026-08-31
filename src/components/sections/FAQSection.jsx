@@ -69,11 +69,6 @@ const faqItems = [
       'No prior experience is required. Every new student begins with the same foundational sequence for the first two weeks, regardless of age or fitness level, before progressing to a faster-paced batch.',
   },
   {
-    title: 'What should I bring to my first class?',
-    description:
-      'Please bring water and comfortable clothing suitable for movement. Mats, blocks, and straps are provided free of charge. If you own a mat, you are welcome to bring your own, as floor space is assigned by mat to help you retain the same spot each class.',
-  },
-  {
     title: 'Do you offer yoga therapy sessions?',
     description:
       'Yes. Our therapy track is separate from regular batches and is designed for specific concerns such as chronic back pain, post-injury recovery, stress, and joint issues. Each program begins with a one-on-one assessment so the plan is tailored to your individual needs.',
@@ -163,16 +158,16 @@ export default function FAQSection() {
             viewport={{ once: true, amount: 0.2 }}
             className="relative w-full lg:w-[45%]"
           >
-            <div className="relative overflow-hidden rounded-[28px] shadow-elevated">
+            <div className="relative h-[320px] overflow-hidden rounded-[28px] shadow-elevated sm:h-[380px] lg:h-[420px]">
               {photo ? (
                 <img
                   src={photo}
                   alt="Students practicing at Vimoksha Yogshala"
-                  className="h-[500px] w-full object-cover"
+                  className="h-full w-full object-cover"
                   loading="lazy"
                 />
               ) : (
-                <div className="flex h-[500px] w-full items-center justify-center bg-gradient-to-br from-primary/30 to-primary-dark/40">
+                <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-primary/30 to-primary-dark/40">
                   <div className="text-center">
                     <span className="font-heading text-3xl text-white/70">
                       Vimoksha Yogshala
@@ -215,13 +210,13 @@ export default function FAQSection() {
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, amount: 0.1 }}
-              className="flex flex-col gap-4"
+              className="flex flex-col gap-2.5"
             >
               {content.items.map((faq, index) => (
                 <motion.div
                   key={index}
                   variants={fadeUp}
-                  className={`overflow-hidden rounded-[20px] border bg-white p-6 shadow-soft transition-all duration-300 ${
+                  className={`overflow-hidden rounded-2xl border bg-white p-4 shadow-soft transition-all duration-300 ${
                     openIndex === index
                       ? 'border-primary'
                       : 'border-border hover:border-primary/50'
@@ -233,20 +228,20 @@ export default function FAQSection() {
                     className="flex w-full items-center justify-between gap-4 text-left"
                     aria-expanded={openIndex === index}
                   >
-                    <span className="font-heading text-base font-semibold text-dark md:text-lg">
+                    <span className="font-heading text-sm font-semibold text-dark md:text-base">
                       {faq.title}
                     </span>
                     <span
-                      className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full transition-all duration-300 ${
+                      className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-full transition-all duration-300 ${
                         openIndex === index
                           ? 'bg-primary text-white'
                           : 'bg-primary/10 text-primary'
                       }`}
                     >
                       {openIndex === index ? (
-                        <FiMinus className="h-4 w-4" />
+                        <FiMinus className="h-3 w-3" />
                       ) : (
-                        <FiPlus className="h-4 w-4" />
+                        <FiPlus className="h-3 w-3" />
                       )}
                     </span>
                   </button>
@@ -261,7 +256,7 @@ export default function FAQSection() {
                         transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
                         className="overflow-hidden"
                       >
-                        <p className="pt-4 text-sm leading-relaxed text-muted">
+                        <p className="pt-2.5 text-xs leading-relaxed text-muted">
                           {faq.description}
                         </p>
                       </motion.div>
@@ -280,17 +275,17 @@ export default function FAQSection() {
               href="https://wa.me/917351317975"
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-6 flex items-center justify-between gap-4 rounded-[20px] border border-primary/20 bg-primary/5 p-5 transition-colors hover:bg-primary/10"
+              className="mt-4 flex items-center justify-between gap-4 rounded-2xl border border-primary/20 bg-primary/5 p-4 transition-colors hover:bg-primary/10"
             >
               <div className="flex items-center gap-3">
-                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary text-white">
-                  <IoLogoWhatsapp className="h-5 w-5" />
+                <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-primary text-white">
+                  <IoLogoWhatsapp className="h-4 w-4" />
                 </div>
                 <div>
-                  <p className="font-heading text-sm font-semibold text-dark">
+                  <p className="font-heading text-xs font-semibold text-dark">
                     Still have a question?
                   </p>
-                  <p className="font-body text-xs text-muted">
+                  <p className="font-body text-[11px] text-muted">
                     Message us on WhatsApp; we typically respond within the hour.
                   </p>
                 </div>

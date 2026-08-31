@@ -2,8 +2,9 @@ import { useEffect, useState } from 'react';
 import { api } from '@/lib/api';
 
 /**
- * Admin editor for the 3 photo+text cards shown under each Services
- * section (Classes / Training / Therapy) on the home page.
+ * Admin editor for the photo+text cards shown on the home page: the 3
+ * cards under each Services section (Classes / Training / Therapy) and
+ * the 9 photos in the Gallery section.
  *
  * This is separate from your existing "heading/description/image" Site
  * Content form — it only manages the `items` array on the same
@@ -15,9 +16,14 @@ const SECTIONS = [
   { key: 'classes', label: 'Classes' },
   { key: 'training', label: 'Training' },
   { key: 'therapy', label: 'Therapy' },
+  { key: 'gallery', label: 'Gallery' },
 ];
 
-const EMPTY_ITEM = { title: '', description: '', image: '', link: '' };
+// Classes/Training/Therapy show 3 cards; Gallery shows 9 photos
+// (matches the SiteContent schema comment and GallerySection.jsx's grid).
+const ITEM_COUNTS = { classes: 3, training: 3, therapy: 3, gallery: 9 };
+
+const EMPTY_ITEM = { title: '', description: '', image: '', link: '', category: '' };
 
 export default function SiteContentItemsEditor() {
   const [section, setSection] = useState('classes');
@@ -26,6 +32,9 @@ export default function SiteContentItemsEditor() {
   const [saving, setSaving] = useState(false);
   const [uploadingIndex, setUploadingIndex] = useState(null);
   const [message, setMessage] = useState(null); // { type: 'success' | 'error', text }
+
+  const rowCount = ITEM_COUNTS[section] ?? 3;
+  const isGallery = section === 'gallery';
 
   useEffect(() => {
     let cancelled = false;
@@ -37,8 +46,11 @@ export default function SiteContentItemsEditor() {
       .then((data) => {
         if (cancelled) return;
         const savedItems = data?.items?.length ? data.items : [];
-        // Always show exactly 3 rows to edit, padding with empty ones
-        const padded = [0, 1, 2].map((i) => ({ ...EMPTY_ITEM, ...savedItems[i] }));
+        // Always show a fixed number of rows to edit, padding with empty ones
+        const padded = Array.from({ length: ITEM_COUNTS[section] ?? 3 }, (_, i) => ({
+          ...EMPTY_ITEM,
+          ...savedItems[i],
+        }));
         setItems(padded);
       })
       .catch(() => {
@@ -76,7 +88,9 @@ export default function SiteContentItemsEditor() {
     setMessage(null);
     try {
       // Drop fully-empty rows so we don't save blank cards
-      const cleanItems = items.filter((item) => item.title.trim() || item.description.trim());
+      const cleanItems = items.filter((item) =>
+        item.title.trim() || item.description.trim() || item.image.trim(),
+      );
       await api.updateSiteContent(section, { items: cleanItems });
       setMessage({ type: 'success', text: 'Saved. The homepage will reflect this shortly.' });
     } catch (err) {
@@ -90,7 +104,8 @@ export default function SiteContentItemsEditor() {
     <div className="mx-auto max-w-3xl p-6">
       <h1 className="text-2xl font-semibold text-gray-900">Section Photos & Text</h1>
       <p className="mt-1 text-sm text-gray-500">
-        Edit the 3 photo cards shown under Classes, Training, and Therapy on the homepage.
+        Edit the photo cards shown under Classes, Training, and Therapy, and the photos in the
+        homepage Gallery section.
       </p>
 
       {/* Section tabs */}
@@ -129,7 +144,9 @@ export default function SiteContentItemsEditor() {
         <div className="mt-6 space-y-6">
           {items.map((item, index) => (
             <div key={index} className="rounded-xl border border-gray-200 p-4">
-              <h2 className="text-sm font-semibold text-gray-700">Card {index + 1}</h2>
+              <h2 className="text-sm font-semibold text-gray-700">
+                {isGallery ? `Photo ${index + 1}` : `Card ${index + 1}`}
+              </h2>
 
               <div className="mt-3 flex flex-col gap-4 sm:flex-row">
                 {/* Image */}
@@ -174,30 +191,51 @@ export default function SiteContentItemsEditor() {
                       className="mt-1 w-full rounded-md border border-gray-300 px-3 py-1.5 text-sm focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
                     />
                   </div>
-                  <div>
-                    <label className="block text-xs font-medium text-gray-600">
-                      Description
-                    </label>
-                    <textarea
-                      rows={3}
-                      value={item.description}
-                      onChange={(e) => updateItem(index, 'description', e.target.value)}
-                      placeholder="Short description shown below the title"
-                      className="mt-1 w-full rounded-md border border-gray-300 px-3 py-1.5 text-sm focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-xs font-medium text-gray-600">
-                      "Learn More" link
-                    </label>
-                    <input
-                      type="text"
-                      value={item.link}
-                      onChange={(e) => updateItem(index, 'link', e.target.value)}
-                      placeholder="/classes/beginner"
-                      className="mt-1 w-full rounded-md border border-gray-300 px-3 py-1.5 text-sm focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
-                    />
-                  </div>
+                  {isGallery ? (
+                    <div>
+                      <label className="block text-xs font-medium text-gray-600">
+                        Category
+                      </label>
+                      <input
+                        type="text"
+                        value={item.category}
+                        onChange={(e) => updateItem(index, 'category', e.target.value)}
+                        placeholder="e.g. Yoga Classes, Meditation, Events…"
+                        className="mt-1 w-full rounded-md border border-gray-300 px-3 py-1.5 text-sm focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
+                      />
+                      <p className="mt-1 text-xs text-gray-400">
+                        Used for the filter pills on the Gallery section (Yoga Classes,
+                        Meditation, Teacher Training, Events, Workshops).
+                      </p>
+                    </div>
+                  ) : (
+                    <>
+                      <div>
+                        <label className="block text-xs font-medium text-gray-600">
+                          Description
+                        </label>
+                        <textarea
+                          rows={3}
+                          value={item.description}
+                          onChange={(e) => updateItem(index, 'description', e.target.value)}
+                          placeholder="Short description shown below the title"
+                          className="mt-1 w-full rounded-md border border-gray-300 px-3 py-1.5 text-sm focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-xs font-medium text-gray-600">
+                          "Learn More" link
+                        </label>
+                        <input
+                          type="text"
+                          value={item.link}
+                          onChange={(e) => updateItem(index, 'link', e.target.value)}
+                          placeholder="/classes/beginner"
+                          className="mt-1 w-full rounded-md border border-gray-300 px-3 py-1.5 text-sm focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
+                        />
+                      </div>
+                    </>
+                  )}
                 </div>
               </div>
             </div>
