@@ -12,13 +12,16 @@ import {
   LuCircleHelp,
   LuPlus,
   LuTrash2,
+  LuCompass,
 } from 'react-icons/lu';
 
 const sections = [
   { key: 'hero', label: 'Hero Section', icon: LuHouse },
+  { key: 'pathways', label: 'Pathways', icon: LuCompass },
+  { key: 'classes', label: 'Classes', icon: LuUsers },
   { key: 'training', label: 'Training', icon: LuDumbbell },
   { key: 'therapy', label: 'Therapy', icon: LuHeartPulse },
-  { key: 'classes', label: 'Classes', icon: LuUsers },
+  { key: 'whyUs', label: 'Why Choose Us', icon: LuSparkles },
   { key: 'programs', label: 'Programs', icon: LuSparkles },
   { key: 'blogs', label: 'Blogs', icon: LuNewspaper },
   { key: 'gallery', label: 'Gallery', icon: LuImage },
@@ -49,9 +52,27 @@ const EMPTY_ITEM = {
 };
 
 // Sections that show a fixed-count card grid on the homepage
-const SECTIONS_WITH_ITEMS = ['training', 'therapy', 'classes', 'programs', 'blogs', 'gallery'];
+const SECTIONS_WITH_ITEMS = [
+  'training',
+  'therapy',
+  'classes',
+  'programs',
+  'blogs',
+  'gallery',
+  'whyUs',
+  'pathways',
+];
 // How many cards each of those sections has
-const ITEM_COUNTS = { training: 3, therapy: 3, classes: 3, programs: 6, blogs: 3, gallery: 9 };
+const ITEM_COUNTS = {
+  training: 3,
+  therapy: 3,
+  classes: 3,
+  programs: 6,
+  blogs: 3,
+  gallery: 9,
+  whyUs: 6,
+  pathways: 3,
+};
 // Only Programs cards use duration / difficulty
 const SECTIONS_WITH_DIFFICULTY = ['programs'];
 const DIFFICULTY_OPTIONS = [
@@ -290,35 +311,39 @@ export default function AdminContentPage() {
           onSubmit={handleSubmit}
           className="flex flex-col gap-5 rounded-2xl border border-border bg-white p-7 shadow-soft"
         >
-          {active === 'hero' && (
-            <>
-              <div>
-                <label className={labelClass}>Heading</label>
-                <input name="heading" value={form.heading} onChange={handleChange} className={inputClass} />
-              </div>
+          <div>
+            <label className={labelClass}>Heading</label>
+            <input
+              name="heading"
+              value={form.heading}
+              onChange={handleChange}
+              className={inputClass}
+              placeholder="Section main title"
+            />
+          </div>
 
-              <div>
-                <label className={labelClass}>Subheading</label>
-                <input
-                  name="subheading"
-                  value={form.subheading}
-                  onChange={handleChange}
-                  className={inputClass}
-                />
-              </div>
+          <div>
+            <label className={labelClass}>Subheading / Badge</label>
+            <input
+              name="subheading"
+              value={form.subheading}
+              onChange={handleChange}
+              className={inputClass}
+              placeholder="Pill badge or section tag"
+            />
+          </div>
 
-              <div>
-                <label className={labelClass}>Description</label>
-                <textarea
-                  name="description"
-                  value={form.description}
-                  onChange={handleChange}
-                  rows={4}
-                  className={inputClass}
-                />
-              </div>
-            </>
-          )}
+          <div>
+            <label className={labelClass}>Description</label>
+            <textarea
+              name="description"
+              value={form.description}
+              onChange={handleChange}
+              rows={3}
+              className={inputClass}
+              placeholder="Section introductory paragraph"
+            />
+          </div>
 
           {SECTIONS_WITH_IMAGE.includes(active) && (
             <div>
@@ -342,7 +367,7 @@ export default function AdminContentPage() {
             </div>
           )}
 
-          {active === 'hero' && (
+          {['hero', 'whyUs'].includes(active) && (
             <>
               <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
                 <div>

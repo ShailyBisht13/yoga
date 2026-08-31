@@ -3,40 +3,44 @@ import { Container } from '@/components/ui';
 import { IoArrowForward } from 'react-icons/io5';
 import { GiMeditation, GiLotus } from 'react-icons/gi';
 import { HiAcademicCap } from 'react-icons/hi2';
+import useSiteContent from '@/hooks/useSiteContent';
 
-// Swap these paths for wherever the images live in your project (e.g. /src/assets/...)
 import classesImg from '../../assets/pathways-classes.png';
 import therapyImg from '../../assets/pathways-therapy.png';
 import trainingImg from '../../assets/pathways-training.png';
 
 const SCROLL_OFFSET = 110;
 
-const pathways = [
+const defaultIcons = [GiMeditation, HiAcademicCap, GiLotus];
+const defaultColors = ['var(--color-primary)', 'var(--color-secondary)', 'var(--color-accent)'];
+const defaultTargets = ['classes', 'training', 'therapies'];
+
+const pathwaysFallbackItems = [
   {
     title: 'Classes',
     description: 'From beginners to advanced practitioners — find the right class for your body & mind.',
-    icon: GiMeditation,
-    color: 'var(--color-primary)',
     image: classesImg,
-    targetId: 'classes',
   },
   {
     title: 'Training',
     description: 'Become a certified yoga teacher with world-class training and guidance.',
-    icon: HiAcademicCap,
-    color: 'var(--color-secondary)',
     image: trainingImg,
-    targetId: 'training',
   },
   {
     title: 'Therapy',
     description: 'Healing therapies to release stress, restore energy and bring inner peace.',
-    icon: GiLotus,
-    color: 'var(--color-accent)',
     image: therapyImg,
-    targetId: 'therapies',
   },
 ];
+
+const pathwaysFallback = {
+  heading: 'Explore Our Pathways',
+  subheading: '',
+  description: 'Choose what speaks to your journey today.',
+  image: '',
+  features: [],
+  items: pathwaysFallbackItems,
+};
 
 const fadeUp = {
   hidden: { opacity: 0, y: 40 },
@@ -56,6 +60,9 @@ const staggerContainer = {
 };
 
 export default function PathwaysSection() {
+  const { content } = useSiteContent('pathways', pathwaysFallback);
+  const items = content.items?.length ? content.items : pathwaysFallbackItems;
+
   const scrollToId = (id) => {
     const el = document.getElementById(id);
     if (!el) return;
@@ -86,7 +93,7 @@ export default function PathwaysSection() {
             variants={fadeUp}
             className="font-heading text-4xl font-semibold text-[var(--color-primary)] md:text-5xl"
           >
-            Explore Our Pathways
+            {content.heading}
           </motion.h2>
           <motion.div
             variants={fadeUp}
@@ -97,7 +104,7 @@ export default function PathwaysSection() {
             <span className="h-px flex-1 bg-[var(--color-primary)]/25" />
           </motion.div>
           <motion.p variants={fadeUp} className="text-base text-[var(--color-muted)] md:text-lg">
-            Choose what speaks to your journey today.
+            {content.description}
           </motion.p>
         </motion.div>
 
@@ -108,61 +115,68 @@ export default function PathwaysSection() {
           variants={staggerContainer}
           className="grid gap-6 pr-2 md:grid-cols-3 md:pr-4 lg:pr-6"
         >
-          {pathways.map((p) => (
-            <motion.div
-              key={p.title}
-              variants={fadeUp}
-              whileHover={{ y: -6 }}
-              transition={{ type: 'spring', stiffness: 300, damping: 20 }}
-              className="relative flex min-h-[260px] overflow-hidden rounded-[24px] border border-[var(--color-border)] bg-[var(--color-surface)] shadow-[0_8px_30px_-12px_rgba(46,46,46,0.15)]"
-            >
-              {/* Text content */}
-              <div className="relative z-10 flex w-3/5 shrink-0 flex-col justify-between gap-4 p-6">
-                <div>
-                  <div className="mb-3 flex items-center gap-3">
-                    <div
-                      className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full text-white"
-                      style={{ backgroundColor: p.color }}
-                    >
-                      <p.icon className="h-5 w-5" />
+          {items.map((p, index) => {
+            const IconComponent = defaultIcons[index % defaultIcons.length];
+            const color = defaultColors[index % defaultColors.length];
+            const targetId = defaultTargets[index % defaultTargets.length];
+            const bgImage = p.image || pathwaysFallbackItems[index % pathwaysFallbackItems.length].image;
+
+            return (
+              <motion.div
+                key={index}
+                variants={fadeUp}
+                whileHover={{ y: -6 }}
+                transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+                className="relative flex min-h-[260px] overflow-hidden rounded-[24px] border border-[var(--color-border)] bg-[var(--color-surface)] shadow-[0_8px_30px_-12px_rgba(46,46,46,0.15)]"
+              >
+                {/* Text content */}
+                <div className="relative z-10 flex w-3/5 shrink-0 flex-col justify-between gap-4 p-6">
+                  <div>
+                    <div className="mb-3 flex items-center gap-3">
+                      <div
+                        className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full text-white"
+                        style={{ backgroundColor: color }}
+                      >
+                        <IconComponent className="h-5 w-5" />
+                      </div>
+                      <h3 className="font-heading text-lg font-semibold text-[var(--color-primary)]">
+                        {p.title}
+                      </h3>
                     </div>
-                    <h3 className="font-heading text-lg font-semibold text-[var(--color-primary)]">
-                      {p.title}
-                    </h3>
+                    <p className="text-sm leading-relaxed text-[var(--color-muted)]">
+                      {p.description}
+                    </p>
                   </div>
-                  <p className="text-sm leading-relaxed text-[var(--color-muted)]">
-                    {p.description}
-                  </p>
+
+                  <button
+                    type="button"
+                    onClick={() => scrollToId(targetId)}
+                    className="explore-btn inline-flex w-fit items-center gap-2 rounded-full border px-4 py-2 text-xs font-semibold transition-colors duration-300"
+                    style={{
+                      borderColor: color,
+                      '--btn-color': color,
+                    }}
+                  >
+                    Explore {p.title}
+                    <IoArrowForward className="h-3.5 w-3.5" />
+                  </button>
                 </div>
 
-                <button
-                  type="button"
-                  onClick={() => scrollToId(p.targetId)}
-                  className="explore-btn inline-flex w-fit items-center gap-2 rounded-full border px-4 py-2 text-xs font-semibold transition-colors duration-300"
-                  style={{
-                    borderColor: p.color,
-                    '--btn-color': p.color,
-                  }}
-                >
-                  Explore {p.title}
-                  <IoArrowForward className="h-3.5 w-3.5" />
-                </button>
-              </div>
-
-              {/* Image, tucked into a dashed rounded corner echoing the reference layout */}
-              <div className="relative w-2/5 shrink-0">
-                <div className="absolute inset-0 overflow-hidden rounded-tl-[64px] border-l-2 border-t-2 border-dashed border-[var(--color-border)]">
-                  <img
-                    src={p.image}
-                    alt={p.title}
-                    className="h-full w-full object-cover"
-                  />
+                {/* Image */}
+                <div className="relative w-2/5 shrink-0">
+                  <div className="absolute inset-0 overflow-hidden rounded-tl-[64px] border-l-2 border-t-2 border-dashed border-[var(--color-border)]">
+                    <img
+                      src={bgImage}
+                      alt={p.title}
+                      className="h-full w-full object-cover"
+                    />
+                  </div>
                 </div>
-              </div>
-            </motion.div>
-          ))}
+              </motion.div>
+            );
+          })}
         </motion.div>
       </Container>
     </section>
   );
-}
+}

@@ -10,6 +10,7 @@ import {
   FaHandsHelping,
 } from 'react-icons/fa';
 import { GiMeditation } from 'react-icons/gi';
+import useSiteContent from '@/hooks/useSiteContent';
 
 /* ───── Animation Variants ───── */
 const fadeUp = {
@@ -38,48 +39,57 @@ const staggerItem = {
   },
 };
 
+const defaultIcons = [FaUserGraduate, FaLeaf, GiMeditation, FaHeart, FaClock, FaHandsHelping];
+
 /* ───── Feature Data ───── */
-const features = [
+const whyUsFallbackItems = [
   {
     title: 'Certified Yoga Experts',
     description:
       'Learn from highly trained instructors with decades of combined experience in authentic yoga traditions.',
-    icon: FaUserGraduate,
   },
   {
     title: 'Personalized Yoga Programs',
     description:
       'Customized practices designed to match your unique body type, fitness level, and wellness aspirations.',
-    icon: FaLeaf,
   },
   {
     title: 'Peaceful Learning Environment',
     description:
       'Immerse yourself in a serene sanctuary surrounded by nature, perfect for deep practice and inner reflection.',
-    icon: GiMeditation,
   },
   {
     title: 'Holistic Wellness Approach',
     description:
       'We integrate asanas, pranayama, meditation, and yogic philosophy for complete mind-body transformation.',
-    icon: FaHeart,
   },
   {
     title: 'Flexible Class Timings',
     description:
       'Early morning, daytime, and evening sessions available to fit seamlessly into your busy schedule.',
-    icon: FaClock,
   },
   {
     title: 'Lifetime Learning Support',
     description:
       'Access ongoing guidance, workshops, and resources to support your yoga journey at every stage.',
-    icon: FaHandsHelping,
   },
 ];
 
+const whyUsFallback = {
+  heading: 'Experience Authentic Yoga With Expert Guidance',
+  subheading: 'WHY CHOOSE VIMOKSHA YOGSHALA',
+  description:
+    'Discover what makes Vimoksha Yogshala a sanctuary for authentic yoga practice. Our dedicated team of experts provides a transformative experience rooted in tradition and tailored to modern needs.',
+  ctaText: 'Book Free Trial',
+  ctaLink: '/contact',
+  items: whyUsFallbackItems,
+};
+
 /* ───── Component ───── */
 export default function WhyChooseUs() {
+  const { content } = useSiteContent('whyUs', whyUsFallback);
+  const items = content.items?.length ? content.items : whyUsFallbackItems;
+
   return (
     <section className="relative overflow-hidden bg-[var(--color-background)] py-[120px]">
       {/* ─── Subtle Decorative Background ─── */}
@@ -103,13 +113,15 @@ export default function WhyChooseUs() {
           className="mx-auto mb-10 max-w-[620px] text-center md:mb-14"
         >
           {/* Premium Pill Badge */}
-          <motion.span
-            custom={0}
-            variants={fadeUp}
-            className="mb-3 inline-block rounded-full border border-[var(--color-secondary)]/30 bg-[var(--color-surface)]/80 px-4 py-1 font-body text-xs font-semibold uppercase tracking-[0.25em] text-[var(--color-primary)] shadow-sm backdrop-blur-md"
-          >
-            WHY CHOOSE VIMOKSHA YOGSHALA
-          </motion.span>
+          {content.subheading && (
+            <motion.span
+              custom={0}
+              variants={fadeUp}
+              className="mb-3 inline-block rounded-full border border-[var(--color-secondary)]/30 bg-[var(--color-surface)]/80 px-4 py-1 font-body text-xs font-semibold uppercase tracking-[0.25em] text-[var(--color-primary)] shadow-sm backdrop-blur-md"
+            >
+              {content.subheading}
+            </motion.span>
+          )}
 
           {/* Heading */}
           <motion.h2
@@ -117,9 +129,7 @@ export default function WhyChooseUs() {
             variants={fadeUp}
             className="font-heading text-4xl font-semibold leading-tight tracking-tight text-[var(--color-dark)] md:text-5xl"
           >
-            Experience Authentic Yoga
-            <br />
-            With Expert Guidance
+            {content.heading}
           </motion.h2>
 
           {/* Description */}
@@ -128,9 +138,7 @@ export default function WhyChooseUs() {
             variants={fadeUp}
             className="mx-auto mt-3 max-w-[460px] text-base leading-relaxed text-[var(--color-muted)] md:text-lg"
           >
-            Discover what makes Vimoksha Yogshala a sanctuary for authentic yoga
-            practice. Our dedicated team of experts provides a transformative
-            experience rooted in tradition and tailored to modern needs.
+            {content.description}
           </motion.p>
         </motion.div>
 
@@ -142,8 +150,8 @@ export default function WhyChooseUs() {
           viewport={{ once: true, margin: '-60px' }}
         >
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {features.map((feature, index) => {
-              const IconComponent = feature.icon;
+            {items.map((feature, index) => {
+              const IconComponent = defaultIcons[index % defaultIcons.length];
               return (
                 <motion.div
                   key={index}
@@ -232,13 +240,13 @@ export default function WhyChooseUs() {
             >
               <Button
                 as={Link}
-                to="/contact"
+                to={content.ctaLink || '/contact'}
                 variant="primary"
                 size="lg"
                 icon={<HiArrowRight className="h-4 w-4" />}
                 className="h-[56px] rounded-full px-9 text-base font-medium"
               >
-                Book Free Trial
+                {content.ctaText || 'Book Free Trial'}
               </Button>
             </motion.div>
           </motion.div>
@@ -246,4 +254,4 @@ export default function WhyChooseUs() {
       </Container>
     </section>
   );
-}
+}
