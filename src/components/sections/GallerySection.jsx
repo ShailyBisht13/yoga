@@ -80,18 +80,8 @@ const categories = [
   'Workshops',
 ];
 
-/* ===== Masonry height presets â€” cycled by position, not admin-editable ===== */
-const HEIGHT_PRESETS = [
-  'h-[320px]',
-  'h-[420px]',
-  'h-[280px]',
-  'h-[380px]',
-  'h-[300px]',
-  'h-[440px]',
-  'h-[280px]',
-  'h-[360px]',
-  'h-[400px]',
-];
+/* ===== Uniform card height â€” every gallery image renders at the same size ===== */
+const CARD_HEIGHT = 'h-[340px]';
 
 /* ===== Fallback gallery data â€” shown until the admin edits this section,
    and used to backfill any photo the admin hasn't touched yet. ===== */
@@ -139,7 +129,7 @@ export default function GallerySection() {
       content.items.map((item, i) => ({
         ...item,
         id: i,
-        height: HEIGHT_PRESETS[i % HEIGHT_PRESETS.length],
+        height: CARD_HEIGHT,
       })),
     [content.items],
   );
@@ -319,7 +309,7 @@ export default function GallerySection() {
             variants={staggerContainer}
             initial="hidden"
             animate="visible"
-            className="columns-1 gap-6 sm:columns-2 lg:columns-3"
+            className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3"
           >
             {filteredItems.map((item, index) => {
               const isLoaded = loadedIds.has(item.id);
@@ -333,7 +323,7 @@ export default function GallerySection() {
                   whileHover={{ scale: 1.02 }}
                   transition={{ type: 'spring', stiffness: 300, damping: 22 }}
                   onClick={() => goToImage(index)}
-                  className={`group relative mb-6 block w-full cursor-pointer overflow-hidden rounded-[24px] bg-dark/5 shadow-soft break-inside-avoid ${item.height}`}
+                  className={`group relative block w-full cursor-pointer overflow-hidden rounded-[24px] bg-dark/5 shadow-soft ${item.height}`}
                 >
                   {/* Loading skeleton shimmer */}
                   {!isLoaded && (
